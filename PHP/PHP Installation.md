@@ -75,12 +75,13 @@ php -v
 
 1. Install Xdebug (recommended debugger):
    - For Windows: Edit `php.ini` and add:
-     ```
+ ```ini
      zend_extension=path_to_xdebug.dll
      xdebug.mode=debug
      xdebug.start_with_request=yes
      ```
-   - For Linux/macOS:
+     
+ For Linux/macOS:
   ```bash
      pecl install xdebug
      ```
