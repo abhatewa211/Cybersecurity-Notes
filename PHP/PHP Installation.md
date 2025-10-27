@@ -84,12 +84,12 @@ php -v
 ```bash
      pecl install xdebug
 ```
--Then add to `php.ini`:
-     ```ini
-     zend_extension=xdebug.so
+Then add to `php.ini`:
+    ```ini
+    ```
+	zend_extension=xdebug.so
      xdebug.mode=debug
-     xdebug.start_with_request=yes
-     ```
+     xdebug.start_with_request=yes`
 
 1. In VS Code:
    - Create a `.vscode/launch.json` file in your project
