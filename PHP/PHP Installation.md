@@ -94,7 +94,7 @@ Then add to `php.ini`:
 2. In VS Code:
    - Create a `.vscode/launch.json` file in your project
    - Add this configuration:
-     ```json
+```json
      {
        "version": "0.2.0",
        "configurations": [
@@ -114,7 +114,7 @@ Then add to `php.ini`:
          }
        ]
      }
-     ```
+```
 
 ### 4. Basic PHP Project Setup in VS Code
 
