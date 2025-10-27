@@ -166,17 +166,129 @@ Add these to your VS Code settings (`settings.json`) for better PHP development:
    - Verify Xdebug is properly installed (`php -m` should list xdebug)
    - Check the port configuration matches in php.ini and launch.json
 
-## Best Practices for PHP in VS Code
+## 6. Testing PHP in VS Code
 
-1. Use proper folder structure for your projects
-2. Enable version control (Git)
-3. Take advantage of Intelephense's code navigation features
-4. Use the built-in terminal for running PHP scripts
-5. Regularly update your PHP and extensions
+Now that you have PHP installed and configured in VS Code, let's test your setup to ensure everything works properly.
 
-This setup will give you a powerful PHP development environment in VS Code with features like:
-- Intelligent code completion
-- Real-time error checking
-- Easy debugging
-- Quick documentation access
-- Code formatting
+### 1. Basic PHP File Test
+
+1. Create a new file named `test.php` in your project folder
+2. Add the following code:
+
+```php
+<?php
+// Basic PHP test
+echo "<h1>PHP is working!</h1>";
+
+// Show PHP information (remove this in production)
+phpinfo();
+?>
+```
+
+3. Save the file (`Ctrl+S` or `Cmd+S`)
+
+### 2. Running the Test File
+
+#### Method 1: Using Built-in PHP Server
+1. Open the integrated terminal in VS Code (`Ctrl+` or `Cmd+`)
+2. Run:
+   ```bash
+   php -S localhost:8000
+   ```
+3. Open your browser and visit:
+   ```
+   http://localhost:8000/test.php
+   ```
+
+#### Method 2: Using PHP Server Extension
+1. Right-click on `test.php` in the Explorer
+2. Select "PHP Server: Serve project"
+3. VS Code will automatically open your browser
+
+#### Method 3: Direct Execution
+1. In the terminal, run:
+   ```bash
+   php test.php
+   ```
+   (This will output to the terminal instead of a browser)
+
+### 3. Expected Results
+
+You should see:
+1. A heading saying "PHP is working!"
+2. A detailed PHP information page showing:
+   - Your PHP version
+   - Loaded extensions (including Xdebug if installed)
+   - Configuration settings
+
+### 4. Debugging Test
+
+1. Set a breakpoint by clicking to the left of line numbers in `test.php`
+2. Press `F5` or click "Run and Debug" in the left sidebar
+3. Select "Listen for Xdebug"
+4. Open your browser and visit:
+   ```
+   http://localhost:8000/test.php
+   ```
+5. VS Code should pause execution at your breakpoint
+
+### 5. Extension Functionality Test
+
+Test these Intelephense features:
+1. **Code Completion**:
+   - Type `echo str` and check if string functions appear
+2. **Go to Definition**:
+   - Right-click on `phpinfo` and select "Go to Definition"
+3. **Hover Information**:
+   - Hover over `phpinfo` to see function documentation
+4. **Error Checking**:
+   - Add `echo undefinedFunction();` and look for squiggly lines
+
+### 6. Troubleshooting Common Issues
+
+If something isn't working:
+
+1. **PHP not executing**:
+   - Verify PHP is in your PATH (`php -v` in terminal)
+   - Check the VS Code PHP executable path in settings
+
+2. **Extensions not working**:
+   - Reload VS Code (`Ctrl+Shift+P` > "Reload Window")
+   - Check extension requirements (some need PHP 7.4+)
+
+3. **Debugging not working**:
+   - Verify Xdebug is installed (`php -m | grep xdebug`)
+   - Check ports match in `php.ini` and `launch.json`
+
+4. **No syntax highlighting**:
+   - Ensure file has `.php` extension
+   - Check PHP extensions are enabled
+
+### 7. Final Verification
+
+Create a more complex test file `functions.php`:
+
+```php
+<?php
+function calculateSum(int $a, int $b): int {
+    return $a + $b;
+}
+
+$result = calculateSum(5, '7'); // Intentional type mismatch
+echo "The result is: " . $result;
+
+// Test debugging
+$x = 10;
+$y = 20;
+$z = $x * $y; // Set breakpoint here
+echo "\nMultiplication result: " . $z;
+?>
+```
+
+Check for:
+1. Type warnings on the '7' argument
+2. Proper function documentation on hover
+3. Working breakpoints
+4. Correct output (should show "The result is: 12" and "Multiplication result: 200")
+
+If all these tests pass, your PHP environment in VS Code is properly set up and ready for development!
