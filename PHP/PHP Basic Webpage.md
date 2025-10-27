@@ -1,5 +1,3 @@
-# PHP Script for Basic Webpage Display - Detailed Notes
-
 Below is a detailed explanation of a basic PHP script that displays a webpage, with notes on each component.
 
 ## Basic PHP Webpage Template

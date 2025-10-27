@@ -1,5 +1,3 @@
-# **HTTP Requests and Responses - Detailed Notes**
-
 ## **1. Introduction to HTTP**
 HTTP (**Hypertext Transfer Protocol**) is the foundation of data communication on the World Wide Web. It is a **client-server protocol**, where:
 - The **client** (browser, mobile app, etc.) sends an **HTTP Request**.
