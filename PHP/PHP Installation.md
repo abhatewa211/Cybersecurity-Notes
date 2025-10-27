@@ -79,13 +79,12 @@ php -v
      zend_extension=path_to_xdebug.dll
      xdebug.mode=debug
      xdebug.start_with_request=yes
-     ```
-     
- For Linux/macOS:
-  ```bash
+``` 
+- For Linux/macOS:
+```bash
      pecl install xdebug
-     ```
-     Then add to `php.ini`:
+```
+-Then add to `php.ini`:
      ```ini
      zend_extension=xdebug.so
      xdebug.mode=debug
