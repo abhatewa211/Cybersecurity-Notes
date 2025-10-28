@@ -34,9 +34,9 @@ Count: 5
 2. **Infinite Loops Risk**  
    - If the condition never becomes `false`, the loop runs indefinitely.
    - Example:  
-```php
+    ```php
      while (true) { // Infinite loop!
-         echo "This never ends!";
+	    echo "This never ends!";
      }
      ```
 
