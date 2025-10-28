@@ -1,5 +1,3 @@
-# **PHP Variable Scope and Global Variables - Detailed Notes**
-
 ## **1. Understanding Variable Scope in PHP**
 Variable scope defines where a variable can be accessed in a PHP script. PHP has three main types of variable scope:
 1. **Local Scope** (inside a function)
