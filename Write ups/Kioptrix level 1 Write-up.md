@@ -1,4 +1,4 @@
-## **Step 1: Reconnaissance**
+	## **Step 1: Reconnaissance**
 
 Before attacking, we need to gather information about the target.
 
