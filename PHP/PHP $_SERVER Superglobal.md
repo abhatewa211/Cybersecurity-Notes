@@ -1,5 +1,3 @@
-# **PHP `$_SERVER` Superglobal - Detailed Notes**
-
 The `$_SERVER` superglobal is an associative array containing server and execution environment information. It provides details about:
 - Server configurations
 - Current request headers
