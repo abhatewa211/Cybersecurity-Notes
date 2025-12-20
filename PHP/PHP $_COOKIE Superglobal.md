@@ -1,4 +1,4 @@
-**Overview**
+## **Overview**
 `$_COOKIE` is a PHP superglobal (associative array) that contains variables passed to the current script via HTTP cookies.
 
 ## **Basic Characteristics**
