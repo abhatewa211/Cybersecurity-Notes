@@ -1,5 +1,3 @@
-# PHP `$_SESSION` Superglobal - Detailed Notes
-
 ## **Overview**
 `$_SESSION` is a PHP superglobal array that persists data across multiple page requests for the same user, using server-side storage with a client-side session ID.
 
