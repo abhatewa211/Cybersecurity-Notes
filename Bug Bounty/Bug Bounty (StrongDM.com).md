@@ -5,4 +5,7 @@
 
 ![[Pasted image 20260104091736.png]]
 
-Out Of Scope 
+**Out Of Scope Domains/apps**
+
+![[Pasted image 20260104091830.png]]
+
