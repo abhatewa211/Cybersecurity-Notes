@@ -285,7 +285,3 @@ You will be able to:
 ✅ Provide remediation, not just findings
 
 ---
-
-If you want, I can next turn this into a **one-page printable cheat sheet** or a **mind map** for quick revision.
-
-hello
