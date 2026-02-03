@@ -146,11 +146,11 @@ This entire path mirrors a real assessment against a fictional company (**Inlane
 
 ### Phase 3 — Web Exploitation
 
-![Image](https://portswigger.net/burp/documentation/desktop/images/getting-started/quick-start-pro-intercepted-request.png)
 
-![Image](https://portswigger.net/web-security/images/sql-injection.svg)
 
-![Image](https://portswigger.net/support/images/methodology_attacking_users_xss_tag_1.png)
+
+
+
 
 ![Image](https://miro.medium.com/1%2AnBHP_IDyxI3cdKyUehpW9g.png)
 
