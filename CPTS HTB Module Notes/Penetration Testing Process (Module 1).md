@@ -145,7 +145,7 @@ This entire path mirrors a real assessment against a fictional company (**Inlane
 ---
 
 ### Phase 3 — Web Exploitation
-![[Pasted image 20260203203659.png]]
+![[Pasted image 20260203204000.png]]
 ![[Pasted image 20260203203826.png]]
 
 
