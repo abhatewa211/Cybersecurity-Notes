@@ -150,8 +150,6 @@ This entire path mirrors a real assessment against a fictional company (**Inlane
 ![[aYM8k8N0obKb1pl-nuWssAvPhNiAs-XDm7JZbdUdubLO_z6Q6nMsR75fwEOwrXkZICiKQLnm3MyxY1wDKJwdtF5OTQmUQ8Pb_zYlfxG73SbPGqZoUIAy_SwFmGqPNFwof5VEz8x4GIduYtCCqL4-5A.png]]
 ![[vWD6HmhdYWmu0yhzsvDGA1UZEOYFPeHYLTonAmnd7SVSXS2d1gbk1VJ3swX1mzTpdxnmIU9jegmbTb6f2Yz2L0UuHAxBGp588tCi24k8xe4TmWjGId9pOoKH9R5fizjm3AZg9rpH-fh-JEn4xabM1w.png]]
 
-
-
 ![Image](https://miro.medium.com/1%2AnBHP_IDyxI3cdKyUehpW9g.png)
 
 |Module|What You Learn|Why It Matters|
