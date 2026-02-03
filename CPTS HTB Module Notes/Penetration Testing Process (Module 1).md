@@ -1,7 +1,3 @@
-    
-
----
-
 ## 🎯 Purpose of the Penetration Tester Path
 
 This path prepares you to perform **real-world penetration tests** at a **basic to intermediate professional level**, covering:
