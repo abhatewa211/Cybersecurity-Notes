@@ -98,17 +98,17 @@ Common assessment options:
 
 You must learn:
 
-- # of live hosts / IP ranges
+-  of live hosts / IP ranges
     
-- # of domains/subdomains
+-  of domains/subdomains
     
-- # of applications & user roles
+-  of applications & user roles
     
-- # of wireless SSIDs
+-  of wireless SSIDs
     
-- # of phishing targets
+-  of phishing targets
     
-- # of physical locations
+-  of physical locations
     
 - If NAC bypass is required
     
