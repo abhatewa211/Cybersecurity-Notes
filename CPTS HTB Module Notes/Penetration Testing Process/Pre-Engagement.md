@@ -342,8 +342,8 @@ It is the **foundation that makes a penetration test legitimate, safe, and succe
 #### Questions
 
 Answer the question(s) below to complete this Section and earn cubes!
+```
+Q1.Q1.  How many documents must be prepared in total for a penetration test?
+Ans. 7```
+```
 
-```
-``` #### Q1. How many documents must be prepared in total for a penetration test?
-```A
-```
