@@ -339,14 +339,14 @@ Pre-Engagement is not paperwork.
 
 It is the **foundation that makes a penetration test legitimate, safe, and successful**.
 
-#### Questions
+###### Questions
 
-Answer the question(s) below to complete this Section and earn cubes.
+###### Answer the question(s) below to complete this Section and earn cubes.
 
-```bash
-###### ``Q1. How many documents must be prepared in total for a penetration test?
-```
-###### ``Ans. 7
+
+``Q1. How many documents must be prepared in total for a penetration test?
+
+``Ans. 7
 
 
 
