@@ -490,5 +490,8 @@ Steps for Solution
 2. The file will save on the main machine as in ScreenShot.
 ![[Screenshot From 2026-02-07 22-51-56.png]]
 
-3. Open the terminal and run the command as shown in Screenshot.
+3. Open the terminal and run the RDP command as shown in Screenshot. (Requested by HTB in the question)
 ![[Screenshot From 2026-02-07 23-06-55.png]]
+
+4. RDP Screen POP Out.
+![[Pasted image 20260207231737.png]]
