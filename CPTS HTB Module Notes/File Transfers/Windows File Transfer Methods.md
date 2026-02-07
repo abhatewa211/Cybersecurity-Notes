@@ -460,7 +460,7 @@ ftp -v -n -s:ftpcommand.txt
 ```Plain text
 Q1. Download the file flag.txt from the web root using wget from the Pwnbox. Submit the contents of the file as your answer?
 
-Ans 
+Ans b1a4ca918282fcd96004565521944a3b
 ```
 
 Steps for the solution are follows:
@@ -471,4 +471,9 @@ Steps for the solution are follows:
 		![[Pasted image 20260207171140.png]]
 2.  Run the nmap command and save the output as in screenshot.
 	 ![[Pasted image 20260207171404.png]]
-	 
+
+3. We will use wget command for the flag.txt as the apache web server is vulnerable.(see in ScreenShot)
+![[Pasted image 20260207172442.png]] 
+In the above screenshot the webserver port is open. On the other hand in the screenshot below we used wget command to get flag.txt file, and read the file by cat command. 
+![[Pasted image 20260207172740.png]]
+ 
