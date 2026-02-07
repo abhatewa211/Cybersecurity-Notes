@@ -487,4 +487,4 @@ Steps for Solution
 1.  Download the file from HTB Academy.
 ![[Screenshot From 2026-02-07 22-44-20.png]]
 
-2. The file will save on  
+2. The file will save on the main machine as in ScreenShot. 
