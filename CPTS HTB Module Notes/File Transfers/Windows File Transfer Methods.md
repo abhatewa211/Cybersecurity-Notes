@@ -476,4 +476,9 @@ Steps for the solution are follows:
 ![[Pasted image 20260207172442.png]] 
 In the above screenshot the webserver port is open. On the other hand in the screenshot below we used wget command to get flag.txt file, and read the file by cat command. 
 ![[Pasted image 20260207172740.png]]
- 
+```Plain
+ RDP to 10.129.201.55 (ACADEMY-MISC-MS02) with user "htb-student" and password "HTB_@cademy_stdnt!" 
+Q2. Upload the attached file named upload_win.zip to the target using the method of your choice. Once uploaded, unzip the archive, and run "hasher upload_win.txt" from the command line. Submit the generated hash as your answer?
+
+Ans b1a4ca918282fcd96004565521944a3b
+```
