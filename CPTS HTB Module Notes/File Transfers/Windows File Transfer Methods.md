@@ -499,3 +499,4 @@ Steps for Solution
 5. Open the shared folder which is already done by the command.
 ![[Pasted image 20260207234853.png]]
 
+6. Place the Zip folder downloaded from htb in the machine 
