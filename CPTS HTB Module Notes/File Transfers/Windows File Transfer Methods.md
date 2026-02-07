@@ -499,4 +499,5 @@ Steps for Solution
 5. Open the shared folder which is already done by the command.
 ![[Pasted image 20260207234853.png]]
 
-6. Place the Zip folder downloaded from htb in the machine 
+6. Place the Zip folder downloaded from htb in the machine after that unzip the file and at thw same time open the folder after extraction the upload_win.txt file will appear as shown in video attached. Open the upload_win.txt  file and solution will be seen.
+![[2026-02-07 23-52-42.mkv]]
