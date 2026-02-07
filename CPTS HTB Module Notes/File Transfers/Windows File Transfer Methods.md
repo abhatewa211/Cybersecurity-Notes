@@ -490,4 +490,4 @@ Steps for Solution
 2. The file will save on the main machine as in ScreenShot.
 ![[Screenshot From 2026-02-07 22-51-56.png]]
 
-3. Open the terminal and run the command 
+3. Open the terminal and run the command as shown in Screenshot.
