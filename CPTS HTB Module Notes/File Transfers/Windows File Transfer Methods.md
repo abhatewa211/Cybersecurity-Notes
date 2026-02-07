@@ -485,4 +485,6 @@ Ans f458303ea783c224c6b4e7ef7f17eb9d
 
 Steps for Solution
 1.  Download the file from HTB Academy.
+![[Screenshot From 2026-02-07 22-44-20.png]]
 
+2. The file will save on  
