@@ -462,3 +462,13 @@ Q1. Download the file flag.txt from the web root using wget from the Pwnbox. Sub
 
 Ans 
 ```
+
+Steps for the solution are follows:
+
+1. Spawn the machine and Open the terminal, spawn the VPN as well.
+
+	 ![[Pasted image 20260207171213.png]]
+		![[Pasted image 20260207171140.png]]
+2.  Run the nmap command and save the output as in screenshot.
+	 ![[Pasted image 20260207171404.png]]
+	 
