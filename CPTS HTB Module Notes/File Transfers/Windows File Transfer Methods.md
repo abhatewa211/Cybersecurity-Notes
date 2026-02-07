@@ -482,3 +482,6 @@ Q2. Upload the attached file named upload_win.zip to the target using the method
 
 Ans f458303ea783c224c6b4e7ef7f17eb9d
 ```
+
+Steps for Solution
+1.  Download the file from HTB Academy 
