@@ -480,5 +480,5 @@ In the above screenshot the webserver port is open. On the other hand in the scr
  **%% RDP to 10.129.201.55 (ACADEMY-MISC-MS02) with user "htb-student" and password "HTB_@cademy_stdnt!" %%** 
 Q2. Upload the attached file named upload_win.zip to the target using the method of your choice. Once uploaded, unzip the archive, and run "hasher upload_win.txt" from the command line. Submit the generated hash as your answer?
 
-Ans 
+Ans f458303ea783c224c6b4e7ef7f17eb9d
 ```
