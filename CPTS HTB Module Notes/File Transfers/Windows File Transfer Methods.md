@@ -497,3 +497,5 @@ Steps for Solution
 ![[Pasted image 20260207231737.png]]
 
 5. Open the shared folder which is already done by the command.
+![[Pasted image 20260207234853.png]]
+
