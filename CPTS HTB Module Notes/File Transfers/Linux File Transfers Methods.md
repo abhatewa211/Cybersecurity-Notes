@@ -402,3 +402,10 @@ scp /etc/passwd htb-student@10.129.86.90:/home/htb-student/
 |`wget URL -O file`|Download file|⭐⭐⭐☆☆|Same as curl; very normal|
 |`php -r 'file_get_contents()'`|Download file|⭐⭐☆☆☆|Situational; depends on PHP availability|
 |`scp user@host:file local`|Authenticated transfer|⭐⭐☆☆☆|Internal movement only; needs creds|
+### Exercises
+
+![[Pasted image 20260210145301.png]]
+
+Step by Step Solutions for the above answers
+
+Step1. 
