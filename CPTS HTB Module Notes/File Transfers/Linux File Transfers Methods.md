@@ -433,5 +433,3 @@ Step6. upload the file via scp after extracting the file downloaded from the HTB
 Step7. we will use the hasher command as said in question 2 and get the answer
 ![[Pasted image 20260210230310.png]]
 
-
-
