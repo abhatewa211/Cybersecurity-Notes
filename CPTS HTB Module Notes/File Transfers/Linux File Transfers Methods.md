@@ -394,3 +394,11 @@ scp /etc/passwd htb-student@10.129.86.90:/home/htb-student/
 
 ### Cheatsheet 
 
+### 🐧 Linux / Cross-Platform Methods
+
+|Command|Purpose|Stealth|Notes|
+|---|---|---|---|
+|`curl -o file URL`|Download file|⭐⭐⭐☆☆|Common admin behavior|
+|`wget URL -O file`|Download file|⭐⭐⭐☆☆|Same as curl; very normal|
+|`php -r 'file_get_contents()'`|Download file|⭐⭐☆☆☆|Situational; depends on PHP availability|
+|`scp user@host:file local`|Authenticated transfer|⭐⭐☆☆☆|Internal movement only; needs creds|
