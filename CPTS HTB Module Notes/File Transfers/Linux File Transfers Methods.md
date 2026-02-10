@@ -410,3 +410,9 @@ Step by Step Solutions for the above answers
 
 Step1. Spawn the machine and Open the terminal, spawn the VPN as well.
 ![[Pasted image 20260210150122.png]]
+![[Pasted image 20260210150750.png]]
+
+Step2. Run the nmap command and save the output as in screenshot. 
+![[Pasted image 20260210150718.png]]
+
+Step3. 
