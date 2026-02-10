@@ -415,4 +415,11 @@ Step1. Spawn the machine and Open the terminal, spawn the VPN as well.
 Step2. Run the nmap command and save the output as in screenshot. 
 ![[Pasted image 20260210150718.png]]
 
-Step3. 
+Step3. We will use wget command for the flag.txt as the apache web server is vulnerable.(see in ScreenShot)
+![[Pasted image 20260210151559.png]]
+
+Step4. In the screenshot below we used wget command to get flag.txt file, and read the file by cat command.
+![[Pasted image 20260210151738.png]]
+Answer 1 is founded above.
+
+
