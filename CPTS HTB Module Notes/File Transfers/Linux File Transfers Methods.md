@@ -422,4 +422,6 @@ Step4. In the screenshot below we used wget command to get flag.txt file, and re
 ![[Pasted image 20260210151738.png]]
 Answer 1 is founded above.
 
+Step5. Connect the Target box by ssh.
+
 
