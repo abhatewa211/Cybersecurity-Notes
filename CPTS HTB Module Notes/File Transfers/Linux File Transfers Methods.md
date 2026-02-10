@@ -428,6 +428,10 @@ Step5. Connect the Target box by ssh.
 Step6. upload the file via scp after extracting the file downloaded from the HTB.
 ![[Pasted image 20260210225222.png]]
 ![[Screenshot From 2026-02-10 22-54-47.png]]
+![[Pasted image 20260210230158.png]]
+
+Step7. we will use the hasher command as said in question 2 and get the answer
+![[Pasted image 20260210230310.png]]
 
 
 
