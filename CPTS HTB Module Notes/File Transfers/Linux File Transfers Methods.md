@@ -427,6 +427,7 @@ Step5. Connect the Target box by ssh.
 
 Step6. upload the file via scp after extracting the file downloaded from the HTB.
 ![[Pasted image 20260210225222.png]]
+![[Screenshot From 2026-02-10 22-54-47.png]]
 
 
 
