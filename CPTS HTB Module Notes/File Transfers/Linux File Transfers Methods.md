@@ -408,4 +408,5 @@ scp /etc/passwd htb-student@10.129.86.90:/home/htb-student/
 
 Step by Step Solutions for the above answers
 
-Step1. 
+Step1. Spawn the machine and Open the terminal, spawn the VPN as well.
+![[Pasted image 20260210150122.png]]
