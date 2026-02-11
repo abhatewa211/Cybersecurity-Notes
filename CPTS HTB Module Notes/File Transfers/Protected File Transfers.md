@@ -294,4 +294,135 @@ openssl enc -d -aes256 -iter 100000 -pbkdf2 -in ntds.enc -out ntds.dit
     
 - Maintain professional ethics
 
-Cheatsheet
+### Cheatsheet
+
+# 🔐 Ultra-Compact Exam Cheat Sheet – Protected File Transfers
+
+---
+
+## 🎯 Core Principle
+
+> If secure transport (SSH/HTTPS) is NOT available → **Encrypt first, then transfer**
+
+---
+
+# 🖥️ Windows – AES File Encryption
+
+## 🔹 Import Script
+
+```powershell
+Import-Module .\Invoke-AESEncryption.ps1
+```
+
+## 🔹 Encrypt File
+
+```powershell
+Invoke-AESEncryption -Mode Encrypt -Key "StrongPass!" -Path .\file.txt
+```
+
+➡ Creates: `file.txt.aes`
+
+## 🔹 Decrypt File
+
+```powershell
+Invoke-AESEncryption -Mode Decrypt -Key "StrongPass!" -Path .\file.txt.aes
+```
+
+---
+
+## 🔹 Encrypt Text (Returns Base64)
+
+```powershell
+Invoke-AESEncryption -Mode Encrypt -Key "StrongPass!" -Text "Secret"
+```
+
+---
+
+# 🐧 Linux – OpenSSL Encryption
+
+## 🔹 Encrypt File
+
+```bash
+openssl enc -aes256 -iter 100000 -pbkdf2 -in file.txt -out file.enc
+```
+
+## 🔹 Decrypt File
+
+```bash
+openssl enc -d -aes256 -iter 100000 -pbkdf2 -in file.enc -out file.txt
+```
+
+---
+
+## 🔍 Important Flags
+
+|Flag|Meaning|
+|---|---|
+|`-aes256`|AES-256-CBC|
+|`-pbkdf2`|Secure key derivation|
+|`-iter 100000`|Slows brute-force|
+|`-d`|Decrypt|
+
+---
+
+# 🔐 Secure Transport Methods (Preferred)
+
+|Method|Encrypted in Transit|
+|---|---|
+|SSH|✅|
+|SCP|✅|
+|SFTP|✅|
+|HTTPS|✅|
+|SMB|❌ (unless SMB signing/encryption enabled)|
+|Netcat|❌|
+|FTP|❌|
+
+---
+
+# 🔁 Secure Workflow
+
+1. Dump sensitive file
+    
+2. Encrypt file
+    
+3. Transfer encrypted version
+    
+4. Decrypt safely offline
+    
+
+---
+
+# ⚠️ Exam Reminders
+
+- Always use **strong unique passwords**
+    
+- Use `-pbkdf2` + high `-iter`
+    
+- Never exfiltrate real PII unless authorized
+    
+- Prefer SSH/SCP over raw HTTP/Netcat
+    
+- Encrypt if using:
+    
+    - Netcat
+        
+    - FTP
+        
+    - HTTP
+        
+    - Unencrypted SMB
+        
+
+---
+
+# 🧠 Quick Decision Rule
+
+```
+Encrypted transport available?
+        ↓
+      YES → Transfer
+        ↓
+      NO  → Encrypt → Transfer → Decrypt
+```
+
+---
