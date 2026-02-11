@@ -1,7 +1,3 @@
-#
-
----
-
 ## 🎯 Why Protect File Transfers?
 
 During penetration tests, we often handle **highly sensitive data**, such as:
@@ -297,21 +293,5 @@ openssl enc -d -aes256 -iter 100000 -pbkdf2 -in ntds.enc -out ntds.dit
 - Use strong unique passwords
     
 - Maintain professional ethics
-    
 
----
-
-If you'd like, I can also create:
-
-- 🔥 Ultra-compact exam cheat sheet
-    
-- 📊 Comparison table (All file transfer + encryption methods)
-    
-- 🧠 Decision flowchart
-    
-- 🛡️ Blue-team detection notes
-    
-- 📄 Printable PDF-style summary
-    
-
-Just tell me what you prefer.
+Cheatsheet
