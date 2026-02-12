@@ -391,3 +391,7 @@ When gaining a shell during an engagement, always:
     
 4. Deliver compatible payloads
 ---
+
+### Excercises
+
+![[Pasted image 20260212115904.png]]
