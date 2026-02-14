@@ -734,4 +734,4 @@ Download:
 
 ### Steps to get answers
 
-Step1.  The answer for the 1st question 
+Step1.  The answer for the 1st question is inside the question because if we want to connect the target system the bind shell's ip 
