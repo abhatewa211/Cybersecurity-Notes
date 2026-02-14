@@ -740,4 +740,5 @@ Step2. Spawn the machine and Open the terminal, spawn the VPN as well.
 ![[Pasted image 20260214144332.png]]
 ![[Pasted image 20260210150750.png]]
 
-Step3. 
+Step3. Connect the machine by ssh as asked in the question, and type the bind shell command as shown below, use IP of target machine. Not the Openvpn.
+![[Pasted image 20260214224402.png]]
