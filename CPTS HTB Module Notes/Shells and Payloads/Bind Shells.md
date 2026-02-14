@@ -742,3 +742,8 @@ Step2. Spawn the machine and Open the terminal, spawn the VPN as well.
 
 Step3. Connect the machine by ssh as asked in the question, and type the bind shell command as shown below, use IP of target machine. Not the Openvpn.
 ![[Pasted image 20260214224402.png]]
+
+Step4. start the listener before the bind shell command to connect sucessfully and get to the directory where the flag is located.
+![[Pasted image 20260214225158.png]]                                                                                 ![[Pasted image 20260214225234.png]]
+
+Step5. submit the flag as answer
