@@ -736,5 +736,6 @@ Download:
 
 Step1.  The answer for the 1st question is inside the question because if we want to connect the target system, the bind shell's port must be same as the attacker's machine.
 
-Step2. 
-
+Step2. Spawn the machine and Open the terminal, spawn the VPN as well.
+![[Pasted image 20260214144332.png]]
+![[Pasted image 20260210150750.png]]
