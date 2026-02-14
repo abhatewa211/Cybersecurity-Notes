@@ -734,4 +734,7 @@ Download:
 
 ### Steps to get answers
 
-Step1.  The answer for the 1st question is inside the question because if we want to connect the target system the bind shell's ip 
+Step1.  The answer for the 1st question is inside the question because if we want to connect the target system, the bind shell's port must be same as the attacker's machine.
+
+Step2. 
+
