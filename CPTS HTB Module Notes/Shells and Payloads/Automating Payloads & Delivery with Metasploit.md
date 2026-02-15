@@ -831,6 +831,7 @@ Step3. Now we know that about the OS which is Windows 10 so the Command language
 Step4. Now we will exploit the machine by SMB server using Metasploit. Now start the exploit. Lets first Start Metasploit.
 ![[Pasted image 20260216000424.png]]
 
-Step5. Now lets search for the exploit for smb.
+Step5. Now lets search for the exploit for smb. After seaching we have selected the exploit and we will use that exploit as in the screenshot.
+![[Pasted image 20260216001135.png]]
 
 
