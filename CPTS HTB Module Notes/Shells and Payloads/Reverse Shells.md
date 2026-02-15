@@ -529,3 +529,13 @@ Attacker → Gains Shell Access
 |PHP|php fsockopen reverse shell|
 
 ---
+
+### Excercises
+
+![[Pasted image 20260215174040.png]]
+
+Steps for the answers
+
+Step1. The answer is client because the target initiates the connection to the attacker’s listener, and the system that initiates a connection is the client.
+
+Step2. 
