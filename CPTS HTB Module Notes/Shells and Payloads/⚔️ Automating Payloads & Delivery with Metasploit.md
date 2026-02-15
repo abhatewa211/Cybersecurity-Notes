@@ -813,3 +813,6 @@ Recon → Scan → Exploit → Payload → Session → Privilege Escalation → 
 ```
 
 ---
+
+### Exercises
+![[Pasted image 20260215214929.png]]
