@@ -544,5 +544,6 @@ Step2. Spawn the machine and Open the terminal, spawn the VPN as well.
 
 Step3. Open the terminal and run the RDP command as shown in Screenshot. and RDP Screen POP Out. (Requested by HTB in the question)
 ![[Pasted image 20260215182321.png]]
+![[Pasted image 20260215182437.png]]
 
 
