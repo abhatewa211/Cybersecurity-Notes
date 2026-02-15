@@ -819,3 +819,4 @@ Recon → Scan → Exploit → Payload → Session → Privilege Escalation → 
 
 Steps for the answers.
 
+step1.  Spawn the machine and Open the terminal, spawn the VPN as well.
