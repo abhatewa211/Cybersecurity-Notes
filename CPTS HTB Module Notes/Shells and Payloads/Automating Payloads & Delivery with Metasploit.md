@@ -839,4 +839,6 @@ Step6. As in the above image we will run options command and fill the important 
 Step7. Now we will run the exploit after filling the Details. As in the Screenshot below and we will get the shell in the same image.
 ![[Pasted image 20260216002243.png]]
 ![[Pasted image 20260216002400.png]]  ![[Pasted image 20260216002442.png]]
+![[Pasted image 20260216002549.png]]
 
+Step8. Now we have also get the shell and the lab is also completed with the juicyfile Staffsalarie
