@@ -538,4 +538,6 @@ Steps for the answers
 
 Step1. The answer of the first question is client because the target initiates the connection to the attacker’s listener, and the system that initiates a connection is the client.
 
-Step2. 
+Step2. Spawn the machine and Open the terminal, spawn the VPN as well.
+![[Pasted image 20260215181752.png]]
+![[Pasted image 20260215181820.png]]
