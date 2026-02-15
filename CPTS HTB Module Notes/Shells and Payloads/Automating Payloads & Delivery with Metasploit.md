@@ -822,3 +822,11 @@ Steps for the answers.
 Step1.  Spawn the machine and Open the terminal, spawn the VPN as well.
 ![[Pasted image 20260215220022.png]]
 ![[Pasted image 20260215215955.png]]
+
+Step2. We have ran the Nmap scan to know the open ports of the machine and we have seen that smb server port is open and we will exploit this. On the other hand we also have know which OS is running on Target System.
+![[Pasted image 20260215220618.png]]
+
+Step3. Now we know that about the OS which is Windows 10 so the Command language interpreter is Powershell. which is used by Microsoft windows by default.
+
+Step4. 
+
