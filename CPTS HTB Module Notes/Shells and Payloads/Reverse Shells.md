@@ -536,6 +536,6 @@ Attacker → Gains Shell Access
 
 Steps for the answers
 
-Step1. The answer is client because the target initiates the connection to the attacker’s listener, and the system that initiates a connection is the client.
+Step1. The answer of the first question is client because the target initiates the connection to the attacker’s listener, and the system that initiates a connection is the client.
 
 Step2. 
