@@ -546,8 +546,9 @@ Step3. Open the terminal and run the RDP command as shown in Screenshot. and RDP
 ![[Pasted image 20260215182321.png]]
 ![[Pasted image 20260215182437.png]]
 
-Step4. connect to the target machine via reverse shell by using the command taught in the Module. Use two different IP: in target machine use IP of attacker machine and in the attacker machine use target IP to connect. 
+Step4. connect to the target machine via reverse shell by using the command taught in the Module. Use two different IP: in target machine use IP of attacker machine and in the attacker machine use target IP to connect. And also open the listener in the attacker machine.
 ![[Pasted image 20260215183804.png]]
 ![[Pasted image 20260215183843.png]]
 
-Step5. 
+Step5.  After the connection, type the hostname command in the cmd and submit the hostname showed as the answer.
+
