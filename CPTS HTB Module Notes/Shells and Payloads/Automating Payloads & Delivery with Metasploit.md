@@ -829,5 +829,7 @@ Step2. We have ran the Nmap scan to know the open ports of the machine and we ha
 Step3. Now we know that about the OS which is Windows 10 so the Command language interpreter is Powershell. which is used by Microsoft windows by default.
 
 Step4. Now we will exploit the machine by SMB server using Metasploit. Now start the exploit. Lets first Start Metasploit.
+![[Pasted image 20260216000424.png]]
 
+Step5. 
 
