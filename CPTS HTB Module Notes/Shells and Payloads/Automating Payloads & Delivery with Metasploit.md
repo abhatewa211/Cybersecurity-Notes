@@ -834,4 +834,7 @@ Step4. Now we will exploit the machine by SMB server using Metasploit. Now start
 Step5. Now lets search for the exploit for smb. After seaching we have selected the exploit and we will use that exploit as in the screenshot.
 ![[Pasted image 20260216001135.png]]
 
+Step6. As in the above image we will run options command and fill the important lines. that are RHOSTS, RPORT, SMBUser, SMBPass. With the target machine IP and Port with the credentials given.
 
+Step7. Now we will run the exploit after filling the Details. As in the Screenshot below and we will get the shell in the same image.
+	
