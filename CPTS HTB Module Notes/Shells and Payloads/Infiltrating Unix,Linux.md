@@ -720,4 +720,8 @@ Step1. Same As the previous module.Opening machine, terminal and VPN.
 Step2. We have ran the Nmap scan to know the open ports of the machine and we have seen that smb server port is open and we will exploit this. On the other hand we also have know which OS is running on Target System.
 ![[Pasted image 20260217000315.png]]
 
-Step3. 
+Step3. Now we know that about the OS which is CentOS  and we also know that the Apache httpd 2.4.6 is vulnerable in this.
+
+Step4. Now we will exploit the machine by Apache httpd 2.4.6 using Metasploit. Now start the exploit. Lets first Start Metasploit. We will search the exploit for Apache httpd 2.4.6.
+![[Pasted image 20260217000744.png]]
+
