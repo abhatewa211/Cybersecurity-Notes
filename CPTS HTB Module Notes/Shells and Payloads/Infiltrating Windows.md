@@ -897,3 +897,8 @@ Step5. After selecting the exploit we will fill the options with the target IP P
 Step6.  Now we will run the exploit after filling the Details. As in the Screenshot below and we will get the shell in the same image.
 ![[Pasted image 20260216140157.png]]
 
+Step7. In the above image we have reached to the directory where the flag is.
+
+Step8. Now we will read it by command `type` from cmd.exe. And we will get flag.
+![[Pasted image 20260216140902.png]]
+
