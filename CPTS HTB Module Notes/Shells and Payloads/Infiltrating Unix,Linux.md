@@ -719,3 +719,5 @@ Step1. Same As the previous module.Opening machine, terminal and VPN.
 
 Step2. We have ran the Nmap scan to know the open ports of the machine and we have seen that smb server port is open and we will exploit this. On the other hand we also have know which OS is running on Target System.
 ![[Pasted image 20260217000315.png]]
+
+Step3. 
