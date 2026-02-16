@@ -879,3 +879,6 @@ Recon → Scan → Identify Windows → Enumerate SMB → Exploit → Payload �
 Steps for the solution.
 
 Step1.  Spawn the machine and Open the terminal, spawn the VPN as well.
+![[Pasted image 20260216132337.png]]
+
+![[Pasted image 20260216132308.png]]
