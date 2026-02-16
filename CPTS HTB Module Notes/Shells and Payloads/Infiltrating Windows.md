@@ -875,3 +875,7 @@ Recon → Scan → Identify Windows → Enumerate SMB → Exploit → Payload �
 ### Exercises
 
 ![[Pasted image 20260216104505.png]]
+
+Steps for the solution.
+
+Step1. 
