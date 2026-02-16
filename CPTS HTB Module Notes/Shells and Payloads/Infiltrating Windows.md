@@ -895,5 +895,5 @@ Step5. After selecting the exploit we will fill the options with the target IP P
 ![[Pasted image 20260216135523.png]]
 
 Step6.  Now we will run the exploit after filling the Details. As in the Screenshot below and we will get the shell in the same image.
-
+![[Pasted image 20260216140157.png]]
 
