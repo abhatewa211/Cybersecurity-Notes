@@ -892,6 +892,8 @@ Step4. Now we will exploit the machine by SMB server using Metasploit. Now start
 ![[Pasted image 20260216134249.png]]                                          ![[Pasted image 20260216135045.png]]
 
 Step5. After selecting the exploit we will fill the options with the target IP Port and Attacker IP Port.
+![[Pasted image 20260216135523.png]]
 
+Ste
 
 
