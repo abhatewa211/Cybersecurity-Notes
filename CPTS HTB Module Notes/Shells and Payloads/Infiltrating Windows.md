@@ -886,5 +886,8 @@ Step1.  Spawn the machine and Open the terminal, spawn the VPN as well.
 Step2. We have ran the Nmap scan to know the open ports of the machine and we have seen that smb server port is open and we will exploit this. On the other hand we also have know which OS is running on Target System.
 ![[Pasted image 20260216132827.png]]
 
-Step3. Now we know that about the OS which is Windows 10
+Step3. Now we know that about the OS which is Windows 10  and we also know that the smb eternalblue server is vulnerable in this.
+
+Step4. Now we will exploit the machine by SMB server using Metasploit. Now start the exploit. Lets first Start Metasploit. We will search the exploit for smb eternalblue.
+![[Pasted image 20260216134249.png]]                                 
 
