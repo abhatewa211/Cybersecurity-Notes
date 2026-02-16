@@ -878,4 +878,4 @@ Recon → Scan → Identify Windows → Enumerate SMB → Exploit → Payload �
 
 Steps for the solution.
 
-Step1. 
+Step1.  
