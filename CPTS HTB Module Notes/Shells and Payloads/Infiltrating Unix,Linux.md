@@ -725,3 +725,12 @@ Step3. Now we know that about the OS which is CentOS  and we also know that the 
 Step4. Now we will exploit the machine by Apache httpd 2.4.6 using Metasploit. Now start the exploit. Lets first Start Metasploit. We will search the exploit for Apache httpd 2.4.6.
 ![[Pasted image 20260217000744.png]]
 
+Step5. After selecting the exploit we will fill the options with the target IP Port and Attacker IP Port.
+![[Pasted image 20260217001308.png]]
+
+Step6.  Now we will run the exploit after filling the Details. As in the Screenshot below and we will get the shell in the same image.
+![[Pasted image 20260217001358.png]]
+
+Step7. In the Below image we have reached to the directory where the flag is.
+![[Pasted image 20260217001524.png]]
+Step8. Now we will read it by command `cat` from bash shell. And we will get flag.
