@@ -709,3 +709,5 @@ Scan → Identify Linux → Find vulnerable app → Exploit → Upload payload �
 
 ---
 
+### Exercises
+
