@@ -891,4 +891,5 @@ Step3. Now we know that about the OS which is Windows 10  and we also know that 
 Step4. Now we will exploit the machine by SMB server using Metasploit. Now start the exploit. Lets first Start Metasploit. We will search the exploit for smb eternalblue.
 ![[Pasted image 20260216134249.png]]                                          ![[Pasted image 20260216135045.png]]
 
+Step5. After selecting the exploit we will  
 
