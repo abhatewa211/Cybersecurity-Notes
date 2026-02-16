@@ -408,4 +408,3 @@ Create Payload → Deliver Payload → Victim Executes → Reverse Connection �
 
 ---
 
-If you want, I can also create a **Ultimate Reverse Shell + MSFvenom + Metasploit exam cheat sheet used for HTB, OSCP, and real pentests.
