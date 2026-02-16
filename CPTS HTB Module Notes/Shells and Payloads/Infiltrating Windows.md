@@ -481,5 +481,3 @@ Recon → Fingerprint → Enumerate → Exploit → Payload Execution → Meterp
 ```
 
 ---
-
-If you want, I can now create a **complete Windows exploitation master cheat sheet used in OSCP, HTB, and real pentests (step-by-step)**.
