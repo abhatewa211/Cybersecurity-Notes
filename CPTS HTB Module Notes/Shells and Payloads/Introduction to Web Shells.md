@@ -549,5 +549,3 @@ sudo -l
 ```
 
 ---
-
-If you want, I can also create a **FULL Shells & Payloads Master Cheat Sheet (Bind, Reverse, MSFvenom, Meterpreter, Web Shell, PrivEsc, HTB exam focused)**.
