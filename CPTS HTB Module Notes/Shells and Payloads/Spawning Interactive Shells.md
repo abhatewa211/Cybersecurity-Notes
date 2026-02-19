@@ -545,4 +545,3 @@ find . -exec /bin/bash \; -quit
 sudo -l
 ```
 
----
