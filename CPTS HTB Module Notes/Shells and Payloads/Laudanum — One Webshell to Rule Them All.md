@@ -560,3 +560,6 @@ sudo -l
 |Use reverse shell|More stable|
 
 ---
+
+### Excercises
+
