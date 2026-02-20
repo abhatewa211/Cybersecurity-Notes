@@ -578,4 +578,6 @@ Step4. Now we will set hostname in hosts file.
 ![[Pasted image 20260220090305.png]]
 
 Step5. now we will surf the website for which the hostname is set for.
-![[Pasted image 20260220090536.png]]                                   
+![[Pasted image 20260220090536.png]]                                   ![[Pasted image 20260220090717.png]]
+
+Step6. Now we will upload the laudanum aspx shell after adding the vpn IP.
