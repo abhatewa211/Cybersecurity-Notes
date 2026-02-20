@@ -569,4 +569,6 @@ Steps for Solution
 
 Step1. Firstly, answer for 2nd question is in the module itself.
 
-Step2. 
+Step2. Same As the previous module.Opening machine, terminal and VPN.
+
+Step3. 
