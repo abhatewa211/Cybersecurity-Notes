@@ -586,4 +586,4 @@ Step6. Now we will upload the laudanum aspx shell after adding the vpn IP.
 Step7. Now we upload the aspx shell file through import config as shown in the webpage (image Below).
 ![[Pasted image 20260220091712.png]]
 
-Step8.  
+Step8.  After uploading the file we got the path were the file is stored 
