@@ -574,4 +574,8 @@ Step2. Same As the previous module.Opening machine, terminal and VPN.
 Step3. Step2. We have ran the Nmap scan to know the open ports of the machine and we have seen that smb server port is open and we will exploit this. On the other hand we also have know which OS is running on Target System.
 ![[Pasted image 20260220085852.png]]
 
-Step4. 
+Step4. Now we will set hostname in hosts file.
+![[Pasted image 20260220090305.png]]
+
+Step5. now we will surf the website for which the hostname is set for.
+![[Pasted image 20260220090536.png]]                                   
