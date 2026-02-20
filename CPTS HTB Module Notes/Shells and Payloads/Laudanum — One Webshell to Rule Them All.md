@@ -581,4 +581,9 @@ Step5. now we will surf the website for which the hostname is set for.
 ![[Pasted image 20260220090536.png]]                                   ![[Pasted image 20260220090717.png]]
 
 Step6. Now we will upload the laudanum aspx shell after adding the vpn IP.
-![[Pasted image 20260220091106.png]]              
+![[Pasted image 20260220091106.png]]              ![[Pasted image 20260220091429.png]]
+
+Step7. Now we upload the aspx shell file through import config as shown in the webpage (image Below).
+![[Pasted image 20260220091712.png]]
+
+Step8. 
