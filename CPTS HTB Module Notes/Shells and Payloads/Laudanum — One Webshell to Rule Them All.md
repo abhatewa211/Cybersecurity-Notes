@@ -567,4 +567,4 @@ sudo -l
 
 Steps for Solution
 
-Step1. Firstly answer for 2nd 
+Step1. Firstly, answer for 2nd question  
