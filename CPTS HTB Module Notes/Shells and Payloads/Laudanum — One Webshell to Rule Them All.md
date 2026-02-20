@@ -564,3 +564,7 @@ sudo -l
 ### Excercises
 
 ![[Pasted image 20260220084431.png]]
+
+Steps for Solution
+
+Step1. 
