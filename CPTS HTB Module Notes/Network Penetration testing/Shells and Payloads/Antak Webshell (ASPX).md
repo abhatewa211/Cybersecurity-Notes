@@ -606,3 +606,7 @@ Step5. now we will surf the website for which the hostname is set for.
 Step6. Now we will upload the antak aspx shell after adding the vpn IP.
 ![[Pasted image 20260301001300.png]]
 
+Step7. Now we upload the aspx shell file through import config as shown in the webpage (image Below).
+![[Pasted image 20260301001445.png]]
+
+Step8.  After uploading the file we got the path were the file is stored. Now we will surf the uploaded shell. the shell will be activated.
