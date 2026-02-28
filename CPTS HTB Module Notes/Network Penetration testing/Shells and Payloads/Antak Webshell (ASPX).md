@@ -613,3 +613,4 @@ Step8.  After uploading the file we got the path were the file is stored. Now we
 ![[Pasted image 20260301001545.png]]
 
 Step9. We will run whoami command to get the answer as shown below and answer is also highlighted.
+![[Pasted image 20260301001722.png]]
