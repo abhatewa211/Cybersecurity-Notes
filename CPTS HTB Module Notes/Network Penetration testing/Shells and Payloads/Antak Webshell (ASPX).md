@@ -610,3 +610,5 @@ Step7. Now we upload the aspx shell file through import config as shown in the w
 ![[Pasted image 20260301001445.png]]
 
 Step8.  After uploading the file we got the path were the file is stored. Now we will surf the uploaded shell. the shell will be activated.
+![[Pasted image 20260301001545.png]]
+
