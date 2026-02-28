@@ -612,3 +612,4 @@ Step7. Now we upload the aspx shell file through import config as shown in the w
 Step8.  After uploading the file we got the path were the file is stored. Now we will surf the uploaded shell. the shell will be activated.
 ![[Pasted image 20260301001545.png]]
 
+Step9. We will run whoami command to get the answer as shown below and answer is also highlighted.
