@@ -594,3 +594,7 @@ Step1. The answer to the first question is in the segment itself.
 Step2. Same As the previous module.Opening machine, terminal and VPN.
 
 Step3. We have ran the Nmap scan to know the open ports of the machine and we have seen that Http server port is open and port number is also suspicious and we will exploit this. On the other hand we also have know which OS is running on Target System.
+![[Pasted image 20260301000541.png]]
+
+Step4. Now we will set hostname in hosts file.
+![[Pasted image 20260220090305.png]]
