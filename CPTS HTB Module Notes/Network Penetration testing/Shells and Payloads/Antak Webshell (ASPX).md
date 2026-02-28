@@ -588,3 +588,9 @@ net localgroup administrators
 ![[Pasted image 20260228235643.png]]
 
 Steps for the answers
+
+Step1. The answer to the first question is in the segment itself.
+
+Step2. Same As the previous module.Opening machine, terminal and VPN.
+
+Step3. 
