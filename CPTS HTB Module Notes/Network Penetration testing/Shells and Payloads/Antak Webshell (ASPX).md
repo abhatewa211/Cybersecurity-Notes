@@ -582,3 +582,9 @@ net localgroup administrators
 |Upgrade to reverse shell|More stable access|
 
 ---
+
+### Excersises
+
+![[Pasted image 20260228235643.png]]
+
+Steps for the answers
