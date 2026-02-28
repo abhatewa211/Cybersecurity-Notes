@@ -604,4 +604,5 @@ Step5. now we will surf the website for which the hostname is set for.
 
 
 Step6. Now we will upload the antak aspx shell after adding the vpn IP.
+![[Pasted image 20260301001300.png]]
 
