@@ -729,7 +729,7 @@ Step8. Now we will edit a vendor by selecting them and upload the php webshell f
 
 ![[Screenshot From 2026-03-01 18-37-30.png]]
 
-Step8. 
+Step8. Now we will open the burpsuite 
 
 
 
