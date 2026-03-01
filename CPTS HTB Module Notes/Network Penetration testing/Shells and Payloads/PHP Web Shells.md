@@ -737,7 +737,8 @@ Step8. Now we will open the burpsuite and intercept the request and the request 
 Step9. We will now forward the request with the changes we made as made. (refer the image above) and we will get the shell.
 ![[Screenshot From 2026-03-01 18-47-46.png]]
 
-Step10. We have got the answer for the 2nd question. (Solved)
+Step10. We have got the answer for the 2nd question. (Solved) (See the above image and with format).
+
 
 
 
