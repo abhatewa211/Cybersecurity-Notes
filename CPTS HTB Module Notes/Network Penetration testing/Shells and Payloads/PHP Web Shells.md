@@ -701,4 +701,6 @@ sudo -l
 ---
 
 ### Exercises
+![[Pasted image 20260301185102.png]]
 
+Step1. 
