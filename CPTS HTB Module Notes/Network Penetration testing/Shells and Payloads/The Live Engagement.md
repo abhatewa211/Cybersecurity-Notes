@@ -57,3 +57,4 @@ Enter your credentials again and click `OK` and you will be connected to the pro
 Hosts 1-3 will be your targets for this skills challenge. Each host has a unique vector to attack and may even have more than one route built-in. The challenge questions below can be answered by exploiting these three hosts. Gain access and enumerate these targets. You will need to utilize the Foothold PC provided. The IP will appear when you spawn the targets. Attempting to interact with the targets from anywhere other than the foothold will not work. Keep in mind that the Foothold host has access to the Internal inlanefreight network (`172.16.0.0/23` network) so you may want to pay careful attention to the IP address you pick when starting your listeners.
 
 ---
+
