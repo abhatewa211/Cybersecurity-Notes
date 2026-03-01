@@ -718,7 +718,8 @@ Step4. Now we will surf the website and login the page with credentials.
 Step5. After Loging in the page a homepage comes up with the home section selected which is default. 
 ![[Screenshot From 2026-03-01 18-35-12.png]]
 
-Step6. We will Now click on the devices tab and 
+Step6. We will Now click on the devices tab and we will see
+![[Screenshot From 2026-03-01 18-35-50.png]]
 
 
 
