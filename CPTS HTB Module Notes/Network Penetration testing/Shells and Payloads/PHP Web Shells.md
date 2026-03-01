@@ -703,4 +703,12 @@ sudo -l
 ### Exercises
 ![[Pasted image 20260301185102.png]]
 
-Step1. 
+Steps for the answers
+
+Step1. The answer to the first question is in the segment itself.
+
+Step2. Same As the previous module.Opening machine, terminal and VPN.
+
+Step3. 
+
+
