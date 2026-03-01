@@ -729,7 +729,11 @@ Step8. Now we will edit a vendor by selecting them and upload the php webshell f
 
 ![[Screenshot From 2026-03-01 18-37-30.png]]
 
-Step8. Now we will open the burpsuite 
+Step8. Now we will open the burpsuite and intercept the request and the request in content-type of the shell uploaded.
+![[Screenshot From 2026-03-01 18-38-38.png]]
+
+![[Screenshot From 2026-03-01 18-39-44.png]]
+
 
 
 
