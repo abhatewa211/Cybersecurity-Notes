@@ -724,7 +724,10 @@ Step6. We will Now click on the devices tab and we will see device management pa
 Step7. We will now click on the Vendors page on the same page.
 ![[Screenshot From 2026-03-01 18-36-51.png]]
 
-Step8. Now we will edit a vendor by 
+Step8. Now we will edit a vendor by selecting them and add 
+![[Screenshot From 2026-03-01 18-37-05.png]]
+
+![[Screenshot From 2026-03-01 18-37-30.png]]
 
 
 
