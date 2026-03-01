@@ -712,8 +712,13 @@ Step2. Same As the previous module.Opening machine, terminal and VPN.
 Step3. We have ran the Nmap scan to know the open ports of the machine and we have seen that Http server port is open and port number is also suspicious and we will exploit this. On the other hand we also have know which OS is running on Target System.
 **![[Pasted image 20260301190052.png]]
 
-Step4. Now we will surf the website.
+Step4. Now we will surf the website and login the page with credentials.
+![[Screenshot From 2026-03-01 18-34-38.png]]
 
+Step5. After Loging in the page a homepage comes up with the home section selected which is default. 
+![[Screenshot From 2026-03-01 18-35-12.png]]
+
+Step6. We will Now click on the devices tab and 
 
 
 
