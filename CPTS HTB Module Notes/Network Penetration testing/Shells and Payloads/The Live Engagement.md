@@ -59,5 +59,6 @@ Hosts 1-3 will be your targets for this skills challenge. Each host has a unique
 ---
 
 ### Exercises
+![[Pasted image 20260304225748.png]]
+![[Pasted image 20260304225804.png]]
 
-	
