@@ -1274,3 +1274,16 @@ Must understand:
 ✔ HTTPS / TLS
 
 ---
+### Exercises
+
+![[Pasted image 20260308130729.png]]
+
+Step1. Run the Pwnbox as done in previous sections.
+
+Step2. In your browser first browser  the target then right click the page select inspect and, then the inspect element appears.
+![[Pasted image 20260308131009.png]]
+
+Step3. Now Select Network Tab and a flag url arrive as in above Image then click on that url, a new page appears with a flag.
+![[Pasted image 20260308131231.png]]
+
+
