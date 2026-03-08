@@ -614,5 +614,5 @@ Step2.  Now open the browser in Pwnbox surf the target ip with port given and lo
 Step3. Now search any location there will be error in results, after that open the inspect element and go to network tab
 ![[Pasted image 20260308155327.png]]             ![[Pasted image 20260308155625.png]]
 
-Step4. Now copy the parameter and use it in curl by changing the search to flag and you will get the answer.
-
+Step4. Now copy the parameter and use it in curl by changing the search to flag and you will get the answer. (Highlighted answer)
+![[Pasted image 20260308160248.png]]
