@@ -347,4 +347,5 @@ man curl
 
 Step1. For this we will use the pwnbox for HTB.
 
-Step2. Now we will open terminal  
+Step2. Now we will open terminal and run the curl command to download the flag. (Highlighted)
+![[Pasted image 20260308122104.png]]
