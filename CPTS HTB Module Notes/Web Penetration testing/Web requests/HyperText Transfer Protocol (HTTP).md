@@ -341,3 +341,10 @@ man curl
 - cURL allows sending raw HTTP requests from command line.
 
 ---
+### Exercises
+
+![[Pasted image 20260308121613.png]]
+
+Step1. For this we will use the pwnbox for HTB.
+
+Step2. Now we will open terminal  
