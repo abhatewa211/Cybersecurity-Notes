@@ -339,6 +339,5 @@ man curl
 - Server responds with status code + content.
     
 - cURL allows sending raw HTTP requests from command line.
-    
 
 ---
