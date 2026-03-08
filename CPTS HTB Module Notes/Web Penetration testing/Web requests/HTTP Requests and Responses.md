@@ -666,13 +666,11 @@ curl -vvv site.com
 
 ---
 
-If you want, I can also make **the next HTB notes section**:
+### Exercises
 
-- **HTTP Headers (VERY important for pentesting)**
-    
-- **HTTP Methods exploitation**
-    
-- **Status codes used in web hacking**
-    
+![[Pasted image 20260308124256.png]]
 
-These are **core topics used in Burp Suite and Web Exploitation labs.**
+Step1. Strart the pwnbox as usual.
+
+Step2. Run Command curl in terminal. (Highlighted)
+![[Pasted image 20260308124523.png]]
