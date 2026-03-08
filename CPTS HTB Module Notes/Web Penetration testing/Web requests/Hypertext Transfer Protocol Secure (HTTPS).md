@@ -523,3 +523,4 @@ curl -k https://site.com
 
 ---
 
+Exercises
