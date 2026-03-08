@@ -523,4 +523,9 @@ curl -k https://site.com
 
 ---
 
-Exercises
+### Exercises
+
+![[Pasted image 20260308124256.png]]
+
+Step1. Strart the pwnbox as usual.
+
