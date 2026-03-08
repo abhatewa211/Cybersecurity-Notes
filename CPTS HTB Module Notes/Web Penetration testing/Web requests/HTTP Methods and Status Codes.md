@@ -601,18 +601,3 @@ PATCH
 ```
 
 ---
-
-If you want, I can also make a **SUPER HTB Web Cheatsheet (1 page)** that combines:
-
-- HTTP Methods
-    
-- Headers
-    
-- Status Codes
-    
-- cURL commands
-    
-- Burp Suite tricks
-    
-
-It becomes **one of the best quick references for HTB, Bug Bounty, and OSCP.**
