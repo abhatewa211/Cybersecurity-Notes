@@ -722,4 +722,3 @@ curl -A "Mozilla/5.0" site.com
 
 ---
 
-If you want, I can also make **the next HTB notes section** on **HTTP Methods (GET, POST, PUT, DELETE, OPTIONS, etc.)**, which is **very important for web exploitation and BurpSuite usage.**
