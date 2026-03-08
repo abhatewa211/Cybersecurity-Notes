@@ -603,3 +603,9 @@ curl -v http://target
 
 ---
 
+### Exercises
+![[Pasted image 20260308154455.png]]
+
+Step1.  Start the pwnbox as well and target machine too.
+
+Step2.  
