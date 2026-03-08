@@ -722,3 +722,555 @@ curl -A "Mozilla/5.0" site.com
 
 ---
 
+# HTTP Cheatsheet (Web Pentesting + HTB)
+
+![Image](https://www.researchgate.net/publication/369358390/figure/fig1/AS%3A11431281127810255%401679180216268/HTTP-request-and-response-flow.png)
+
+![Image](https://mdn.github.io/shared-assets/images/diagrams/http/messages/request-headers.svg)
+
+![Image](https://www.tutorialspoint.com/http/images/http-message-response.jpg)
+
+![Image](https://mdn.github.io/shared-assets/images/diagrams/http/messages/response-headers.svg)
+
+---
+
+# 1. HTTP Communication Flow
+
+```text
+Client (Browser / cURL / App)
+        │
+        │  HTTP Request
+        ▼
+      Server
+        │
+        │  HTTP Response
+        ▼
+Client receives data
+```
+
+**Client Examples**
+
+- Browser
+    
+- cURL
+    
+- Mobile app
+    
+- Script
+    
+
+**Server Examples**
+
+- Apache
+    
+- Nginx
+    
+- IIS
+    
+- NodeJS
+    
+
+---
+
+# 2. HTTP Request Structure
+
+```http
+GET /users/login.html HTTP/1.1
+Host: inlanefreight.com
+User-Agent: Mozilla/5.0
+Cookie: PHPSESSID=c4ggt4jull9obt7aupa55o8vbf
+Accept: */*
+
+username=admin&password=password
+```
+
+### Parts of HTTP Request
+
+|Part|Description|
+|---|---|
+|Request Line|Method + Path + HTTP Version|
+|Headers|Metadata about request|
+|Body|Optional data|
+
+---
+
+# 3. Request Line
+
+```http
+GET /users/login.html HTTP/1.1
+```
+
+|Field|Meaning|
+|---|---|
+|Method|Action|
+|Path|Resource|
+|Version|HTTP version|
+
+---
+
+# 4. HTTP Methods
+
+|Method|Purpose|
+|---|---|
+|GET|Retrieve resource|
+|POST|Send data|
+|PUT|Update resource|
+|DELETE|Remove resource|
+|PATCH|Partial update|
+|HEAD|Headers only|
+|OPTIONS|Supported methods|
+
+Example:
+
+```http
+GET /index.html HTTP/1.1
+```
+
+---
+
+# 5. HTTP Response Structure
+
+```http
+HTTP/1.1 200 OK
+Date: Tue, 21 Jul 2020 05:20:15 GMT
+Server: Apache/2.4.41
+Content-Type: text/html
+Content-Length: 464
+```
+
+### Response Parts
+
+|Part|Description|
+|---|---|
+|Status Line|HTTP version + code|
+|Headers|Server information|
+|Body|Response data|
+
+---
+
+# 6. HTTP Status Codes
+
+### 1xx – Informational
+
+|Code|Meaning|
+|---|---|
+|100|Continue|
+
+---
+
+### 2xx – Success
+
+|Code|Meaning|
+|---|---|
+|200|OK|
+|201|Created|
+|204|No Content|
+
+---
+
+### 3xx – Redirection
+
+|Code|Meaning|
+|---|---|
+|301|Moved Permanently|
+|302|Found|
+|304|Not Modified|
+
+---
+
+### 4xx – Client Errors
+
+|Code|Meaning|
+|---|---|
+|400|Bad Request|
+|401|Unauthorized|
+|403|Forbidden|
+|404|Not Found|
+
+---
+
+### 5xx – Server Errors
+
+|Code|Meaning|
+|---|---|
+|500|Internal Server Error|
+|502|Bad Gateway|
+|503|Service Unavailable|
+
+---
+
+# 7. HTTP Header Categories
+
+HTTP headers are divided into **5 categories**.
+
+|Category|Usage|
+|---|---|
+|General Headers|Request + Response|
+|Entity Headers|Describe content|
+|Request Headers|Sent by client|
+|Response Headers|Sent by server|
+|Security Headers|Security policies|
+
+---
+
+# 8. General Headers
+
+|Header|Example|Purpose|
+|---|---|---|
+|Date|Date: Wed, 16 Feb 2022|Message time|
+|Connection|Connection: keep-alive|Connection behavior|
+
+Example
+
+```http
+Connection: keep-alive
+```
+
+---
+
+# 9. Entity Headers
+
+Describe **content being transferred**
+
+|Header|Example|Purpose|
+|---|---|---|
+|Content-Type|text/html|Resource type|
+|Content-Length|385|Data size|
+|Content-Encoding|gzip|Compression|
+|Boundary|boundary=abc123|Multipart separator|
+
+Example
+
+```http
+Content-Type: application/json
+```
+
+---
+
+# 10. Request Headers
+
+Sent by **client → server**
+
+|Header|Example|Purpose|
+|---|---|---|
+|Host|Host: inlanefreight.com|Target host|
+|User-Agent|curl/7.77.0|Client info|
+|Referer|google.com|Request source|
+|Accept|_/_|Accepted formats|
+|Cookie|PHPSESSID=abc123|Session data|
+|Authorization|Basic token|Authentication|
+
+---
+
+### Host Header
+
+```http
+Host: inlanefreight.com
+```
+
+Important for:
+
+- **Virtual hosting**
+    
+- **Subdomain enumeration**
+    
+
+---
+
+### User-Agent
+
+```http
+User-Agent: Mozilla/5.0
+```
+
+Reveals:
+
+- Browser
+    
+- OS
+    
+- Device
+    
+
+---
+
+### Cookie
+
+```http
+Cookie: PHPSESSID=b4e4fbd93540
+```
+
+Used for:
+
+- authentication
+    
+- session tracking
+    
+- preferences
+    
+
+---
+
+# 11. Response Headers
+
+Sent by **server → client**
+
+|Header|Example|Purpose|
+|---|---|---|
+|Server|Apache/2.4.41|Server software|
+|Set-Cookie|PHPSESSID=abc123|Set cookie|
+|WWW-Authenticate|Basic realm|Authentication|
+
+Example
+
+```http
+Server: Apache/2.4.41
+```
+
+Useful for **server fingerprinting**.
+
+---
+
+# 12. Security Headers
+
+Improve **browser security**.
+
+|Header|Example|Purpose|
+|---|---|---|
+|Content-Security-Policy|script-src 'self'|Prevent XSS|
+|Strict-Transport-Security|max-age=31536000|Force HTTPS|
+|Referrer-Policy|origin|Hide referer info|
+
+---
+
+### Content-Security-Policy
+
+```http
+Content-Security-Policy: script-src 'self'
+```
+
+Prevents:
+
+- Cross Site Scripting (XSS)
+    
+
+---
+
+### Strict Transport Security
+
+```http
+Strict-Transport-Security: max-age=31536000
+```
+
+Forces:
+
+```
+HTTPS only
+```
+
+---
+
+# 13. HTTP vs HTTPS
+
+|Feature|HTTP|HTTPS|
+|---|---|---|
+|Encryption|❌|✅|
+|Port|80|443|
+|Security|Low|High|
+|TLS|No|Yes|
+
+---
+
+# 14. cURL Cheatsheet
+
+### Basic Request
+
+```bash
+curl http://example.com
+```
+
+---
+
+### Verbose Mode
+
+```bash
+curl -v http://example.com
+```
+
+Shows:
+
+- request
+    
+- response
+    
+- headers
+    
+
+---
+
+### Very Verbose
+
+```bash
+curl -vvv http://example.com
+```
+
+Shows:
+
+- TLS handshake
+    
+- connection details
+    
+
+---
+
+### Headers Only
+
+```bash
+curl -I https://example.com
+```
+
+Sends **HEAD request**
+
+---
+
+### Headers + Body
+
+```bash
+curl -i https://example.com
+```
+
+---
+
+### Ignore SSL Errors
+
+```bash
+curl -k https://example.com
+```
+
+---
+
+### Custom Header
+
+```bash
+curl -H "User-Agent: Mozilla/5.0" https://example.com
+```
+
+---
+
+### Change User Agent
+
+```bash
+curl -A "Mozilla/5.0" https://example.com
+```
+
+---
+
+### Send POST Request
+
+```bash
+curl -X POST http://site.com/login
+```
+
+---
+
+### Send Data
+
+```bash
+curl -d "username=admin&password=admin" http://site.com/login
+```
+
+---
+
+# 15. Browser DevTools
+
+Open DevTools:
+
+```
+F12
+```
+
+or
+
+```
+CTRL + SHIFT + I
+```
+
+---
+
+### Network Tab Shows
+
+|Field|Description|
+|---|---|
+|Method|GET / POST|
+|Status|Response code|
+|Domain|Server|
+|Path|Resource|
+|Size|Response size|
+|Time|Request duration|
+
+---
+
+### Request Details
+
+DevTools displays:
+
+- Request Headers
+    
+- Response Headers
+    
+- Cookies
+    
+- Payload
+    
+- Response body
+    
+
+---
+
+# 16. Important Pentesting Headers
+
+|Header|Why Important|
+|---|---|
+|Host|Virtual host discovery|
+|Cookie|Session hijacking|
+|Authorization|Auth bypass|
+|Referer|Access control bypass|
+|User-Agent|Filter bypass|
+|Server|Version enumeration|
+
+---
+
+# 17. Important Pentesting Tools
+
+|Tool|Usage|
+|---|---|
+|Burp Suite|Intercept requests|
+|OWASP ZAP|Web vulnerability scanning|
+|Wireshark|Packet capture|
+|cURL|Manual requests|
+|DevTools|Browser debugging|
+
+---
+
+# 18. Important Ports
+
+|Protocol|Port|
+|---|---|
+|HTTP|80|
+|HTTPS|443|
+
+---
+
+# 19. Key Concepts for Web Pentesting
+
+Must understand:
+
+✔ HTTP Requests  
+✔ HTTP Headers  
+✔ Cookies  
+✔ Sessions  
+✔ Authentication  
+✔ Status Codes  
+✔ HTTPS / TLS
+
+---
