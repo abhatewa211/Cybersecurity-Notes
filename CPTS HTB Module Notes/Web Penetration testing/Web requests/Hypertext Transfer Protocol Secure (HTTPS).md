@@ -529,3 +529,5 @@ curl -k https://site.com
 
 Step1. Strart the pwnbox as usual.
 
+Step2. Run Command curl in terminal. (Highlighted)
+![[Pasted image 20260308124523.png]]
