@@ -563,4 +563,7 @@ curl -b "PHPSESSID=SESSIONID" http://target
 Step1.  Start the pwnbox as well and target machine too.
 
 Step2.  Now open the browser in Pwnbox surf the target ip with port given and login with given credentials.
+![[Pasted image 20260310223650.png]]
+
+Step3. Now search any location there will be error in results, after that open the inspect element and go to network tab
 
