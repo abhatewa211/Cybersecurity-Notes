@@ -560,4 +560,7 @@ curl -b "PHPSESSID=SESSIONID" http://target
 
 ![[Pasted image 20260310223316.png]]
 
+Step1.  Start the pwnbox as well and target machine too.
+
+Step2.  Now open the browser in Pwnbox surf the target ip with port given and login with given credentials.
 
