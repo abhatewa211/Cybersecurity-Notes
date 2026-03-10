@@ -556,3 +556,8 @@ curl -b "PHPSESSID=SESSIONID" http://target
 
 ---
 
+### Exercises
+
+![[Pasted image 20260310223316.png]]
+
+
