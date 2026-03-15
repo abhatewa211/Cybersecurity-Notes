@@ -495,3 +495,4 @@ Understanding **Metasploit architecture and modules** is critical before using e
     
 
 ---
+### Exercises
