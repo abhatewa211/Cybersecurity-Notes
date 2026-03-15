@@ -495,16 +495,3 @@ Understanding **Metasploit architecture and modules** is critical before using e
     
 
 ---
-
-If you want, I can also make:
-
-- 🔥 **Ultra-short revision notes (perfect for HTB exams)**
-    
-- 📊 **Metasploit Module Cheat Sheet**
-    
-- 🧠 **Most important msfconsole commands for pentesting**
-    
-- 🗺️ **Complete Metasploit exploitation workflow**
-    
-
-Just tell me.
