@@ -495,4 +495,5 @@ Understanding **Metasploit architecture and modules** is critical before using e
     
 
 ---
-### Exercises
+
+![[Pasted image 20260315154148.png]]
