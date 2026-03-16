@@ -576,4 +576,5 @@ Never rely only on Metasploit automation.
 
 ### Exercises
 
+![[Pasted image 20260316153748.png]]
 
