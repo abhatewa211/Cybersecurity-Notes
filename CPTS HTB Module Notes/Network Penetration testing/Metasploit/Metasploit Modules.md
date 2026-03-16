@@ -574,15 +574,5 @@ Never rely only on Metasploit automation.
 
 ---
 
-✅ If you want, I can also create:
+### Exercises
 
-- 🔥 **Complete Metasploit Cheat Sheet (Top 60 Commands)**
-    
-- 🧠 **Meterpreter Commands Explained**
-    
-- 🗺️ **Real Bug Bounty Exploitation Workflow using Metasploit**
-    
-- ⚡ **HTB Metasploit Exam Notes (Condensed)**
-    
-
-Just tell me.
