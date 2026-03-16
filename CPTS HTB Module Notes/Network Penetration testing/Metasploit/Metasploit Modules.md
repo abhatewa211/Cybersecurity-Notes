@@ -578,3 +578,6 @@ Never rely only on Metasploit automation.
 
 ![[Pasted image 20260316153748.png]]
 
+Step1. On the machine and vpn both.
+
+Step2. 
