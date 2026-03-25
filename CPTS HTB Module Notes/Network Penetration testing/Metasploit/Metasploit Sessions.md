@@ -402,3 +402,5 @@ CTRL + C
 |sessions -i|Interact with session|
 
 ---
+### Exercises
+
