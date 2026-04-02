@@ -60,10 +60,9 @@ Common Vulnerability Patterns
 Outdated Core Installation
 
 # Impact: Multiple CVEs affecting core functionality
-# Detection: Version comparison with latest releases
-# Risk: High - Core vulnerabilities often lead to RCE
+### Risk: High - Core vulnerabilities often lead to RCE
 
-Vulnerable Plugins
+#### Vulnerable Plugins
 
 # Most Common: 
 # - Contact Form 7 (various versions)
