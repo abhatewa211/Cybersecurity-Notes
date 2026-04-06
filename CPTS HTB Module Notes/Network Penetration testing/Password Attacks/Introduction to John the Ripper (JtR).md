@@ -1,49 +1,66 @@
-![Image](https://www.openwall.com/john/cloud/aws-openwall-bundle-md5crypt.png)
+![Image](https://assets.esecurityplanet.com/uploads/2019/10/John-The-Ripper.png)
 
-![Image](https://www.varonis.com/hs-fs/hubfs/Imported_Blog_Media/Reasons-To-Use-John-The-Ripper.png?height=864&name=Reasons-To-Use-John-The-Ripper.png&width=1240)
+![Image](https://dl.flathub.org/media/com/openwall/John/468f777164078acad5ad8b58800b5d13/screenshots/image-1_orig.png)
 
-![Image](https://cdn.sanity.io/images/3jwyzebk/production/57bfae028486dcd24e40b6fbddbee786ead91909-1502x988.png)
+![Image](https://delinea.com/hs-fs/hubfs/Imported_Blog_Media/Hashcat.gif?height=1080&name=Hashcat.gif&width=1512)
 
-![Image](https://ars.els-cdn.com/content/image/3-s2.0-B9781597495707000121-f12-04.jpg)
+![Image](https://www.mdpi.com/sensors/sensors-20-03106/article_deploy/html/images/sensors-20-03106-g001a.png)
 
-### 📌 What is John the Ripper?
+### 📌 Definition
 
-- **John the Ripper (JtR / john)** is a powerful **password cracking tool**
+- **John the Ripper (JtR / john)** is a **password cracking tool**
     
-- Used in **penetration testing & security auditing**
+- Used in:
     
-- Initially released in **1996** for UNIX systems
+    - Penetration testing
+        
+    - Security auditing
+        
+
+### 📅 Background
+
+- Released in **1996**
     
-- Open-source and widely used in the security industry
+- Designed for **UNIX systems**
+    
+- Now supports multiple platforms
     
 
-### 🚀 Jumbo Version (Recommended)
+### 🚀 Jumbo Version (Important)
 
-- Better performance
+- Recommended version
     
-- Supports more hash formats
+- Provides:
     
-- Includes:
-    
+    - Performance optimization
+        
     - Multilingual wordlists
         
-    - 64-bit optimization
+    - 64-bit support
         
-    - Additional cracking features
+    - More cracking features
         
 
-### 🔧 Extra Tools Included:
+### 🔧 Capabilities
 
-- File converters (e.g., `zip2john`, `ssh2john`)
+- Supports:
     
-- Hash format utilities
+    - Brute-force attacks
+        
+    - Dictionary attacks
+        
+- Includes tools to:
     
+    - Convert files → hashes
+        
+    - Identify hash formats
+        
 
-📌 JtR supports **multiple attack modes**
+📌 Regularly updated to match modern security trends
 
 ---
 
-# 🔓 Cracking Modes in John the Ripper
+# 🔓 Cracking Modes
 
 ---
 
@@ -51,38 +68,43 @@
 
 ![Image](https://www.cyberciti.biz/media/new/faq/2006/02/Understanding-etc-passwd-file-format-for-Linux-and-Unix-systems.png)
 
-![Image](https://www.mdpi.com/computers/computers-14-00024/article_deploy/html/images/computers-14-00024-g002.png)
+![Image](https://www.avast.com/hs-fs/hubfs/undefined-Feb-20-2026-02-57-49-8091-PM.png?height=1249&name=undefined-Feb-20-2026-02-57-49-8091-PM.png&width=1600)
 
-![Image](https://www.mdpi.com/applsci/applsci-10-07306/article_deploy/html/images/applsci-10-07306-g001.png)
+![Image](https://assets.esecurityplanet.com/uploads/2019/10/John-The-Ripper.png)
 
-![Image](https://www.mdpi.com/sensors/sensors-20-03106/article_deploy/html/images/sensors-20-03106-g001a.png)
+![Image](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-01080-5/MediaObjects/41598_2025_1080_Fig1_HTML.png)
 
-### 📌 Definition:
+### 📌 Definition
 
-- Rule-based attack using **user information**
+- Rule-based attack using **user-specific information**
     
-- Targets:
-    
-    - Username
-        
-    - Full name (GECOS)
-        
-    - Home directory
-        
 
-### 📌 Example File:
+### 🎯 Uses:
+
+- Username
+    
+- Full name (GECOS)
+    
+- Home directory
+    
+
+---
+
+### 📌 Example passwd Entry
 
 ```text
 r0lf:$6$ues25dIanlctrWxg$...:0:0:Rolf Sebastian:/home/r0lf:/bin/bash
 ```
 
-### 📌 Command:
+### 📌 Attack Command
 
 ```bash
 john --single passwd
 ```
 
-### ⚡ How it Works:
+---
+
+### ⚙️ How It Works
 
 - Extracts:
     
@@ -90,21 +112,25 @@ john --single passwd
         
     - `Rolf Sebastian`
         
-- Applies rules like:
+- Applies transformations:
     
-    - `Smith1`
-        
     - `Rolf123`
         
+    - `Sebastian1`
+        
+    - `r0lf2024`
+        
 
-### ✅ Result:
+---
+
+### ✅ Result
 
 - Password successfully cracked
     
 
-### 🔑 Key Point:
+### 🔑 Key Point
 
-- Very effective for **Linux password files**
+- Very effective for **Linux credential attacks**
     
 
 ---
@@ -113,104 +139,118 @@ john --single passwd
 
 ![Image](https://repository-images.githubusercontent.com/850837348/d40efb10-ce7c-4a90-aac8-142e10cbd71e)
 
-![Image](https://cdn.prod.website-files.com/5ff66329429d880392f6cba2/6474e82e6f85eab93707b9e6_663%20Preview.jpg)
+![Image](https://delinea.com/hs-fs/hubfs/Imported_Blog_Media/7-CeWL-custom-wordlist-generator.png?height=267&name=7-CeWL-custom-wordlist-generator.png&width=657)
 
-![Image](https://www.mdpi.com/applsci/applsci-13-05979/article_deploy/html/images/applsci-13-05979-g007.png)
+![Image](https://www.researchgate.net/profile/Al-Saraireh-J/publication/351679506/figure/fig1/AS%3A1045352912273408%401626242964308/Common-cybersecurity-keywords.png)
 
-![Image](https://marvel-b1-cdn.bc0a.com/f00000000310757/www.fortinet.com/content/dam/fortinet/images/cyberglossary/brute-force-attacks.png)
+![Image](https://www.hackthebox.com/images/landingv3/og/og-hacking-glossary.png)
 
-### 📌 Definition:
+### 📌 Definition
 
-- Uses a **wordlist (dictionary)** of common passwords
+- Uses a **wordlist of common passwords**
     
 
-### 📌 Command Syntax:
+---
+
+### 📌 Syntax
 
 ```bash
 john --wordlist=<wordlist_file> <hash_file>
 ```
 
-### 📌 Wordlist Format:
+---
 
-- Plain text
+### 📌 Wordlist Requirements
+
+- Plain text file
     
 - One password per line
     
+- Multiple lists can be combined
+    
 
-### ⚙️ Advanced Option:
+---
+
+### ⚙️ Rules Feature
 
 ```bash
 john --wordlist=rockyou.txt --rules hashes.txt
 ```
 
-### 🔧 Rules Feature:
+Transforms words like:
 
-- Modify words:
+- `password` → `Password123`
     
-    - Add numbers → `password123`
-        
-    - Capitalize → `Password`
-        
-    - Add symbols → `Password!`
-        
+- `admin` → `Admin@123`
+    
 
-### 🔑 Key Point:
+---
 
-- Most **efficient and commonly used attack**
+### 🔑 Key Point
+
+- **Most efficient and widely used attack**
     
 
 ---
 
 ## 3️⃣ Incremental Mode (Advanced Brute Force)
 
-![Image](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-01080-5/MediaObjects/41598_2025_1080_Fig1_HTML.png)
-
 ![Image](https://www.mdpi.com/applsci/applsci-11-04607/article_deploy/html/images/applsci-11-04607-g001.png)
 
-![Image](https://assets.esecurityplanet.com/uploads/2019/10/John-The-Ripper.png)
+![Image](https://www.researchgate.net/publication/221609438/figure/fig4/AS%3A669308778733578%401536587056232/Number-of-passwords-cracked-in-90-minutes-by-the-John-the-Ripper-password-cracker-tool.png)
 
-![Image](https://www.oreilly.com/api/v2/epubs/urn%3Aorm%3Abook%3A9781788623377/files/assets/53dab6c1-1fe2-4099-a81d-b7ab9b24c5e3.png)
+![Image](https://discover.strongdm.com/hubfs/brute-force-attack.jpg)
 
-### 📌 Definition:
+![Image](https://www.fortinet.com/content/dam/fortinet/images/cyberglossary/brute-force-attacks.png)
 
-- Advanced brute-force using **Markov chains**
+### 📌 Definition
+
+- Brute-force using **Markov chains (probability model)**
     
-- Generates passwords based on probability
-    
 
-### 📌 Command:
+---
+
+### 📌 Command
 
 ```bash
 john --incremental <hash_file>
 ```
 
-### ⚡ Features:
+---
 
-- No wordlist required
+### ⚙️ Features
+
+- No wordlist needed
     
-- Generates combinations dynamically
+- Generates passwords dynamically
     
-- Prioritizes **likely passwords first**
+- Prioritizes likely passwords
     
 
-### 📂 Config Example:
+---
+
+### 📂 Config Example
 
 ```bash
 grep '# Incremental modes' -A 100 /etc/john/john.conf
 ```
 
-### 🔑 Key Points:
+---
 
-- More efficient than naive brute-force
+### 🔑 Key Points
+
+- Most **powerful mode**
     
-- Still **time-consuming**
+- Also **slowest**
     
-- Customizable:
+- Can be customized:
     
-    - Character set
+    - Charset
         
-    - Password length
+    - Length
         
+
+📌 Resource-intensive for long passwords
 
 ---
 
@@ -220,28 +260,34 @@ grep '# Incremental modes' -A 100 /etc/john/john.conf
 
 ![Image](https://www.techtarget.com/rms/onlineImages/security-md5_hashing_mobile.jpg)
 
-![Image](https://www.researchgate.net/publication/331380160/figure/fig2/AS%3A730919145070601%401551276112783/Comparison-between-different-hash-algorithms-19.png)
+![Image](https://www.researchgate.net/publication/338956746/figure/fig1/AS%3A853567866941440%401580517846651/Flowchart-of-the-proposed-image-hashing-scheme.png)
 
-![Image](https://www.researchgate.net/profile/Radwa-Adel-2/publication/311019269/figure/tbl1/AS%3A738549632606208%401553095362224/Comparison-of-Hash-Function-for-Certain-Messages.png)
+![Image](https://www.researchgate.net/publication/362526607/figure/fig2/AS%3A11431281416042223%401746049438840/The-flow-chart-of-the-implemented-hash-algorithm.tif)
 
-### 📌 Problem:
+### 📌 Problem
 
-- Unknown hash format
+- Unknown hash type
     
 
-### 📌 Example Hash:
+---
+
+### 📌 Example Hash
 
 ```text
 193069ceb0461e1d40d216e32c79c704
 ```
 
-### 🔧 Tool: `hashid`
+---
+
+### 🔧 Tool: hashID
 
 ```bash
 hashid -j 193069ceb0461e1d40d216e32c79c704
 ```
 
-### 📊 Output Suggests:
+---
+
+### 📊 Output Includes:
 
 - MD5
     
@@ -249,26 +295,30 @@ hashid -j 193069ceb0461e1d40d216e32c79c704
     
 - RIPEMD-128
     
-- Many others
+- Many more
     
 
-### ⚠️ Reality:
+---
 
-- Sometimes **multiple possible formats**
-    
-- Use **context** to decide
+### ⚠️ Challenge
+
+- Multiple possible formats
     
 
-### 📌 Solution:
+### 💡 Solution
 
-- Specify format manually:
+- Use context (where hash came from)
     
+
+---
+
+### 📌 Specify Format Manually
 
 ```bash
 john --format=raw-md5 hashes.txt
 ```
 
-📌 JtR supports **hundreds of hash formats**
+📌 JtR supports **hundreds of formats**
 
 ---
 
@@ -278,39 +328,47 @@ john --format=raw-md5 hashes.txt
 
 ![Image](https://www.mdpi.com/applsci/applsci-13-05979/article_deploy/html/images/applsci-13-05979-g008.png)
 
-![Image](https://www.varonis.com/hs-fs/hubfs/Imported_Blog_Media/Reasons-To-Use-John-The-Ripper.png?height=864&name=Reasons-To-Use-John-The-Ripper.png&width=1240)
+![Image](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-31792-7/MediaObjects/41598_2025_31792_Fig1_HTML.png)
 
-![Image](https://www.openwall.com/john/cloud/aws-openwall-bundle-md5crypt.png)
+![Image](https://www.researchgate.net/publication/345817049/figure/fig3/AS%3A957507891625996%401605299079714/The-workflow-of-the-upload-file-function.png)
 
-### 📌 Concept:
+### 📌 Concept
 
-- Convert files → Hash → Crack
+- Convert file → Extract hash → Crack
     
 
-### 📌 General Syntax:
+---
+
+### 📌 General Syntax
 
 ```bash
-<tool> <file> > hash.txt
+<tool> <file> > file.hash
 ```
 
-### 🔧 Common Tools:
+---
+
+### 🔧 Common Tools
 
 |Tool|Purpose|
 |---|---|
-|`zip2john`|ZIP files|
-|`rar2john`|RAR archives|
-|`pdf2john`|PDF files|
-|`ssh2john`|SSH keys|
-|`keepass2john`|KeePass DB|
+|zip2john|ZIP files|
+|rar2john|RAR files|
+|pdf2john|PDF documents|
+|ssh2john|SSH keys|
+|keepass2john|KeePass DB|
 
-### 📌 Example:
+---
+
+### 📌 Example
 
 ```bash
 zip2john file.zip > hash.txt
 john hash.txt
 ```
 
-### 📌 Many Tools Available:
+---
+
+### 📌 Find All Tools
 
 ```bash
 locate *2john*
@@ -318,27 +376,27 @@ locate *2john*
 
 ---
 
-# ⚡ Summary of JtR Modes
+# ⚡ Summary Table
 
-|Mode|Type|Speed|Use Case|
+|Mode|Type|Speed|Usage|
 |---|---|---|---|
-|Single Mode|Rule-based|Fast|User-based guesses|
+|Single Mode|Rule-based|Fast|User info|
 |Wordlist Mode|Dictionary|Very Fast|Common passwords|
-|Incremental|Brute-force (AI)|Slow|Full coverage|
+|Incremental|Brute-force AI|Slow|Full attack|
 
 ---
 
 # 🔥 Key Takeaways
 
-- JtR is a **powerful and flexible password cracking tool**
+- JtR is a **core tool in penetration testing**
     
 - **Wordlist mode = most practical**
     
-- **Single mode = smart guessing using user data**
+- **Single mode = smart guessing**
     
-- **Incremental mode = last resort (heavy)**
+- **Incremental mode = exhaustive attack**
     
-- Hash format identification is **critical**
+- Hash identification is **critical skill**
     
-- File cracking requires **conversion tools**
+- File cracking requires **2john tools**
 ---
