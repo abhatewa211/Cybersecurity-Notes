@@ -251,10 +251,3 @@ You can check if your email is leaked using:
 
 ---
 
-If you want, I can also:
-
-- Turn this into **exam-ready short notes**
-    
-- Add **real-world attack techniques (brute force, dictionary, etc.)**
-    
-- Or create a **mind map / cheat sheet** 🚀
