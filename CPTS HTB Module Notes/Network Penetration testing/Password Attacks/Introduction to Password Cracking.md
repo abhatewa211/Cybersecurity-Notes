@@ -252,11 +252,3 @@ abc123
     
 
 ---
-
-If you want, I can next:
-
-- Turn this into **exam-ready notes (1-page revision)**
-    
-- Add **tools like Hashcat / John the Ripper usage**
-    
-- Or create a **mind map / PDF for you**
