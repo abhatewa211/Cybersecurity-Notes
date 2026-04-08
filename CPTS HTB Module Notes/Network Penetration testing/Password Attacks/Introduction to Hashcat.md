@@ -317,11 +317,3 @@ hashcat -a 3 -m 0 1e293d6912d074c0fd15844d803400dd '?u?l?l?l?l?d?s'
         
 
 ---
-
-If you want next:
-
-- I can combine **Password Cracking + JtR + Hashcat into one master PDF**
-    
-- Add **real-world lab workflow (step-by-step cracking process)**
-    
-- Or create a **quick cheat sheet for exams/interviews 🚀**
