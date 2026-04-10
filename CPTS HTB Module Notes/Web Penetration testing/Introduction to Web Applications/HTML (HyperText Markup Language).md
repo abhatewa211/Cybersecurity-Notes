@@ -285,3 +285,8 @@ document
     - Exploitation (XSS, etc.)
         
 ---
+
+### Exercises
+
+![[Pasted image 20260410145200.png]]
+
