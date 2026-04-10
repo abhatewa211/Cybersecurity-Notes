@@ -318,15 +318,4 @@ CSS supports **advanced animations**, including:
     
 - Frameworks make development **faster & easier**
     
-
 ---
-
-## 🚀 Want next?
-
-I can:
-
-- Continue with **JavaScript notes (same format)**
-    
-- Combine HTML + CSS + JS into **one master guide**
-    
-- Add **real pentesting angle (CSS-based attacks, UI redressing, etc.)**
