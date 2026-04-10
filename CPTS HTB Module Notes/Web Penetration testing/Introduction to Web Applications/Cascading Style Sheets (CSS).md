@@ -319,3 +319,4 @@ CSS supports **advanced animations**, including:
 - Frameworks make development **faster & easier**
     
 ---
+![[Pasted image 20260410151139.png]]
