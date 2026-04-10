@@ -301,4 +301,7 @@
     
 ---
 
+### Exercises
+
+![[Pasted image 20260410175207.png]]
 
