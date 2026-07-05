@@ -811,4 +811,4 @@ Telnet
 Many others
 ```
 
-These are the key notes from this HTB module that are highly relevant for CPTS, HTB Academy labs, and real-world Active Directory assessments.
+	These are the key notes from this HTB module that are highly relevant for CPTS, HTB Academy labs, and real-world Active Directory assessments.
