@@ -1,9 +1,3 @@
-# Attacking SAM, SYSTEM & SECURITY – Detailed Notes (HTB)
-
-> **Source:** Based on the uploaded HTB notes.
-
----
-
 # Overview
 
 ![Image](https://images.openai.com/static-rsc-4/Aj5DJodGYPuaBwDJTwMEvABJ6V7k5ozhKhDj9qV2Kvzz3X2vi_IGEUnUgpiI-TJcfm0Zph3AygQW5B4UdIV1mCzFSOkaOxxYRVAW7fI2-lHOWR3pf8ZP1aORcqr2KIeoPV7QJLDz5UNigmm6UseehQTKLalyNuYsmEKvIb-jGkDsEpMyI55ZI0DFU9EUIzc-?purpose=fullsize)
