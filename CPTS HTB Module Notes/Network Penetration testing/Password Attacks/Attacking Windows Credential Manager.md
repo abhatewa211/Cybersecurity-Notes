@@ -1,7 +1,3 @@
-# 📚 Attacking Windows Credential Manager (HTB Detailed Notes)
-
----
-
 # What is Windows Credential Manager?
 
 Windows **Credential Manager** is a built-in Windows feature introduced in:
