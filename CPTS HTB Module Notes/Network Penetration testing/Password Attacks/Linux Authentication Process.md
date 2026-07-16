@@ -1,10 +1,3 @@
-#  Linux Authentication Process (HTB Detailed Notes)
-
-> **Module:** Password Attacks – Linux Authentication Process  
-> Source: User-provided study material
-
----
-
 # Overview
 
 Unlike Windows, Linux supports **multiple authentication mechanisms**. The most common authentication framework used by Linux distributions is **PAM (Pluggable Authentication Modules)**.
