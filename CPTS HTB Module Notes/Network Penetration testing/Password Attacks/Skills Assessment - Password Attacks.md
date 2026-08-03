@@ -25,3 +25,8 @@ Steps for getting the answer
 
 Step 1. connect openvpn through the file downloaded from htb module.
 ![[Pasted image 20260803231736.png]]
+
+Step2. We will find open ports via nmap command.
+![[Pasted image 20260803231906.png]]
+
+Step3. 
