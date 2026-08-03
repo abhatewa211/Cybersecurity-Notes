@@ -20,3 +20,8 @@ The internal hosts (`JUMP01`, `FILE01`, `DC01`) reside on a private subnet that 
 To access these internal systems, we must first gain a foothold on `DMZ01`. From there, we can `pivot` — that is, route our traffic through the compromised host into the private network. This enables our tools to communicate with internal hosts as if they were directly accessible. After compromising the DMZ, refer to the module `cheatsheet` for the necessary commands to set up the pivot and continue your assessment.
 
 ###### Exercise and only Question
+
+Steps for getting the answer
+
+Step 1. connect openvpn through the file downloaded from htb module.
+![[Pasted image 20260803231736.png]]
