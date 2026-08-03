@@ -33,4 +33,3 @@ Step3. As we know that ssh port is open so now we will connect the target machin
 ![[Pasted image 20260803233002.png]]
 
 Step4. We have now get the login credentials for the ssh. username-jbetty password-Texas123!@#
-
