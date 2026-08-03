@@ -29,4 +29,8 @@ Step 1. connect openvpn through the file downloaded from htb module.
 Step2. We will find open ports via nmap command.
 ![[Pasted image 20260803231906.png]]
 
-Step3. 
+Step3. As we know that ssh port is open so now we will connect the target machine via ssh with given credentials by name (betty jade) and password (Texas123!@#) but first we have first find the username to login into ssh so we will use hydra for username verification. I have already created a detailed username list to get the login and saved the file by the name of users.txt.
+![[Pasted image 20260803233002.png]]
+
+Step4. We have now get the login credentials for the ssh. username-jbetty password-Texas123!@#
+
