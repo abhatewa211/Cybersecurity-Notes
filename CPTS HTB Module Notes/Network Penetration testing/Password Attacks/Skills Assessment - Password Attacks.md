@@ -41,4 +41,5 @@ Step 5. Now we will log in via ssh and create a tunnel for internal lateral move
 Step6. Now before connecting to ssh we will setup few things for the internal lateral movement. First we will set up proxychain server to connect to internal network. we will add a line in the last of the file for setting the proxy.
 ![[Screenshot From 2026-08-08 11-10-05.png]]
 
-Step7. Now we will use nmap from main attacking machine via proxychains to know the open ports of internal networks.
+Step7. Now we will use nmap from main attacking machine via proxychains to know the open ports of internal networks and we will only go for AD ports. (Jump Box)
+
