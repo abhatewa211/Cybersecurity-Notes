@@ -38,4 +38,4 @@ Step4. We have now get the login credentials for the ssh. username-jbetty passwo
 Step 5. Now we will log in via ssh and create a tunnel for internal lateral movement to get access to internal network.
 ![[Pasted image 20260808105718.png]]
 
-Step6. 
+Step6. Now before connecting to ssh we will setup few things for the internal lateral movement. First we will set up proxychain server to connect to internal network. we will add a line in the last of the file for setting the proxy 
