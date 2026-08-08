@@ -35,7 +35,7 @@ Step3. As we know that ssh port is open so now we will connect the target machin
 Step4. We have now get the login credentials for the ssh. username-jbetty password-Texas123!@#
 ![[Pasted image 20260803233650.png]]
 
-Step 5. Now we will log in via ssh.
-![[Pasted image 20260803233825.png]]
+Step 5. Now we will log in via ssh and create a tunnel for internal lateral movement to get access to internal network.
+![[Pasted image 20260808105718.png]]
 
 Step6. 
