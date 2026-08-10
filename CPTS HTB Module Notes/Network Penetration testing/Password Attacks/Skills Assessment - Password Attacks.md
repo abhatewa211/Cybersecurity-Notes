@@ -53,4 +53,4 @@ Step9.  Now we will login into rdp via xfreerdp command to Jump01 also known jum
 ![[Pasted image 20260810170310.png]]
 ![[Pasted image 20260810170104.png]]
 
-Step10. After obtaining the file 
+Step10. After obtaining the file from the target machine via rdp we will now crack the password file  
