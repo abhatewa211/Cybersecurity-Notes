@@ -241,3 +241,27 @@ C:\Windows\system32>
 ```
 
 Step18. We will now pull the folder to our main pc by the folder we shared via rdp.
+```bash
+┌──(root㉿kali)-[~]
+└─# ls -la /home/arjun/Downloads/cyber/                                           
+total 11728
+drwxrwxr-x 5 arjun arjun     4096 Aug 10 19:58 .
+drwxr-xr-x 4 arjun arjun     4096 Aug 10 18:17 ..
+-rwxrwxr-x 1 arjun arjun 10571938 Jul 28 10:18 chisel
+-rw-rw-r-- 1 arjun arjun   123545 Jun 27 15:18 E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_hxWx8CarBpqdC4phk_1782553591180_completion_certificate.pdf
+-rw-rw-r-- 1 root  root      1080 Apr 29  2025 Employee-Passwords_OLD.psafe3
+drwxr-xr-x 2 root  root     24576 Jul 24 13:01 loot
+-rw-rw-r-- 1 arjun arjun  1250056 Aug 10 18:16 mimikatz.exe
+drwx------ 2 root  root      4096 Aug 10 20:05 NTDS
+drwxrwxr-x 6 root  root      4096 Jul 19 12:05 PowerHuntShares
+-rw-rw-r-- 1 root  root       171 Aug 10 17:47 pwhash2.txt
+-rw-rw-r-- 1 root  root       148 Aug 10 17:45 pwhash.txt                                                                                  
+┌──(root㉿kali)-[~]
+└─# cd /home/arjun/Downloads/cyber/NTDS
+                                            
+┌──(root㉿kali)-[/home/arjun/Downloads/cyber/NTDS]
+└─# ls                                 
+NTDS.dit  SYSTEM
+```
+
+
