@@ -63,6 +63,7 @@ c. Now we will crack the hash via john the ripper. And we have got the password.
 Step11. Now we will login into Password safe application in windows rdp which we logged in earlier. We will able to see the domain users.
 ![[Pasted image 20260810180514.png]]
 
-Step12. 
+Step12. As we double click on any user a prompt comes up to copy the password.
+
 
 
