@@ -113,3 +113,6 @@ NEXURA\Denied RODC Password Replication Group Alias            S-1-5-21-13337597
 Mandatory Label\Medium Mandatory Level        Label            S-1-16-8192
 ```
 ```
+```
+
+Step15. Now we will shadow copy and extract ntds.dit
