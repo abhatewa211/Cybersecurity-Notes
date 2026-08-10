@@ -55,3 +55,4 @@ Step9.  Now we will login into rdp via xfreerdp command to Jump01 also known jum
 
 Step10. After obtaining the file from the target machine via rdp we will now crack the password file via using john the ripper to get password safe creds to get more user. as shown below. first we will convert the file into hash txt file via pwsafe2john command.
 ![[Pasted image 20260810174359.png]]
+b. Now we will edit the file to crack the hash.
