@@ -66,6 +66,9 @@ Step11. Now we will login into Password safe application in windows rdp which we
 Step12. As we double click on any user a prompt comes up to copy the password. and click on OK.
 ![[Pasted image 20260810183737.png]]
 
-Step13. Now we will rdp into stom Account by his password copied by password safe.
+Step13. Now we will rdp into stom Account by his password copied by password safe. we will use dc01 machine to log into stom account.
+![[Pasted image 20260810192924.png]]
+
+Step14. 
 
 
