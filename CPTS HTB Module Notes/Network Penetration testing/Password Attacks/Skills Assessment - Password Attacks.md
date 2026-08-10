@@ -240,3 +240,4 @@ C:\Windows\system32>dir C:\NTDS
 C:\Windows\system32>
 ```
 
+Step18. We will now pull the folder to our main pc by the folder we shared via rdp.
