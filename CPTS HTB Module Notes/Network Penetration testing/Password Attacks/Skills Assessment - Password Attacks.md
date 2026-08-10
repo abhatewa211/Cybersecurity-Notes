@@ -64,6 +64,6 @@ Step11. Now we will login into Password safe application in windows rdp which we
 ![[Pasted image 20260810180514.png]]
 
 Step12. As we double click on any user a prompt comes up to copy the password.
-
+![[Pasted image 20260810183737.png]]
 
 
