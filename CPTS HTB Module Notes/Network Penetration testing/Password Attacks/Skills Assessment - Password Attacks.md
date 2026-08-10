@@ -57,4 +57,5 @@ Step10. After obtaining the file from the target machine via rdp we will now cra
 ![[Pasted image 20260810174359.png]]
 b. Now we will edit the file to crack the hash.
 ![[Pasted image 20260810174521.png]]
-c. Now we will crack the hash via john the ripper.
+c. Now we will crack the hash via john the ripper. And we have got the password.
+![[Pasted image 20260810175643.png]]
