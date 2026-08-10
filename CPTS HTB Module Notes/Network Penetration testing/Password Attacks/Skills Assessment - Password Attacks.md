@@ -46,3 +46,9 @@ Step7. Now we will use nmap from main attacking machine via proxychains to know 
 ![[Pasted image 20260810163341.png]]
 
 Step8. Now we will connect to jumpbox via rdp but before that we have to find credentials to login via rdp the credentials we have used before to login ssh will not work so we have to find new credentials in the target machine. We will use history command and also filter the commands used to get the creds to login.
+![[Pasted image 20260810165802.png]]
+
+Step9.  Now we will login into rdp via xfreerdp command to Jump01 also known jump box. We will be using the credentials which we found and also connect our main pc folder via rdp as well as shown below. We will also take the password locked file found in \\file01\HR\Archive\
+![[Pasted image 20260810165938.png]]
+![[Pasted image 20260810170310.png]]
+![[Pasted image 20260810170104.png]]
