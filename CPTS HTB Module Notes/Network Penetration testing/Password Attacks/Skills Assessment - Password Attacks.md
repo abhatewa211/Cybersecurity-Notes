@@ -43,3 +43,6 @@ Step6. Now before connecting to ssh we will setup few things for the internal la
 
 Step7. Now we will use nmap from main attacking machine via proxychains to know the open ports of internal networks and we will only go for AD ports. (Jump Box)
 
+![[Pasted image 20260810163341.png]]
+
+Step8. Now we will connect to jumpbox via rdp but before that we have to find credentials to login via rdp the credentials we have used before to login ssh will not work so we have to find new credentials in the target machine. 
