@@ -115,4 +115,51 @@ Mandatory Label\Medium Mandatory Level        Label            S-1-16-8192
 ```
 ```
 
-Step15. Now we will shadow copy and extract ntds.dit
+Step15. Now we will shadow copy and extract **ntds.dit** and **SYSTEM** hive, but before that we will elevate from normal user to admin.
+```cmd
+Microsoft Windows [Version 10.0.17763.2628]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\stom>whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== ========
+SeMachineAccountPrivilege     Add workstations to domain     Disabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+
+C:\Users\stom>^V
+'' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\stom>whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                    Type             SID                                           Attributes
+============================================= ================ ============================================= ===============================================================
+Everyone                                      Well-known group S-1-1-0                                       Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                                 Alias            S-1-5-32-545                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access    Alias            S-1-5-32-554                                  Group used for deny only
+BUILTIN\Administrators                        Alias            S-1-5-32-544                                  Group used for deny only
+NT AUTHORITY\REMOTE INTERACTIVE LOGON         Well-known group S-1-5-14                                      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\INTERACTIVE                      Well-known group S-1-5-4                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users              Well-known group S-1-5-11                                      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization                Well-known group S-1-5-15                                      Mandatory group, Enabled by default, Enabled group
+LOCAL                                         Well-known group S-1-2-0                                       Mandatory group, Enabled by default, Enabled group
+NEXURA\MANAGEMENT                             Group            S-1-5-21-1333759777-277832620-2286231135-1112 Mandatory group, Enabled by default, Enabled group
+NEXURA\Domain Admins                          Group            S-1-5-21-1333759777-277832620-2286231135-512  Group used for deny only
+Authentication authority asserted identity    Well-known group S-1-18-1                                      Mandatory group, Enabled by default, Enabled group
+NEXURA\Denied RODC Password Replication Group Alias            S-1-5-21-1333759777-277832620-2286231135-572  Mandatory group, Enabled by default, Enabled group, Local Group
+Mandatory Label\Medium Mandatory Level        Label            S-1-16-8192
+
+C:\Users\stom>powershell Start-Process cmd -Verb runAs
+
+C:\Users\stom>
+```
+```
+```
