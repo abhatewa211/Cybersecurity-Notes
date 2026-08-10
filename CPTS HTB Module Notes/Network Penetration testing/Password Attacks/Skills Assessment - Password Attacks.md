@@ -62,3 +62,4 @@ c. Now we will crack the hash via john the ripper. And we have got the password.
 
 Step11. Now we will login into Password safe application in windows rdp which we logged in earlier.
 
+
