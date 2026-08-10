@@ -45,4 +45,4 @@ Step7. Now we will use nmap from main attacking machine via proxychains to know 
 
 ![[Pasted image 20260810163341.png]]
 
-Step8. Now we will connect to jumpbox via rdp but before that we have to find credentials to login via rdp the credentials we have used before to login ssh will not work so we have to find new credentials in the target machine. 
+Step8. Now we will connect to jumpbox via rdp but before that we have to find credentials to login via rdp the credentials we have used before to login ssh will not work so we have to find new credentials in the target machine. We will use history command and also filter the commands used to get the creds to login.
