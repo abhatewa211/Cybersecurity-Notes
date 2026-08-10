@@ -69,6 +69,6 @@ Step12. As we double click on any user a prompt comes up to copy the password. a
 Step13. Now we will rdp into stom Account by his password copied by password safe. we will use dc01 machine to log into stom account.
 ![[Pasted image 20260810192924.png]]
 
-Step14. 
+Step14. Now we will open the cmd and 
 
 
