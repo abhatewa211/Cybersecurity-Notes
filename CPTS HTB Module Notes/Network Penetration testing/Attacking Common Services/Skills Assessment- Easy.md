@@ -203,3 +203,35 @@ Nmap done: 1 IP address (1 host up) scanned in 130.95 seconds
 
 ```
 
+Step2. We will start attacking with smtp and we will have to find users first so we will enumerate user by smtp_enum and user and pass list was already provided by the htb so i downloaded it and used.
+```bash
+┌──(root㉿kali)-[~]
+└─# smtp-user-enum -M RCPT \
+-U /home/arjun/Downloads/cyber/users.list \                         
+-t 10.129.203.7 \
+-D inlanefreight.htb
+Starting smtp-user-enum v1.2 ( http://pentestmonkey.net/tools/smtp-user-enum )
+
+ ----------------------------------------------------------
+|                   Scan Information                       |
+ ----------------------------------------------------------
+
+Mode ..................... RCPT
+Worker Processes ......... 5
+Usernames file ........... /home/arjun/Downloads/cyber/users.list
+Target count ............. 1
+Username count ........... 79
+Target TCP port .......... 25
+Query timeout ............ 5 secs
+Target domain ............ inlanefreight.htb
+
+######## Scan started at Sat Aug 15 20:36:39 2026 #########
+10.129.203.7: fiona@inlanefreight.htb exists
+######## Scan completed at Sat Aug 15 20:37:26 2026 #########
+1 results.
+
+79 queries in 47 seconds (1.7 queries / sec)
+
+```
+
+Step3. We will now need password as well we will enumerate it by using hydra and we will get our password.
