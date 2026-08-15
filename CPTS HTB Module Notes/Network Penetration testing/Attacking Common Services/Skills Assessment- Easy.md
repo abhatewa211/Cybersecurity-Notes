@@ -316,3 +316,57 @@ Ports: 80 & 4443
 Test Command: curl http://localhost/test.php  
 ```
 
+Step6. Now we will use core ftp http server to attack and the version is vulnerable to directory path transversal due to the built version is old. We will now check tls version 1.2 explicitly and it is working
+```bash
+┌──(root㉿kali)-[~]
+└─# curl -vk --tlsv1.2 --tls-max 1.2 \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+https://10.129.111.81/docs.txt
+*   Trying 10.129.111.81:443...
+* ALPN: curl offers h2,http/1.1
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* SSL Trust: peer verification disabled
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384 / secp384r1 / rsaEncryption
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*   subject: C=US; ST=FL; L=test; OU=Test; O=Testing; emailAddress=fiona@inlanefreight.htb; CN=Test
+*   start date: Apr 21 19:27:17 2022 GMT
+*   expire date: Apr 18 19:27:17 2032 GMT
+*   issuer: C=US; ST=FL; L=test; OU=Test; O=Testing; emailAddress=fiona@inlanefreight.htb; CN=Test
+*   Certificate level 0: Public key type RSA (2048/112 Bits/secBits), signed using shaWithRSAEncryption
+* OpenSSL verify result: 12
+*  SSL certificate verification failed, continuing anyway!
+* Established connection to 10.129.111.81 (10.129.111.81 port 443) from 10.10.17.239 port 39752 
+* using HTTP/1.x
+* Server auth using Basic with user 'fiona'
+> GET /docs.txt HTTP/1.1
+> Host: localhost
+> Authorization: Basic ZmlvbmE6OTg3NjU0MzIx
+> User-Agent: curl/8.20.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Date:Sat, 15 Jul 2026 18:56:06 GMT
+< Server: Core FTP HTTP Server
+< Accept-Ranges: bytes
+< Connection: close
+< Last-modified: Thr, 21 Apr 2022 19:23:25 GMT
+< Content-type: text/text
+< Content-length: 55
+< 
+* shutting down connection #0
+I'm testing the FTP using HTTPS, everything looks good.
+```
+
+Step7. We will now create a dummy file (payload) and then upload it to check the file working or not and it worked.
+
