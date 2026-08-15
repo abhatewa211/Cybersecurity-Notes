@@ -234,4 +234,5 @@ Target domain ............ inlanefreight.htb
 
 ```
 
-Step3. We will now need password as well we will enumerate it by using hydra and we will get our password.
+Step3. We will now need password as well we will enumerate it by using hydra and we will get our password by bruteforcing.
+
