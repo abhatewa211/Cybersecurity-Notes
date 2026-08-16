@@ -129,4 +129,31 @@ Nmap done: 1 IP address (1 host up) scanned in 219.08 seconds
 
 ```
 
-Step2. 
+Step2. We will first start with dns attacking we will do a zone transfer to get all the subdomains of the target machine by using dig command.
+```bash
+┌──(root㉿kali)-[~]
+└─# dig AXFR @10.129.118.131 inlanefreight.htb
+
+; <<>> DiG 9.20.26-1-Debian <<>> AXFR @10.129.118.131 inlanefreight.htb
+; (1 server found)
+;; global options: +cmd
+inlanefreight.htb.	604800	IN	SOA	inlanefreight.htb. root.inlanefreight.htb. 2 604800 86400 2419200 604800
+inlanefreight.htb.	604800	IN	NS	ns.inlanefreight.htb.
+app.inlanefreight.htb.	604800	IN	A	10.129.200.5
+dc1.inlanefreight.htb.	604800	IN	A	10.129.100.10
+dc2.inlanefreight.htb.	604800	IN	A	10.129.200.10
+int-ftp.inlanefreight.htb. 604800 IN	A	127.0.0.1
+int-nfs.inlanefreight.htb. 604800 IN	A	10.129.200.70
+ns.inlanefreight.htb.	604800	IN	A	127.0.0.1
+un.inlanefreight.htb.	604800	IN	A	10.129.200.142
+ws1.inlanefreight.htb.	604800	IN	A	10.129.200.101
+ws2.inlanefreight.htb.	604800	IN	A	10.129.200.102
+wsus.inlanefreight.htb.	604800	IN	A	10.129.200.80
+inlanefreight.htb.	604800	IN	SOA	inlanefreight.htb. root.inlanefreight.htb. 2 604800 86400 2419200 604800
+;; Query time: 935 msec
+;; SERVER: 10.129.118.131#53(10.129.118.131) (TCP)
+;; WHEN: Sun Aug 16 12:44:08 IST 2026
+;; XFR size: 13 records (messages 1, bytes 372)
+
+```
+
