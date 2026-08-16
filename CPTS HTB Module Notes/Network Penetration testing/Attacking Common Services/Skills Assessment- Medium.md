@@ -7,4 +7,4 @@ The second server is an internal server (within the `inlanefreight.htb` domain) 
 
 Steps to get flags
 
-Step1. 
+Step1. First we will nmap the open ports and also know the services running.
