@@ -129,7 +129,7 @@ Nmap done: 1 IP address (1 host up) scanned in 219.08 seconds
 
 ```
 
-Step2. We will first start with dns attacking we will do a zone transfer to get all the subdomains of the target machine by using dig command.
+Step2. We will first start with dns attacking we will do a zone transfer to get all the DNS records of the target machine by using dig command.
 ```bash
 ┌──(root㉿kali)-[~]
 └─# dig AXFR @10.129.118.131 inlanefreight.htb
