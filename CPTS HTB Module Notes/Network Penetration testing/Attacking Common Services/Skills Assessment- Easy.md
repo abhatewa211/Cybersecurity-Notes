@@ -12,7 +12,7 @@ Our task is to review the security of each of the three servers and present it t
 
 Steps for getting the flag
 
-Step1. First we will namp the ports and also know the services running.
+Step1. First we will nmap the open ports and also know the services running.
 ```bash
 ┌──(root㉿kali)-[~]
 └─# nmap -v -sV -sC -O -T4 -A -oA /home/arjun/"Nmap Output"/easy 10.129.203.7  
