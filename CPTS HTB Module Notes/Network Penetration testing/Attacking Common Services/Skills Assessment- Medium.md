@@ -157,3 +157,4 @@ inlanefreight.htb.	604800	IN	SOA	inlanefreight.htb. root.inlanefreight.htb. 2 60
 
 ```
 
+Step3. Now we will Enumerate FTP server to proceed to get the flag, 
