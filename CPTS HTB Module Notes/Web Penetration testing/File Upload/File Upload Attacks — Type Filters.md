@@ -1,11 +1,3 @@
-Absolutely bro. I’ll keep the **important technical concepts, code, terminology, examples, and attack logic intact**, while organizing everything into clean study notes. I’ll also add visual references where they actually help.
-
-# 📚 File Upload Attacks — Detailed Notes
-
-> **Scope:** These notes are based on the material you provided and are structured for learning/authorized lab environments such as HTB.
-
----
-
 # 1. What Is a File Upload Vulnerability?
 
 Modern web applications frequently allow users to upload files:
