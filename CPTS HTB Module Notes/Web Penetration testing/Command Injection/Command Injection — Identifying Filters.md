@@ -914,4 +914,4 @@ A: It indicates that some validation/filtering mechanism rejected the request, b
 A: It helps determine whether the request was blocked by client-side validation, the application itself, or an intermediary such as a WAF.
 
 **Q: What is the core lesson?**  
-A: **Don't just test whether a payload works—systematically determine why it is being accepted or rejected.**
+A: Don't just test whether a payload works—systematically determine why it is being accepted or rejected.
