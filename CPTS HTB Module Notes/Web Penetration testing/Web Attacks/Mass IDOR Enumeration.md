@@ -1066,3 +1066,4 @@ The core chain to remember is:
 And the most important distinction:
 
 > **The predictable `uid` is what makes mass enumeration practical; the missing backend authorization is what makes it vulnerable.**
+
