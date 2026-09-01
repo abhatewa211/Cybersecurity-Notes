@@ -1,5 +1,3 @@
-# 🔎 Identifying IDORs — Detailed Notes
-
 ![Image](https://images.openai.com/static-rsc-4/eT9Vrh0Vh5ZTwj-QFspHyMHorRgPktsl_oOMzKgcp4L_EbI6ueGPgvdkP7vppZJNT_9_nqrIVVb_KBzz2lmBcRY9Q8mf7IS5frlA70cXux2UEfJjPyzAExptWZ8SQPN-Gk2MBYVwcfz4YWkhy0rLLi6tQ1ViGl1Pp3c_ZunoZK0zK_nmhu-kmpn74fSLBWyL?purpose=fullsize)
 
 ![Image](https://images.openai.com/static-rsc-4/wFQGEgzCc1XM-abiqrfam968D5czXV_9YlSJm004kfwYmJyrx28tRaREgE3d7vYd3cYjZ1LdI-j1_VE21bm9_V5_m3M7wqMJkyHtdrLhB5AHVZWYX1d_w4Ji0gvfYbGydCdgBipB4iSR08DN-b5fizew4KrKw2WF99bP10SJ4zBokNoolzJ0G1SmwJapnXed?purpose=fullsize)
