@@ -1,5 +1,3 @@
-# 
-
 ## Full Penetration Testing Report
 
 > **Assessment type:** External penetration test / Skills Assessment  
