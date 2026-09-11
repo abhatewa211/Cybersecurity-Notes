@@ -1,6 +1,3 @@
-# 🐧  — Detailed Notes
-
-
 The **root account** on Linux systems provides **full administrative-level access** to the operating system. During an assessment, you may initially obtain a **low-privileged shell** and need to perform privilege escalation to reach the root account.
 
 ### 🎯 Basic concept
