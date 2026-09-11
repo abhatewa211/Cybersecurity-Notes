@@ -1,11 +1,3 @@
-# 🔐 Special Permissions — Detailed Notes
-
-This is a **high-priority Linux privilege-escalation topic** for HTB/CPTS.
-
-> 🎯 **Core idea:** Linux has special permission bits that can cause a program to execute with the privileges of its **owner or group** rather than the privileges of the user launching it. Misconfigured or vulnerable binaries with these permissions can become privilege-escalation paths.
-
----
-
 # 1. 🧠 The Three Special Permission Bits
 
 The important special permissions are:
