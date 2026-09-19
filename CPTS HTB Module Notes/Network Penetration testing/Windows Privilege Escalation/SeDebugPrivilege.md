@@ -1,4 +1,4 @@
-This section covers **`SeDebugPrivilege`**, one of the most important Windows privileges to recognize during Windows privilege escalation. The key idea is:
+						xThis section covers **`SeDebugPrivilege`**, one of the most important Windows privileges to recognize during Windows privilege escalation. The key idea is:
 
 > **If your account has `SeDebugPrivilege`, you may be able to access or manipulate processes running with higher privileges, including SYSTEM.**
 
