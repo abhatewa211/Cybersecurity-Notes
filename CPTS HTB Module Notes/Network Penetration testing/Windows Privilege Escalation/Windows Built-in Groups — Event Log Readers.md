@@ -634,3 +634,4 @@ The source specifically notes that `Get-WinEvent` against the Security log requi
 ### One-line takeaway
 
 > **Event Log Readers can turn Windows logs into an information source; Event ID 4688 is especially interesting because process command lines may expose reconnaissance commands and, in poorly designed command usage, credentials.**
+
