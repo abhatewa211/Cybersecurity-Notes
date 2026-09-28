@@ -1,808 +1,1323 @@
-# Scenario
+## 1. External Reconnaissance
 
-![Image](https://images.openai.com/static-rsc-4/1kapF7Ri3Ump8OZ4Auy8Hsa52Cv1ke4vWRKj22R5ZcKjDo4y6ZbpOX0Osf7gHAWkzMOUoDstL45ZuFvP5xeNhNehAM9pVjO2tV6Ny8NvKn56kuzPpBHDKVm8AyN43L3bMYR3HlxpSw5cBiAFC9k8WMAu4nIcwi7Ri6_bAGUgFgxhbYvPRnsJZ0WwlUR7OcXS?purpose=fullsize)
+Before beginning a penetration test, it is beneficial to perform **external reconnaissance** against the target.
 
-![Image](https://images.openai.com/static-rsc-4/-WFaeKRhCbNIm7hxXRWk1lw20yoEkcDuixNplZdzjs5YPYmid4hrM-9RfIfyGmMCXmh7cQFlXCCRC-V_wQTZwPKbLHgRtOSxROPMKyVRXa8oXHAu9ymjWrF1j1NQ0Y9QcMFtOql0wAwEcIKNJ4mTApy6LHAXUjGta2HWFpUGMv-n0-fRWrQNfyp_5eZDsClx?purpose=fullsize)
+The module identifies three major purposes:
 
-![Image](https://images.openai.com/static-rsc-4/5p79M9-yMLUAptOPSKPA9Xgpqj77uIjhh38SG9QTdEH4vMpX0UTeO8tmrBXxsCj6E0IpHWwJtDGJgf_ccPT49j8I1d8zHi0WzgxSU79E0gwo6tRj8R2x4UUNBexYCR31YeZK3crtP9LjoxfQ5CRoo3rt9qlmVu-3R0zJCZ4rmcGAV-_dRe0Lrx8s2y7RlIKX?purpose=fullsize)
+- **Validating information provided to you in the scoping document from the client**
+    
+- **Ensuring you are taking actions against the appropriate scope when working remotely**
+    
+- **Looking for any information that is publicly accessible that can affect the outcome of your test, such as leaked credentials**
+    
 
-![Image](https://images.openai.com/static-rsc-4/sJJItLup4ItHOJGEpkM_vw6RlbYgwn6zDiU9OYV1wmGY2kc4rnpioWTFVRgLdPXD03Hduy8xyPdoxnz3DKSaumUcnEl58mqnic2ZGB6NCug6uI4R7ctC0iDIdamTtWCaM7dSd3DWWhhKiIxgWWbusdHlraxefFA0shJVSAKKPNeClln7p6nmAWGS_H4Szx3B?purpose=fullsize)
+### The "Lay of the Land"
 
-![Image](https://images.openai.com/static-rsc-4/d9vpmkwL-8rRwoBvk1GCG0SE2kxT9UZRHqh-rMAwThZ9bLTp03mr1l4_tfP2vGXGhN73j_H4z8coW-FBeKFvAFuTj6ZKvecyHRt2K4_y1OcfEdp9OBWojIL9_V1RnWcMJAlNHp2A_3AwuTSgIJ_Sn1KmPQQuDNnujsn_p-J09i7K0wuDyCoOpN2iXwHeI3Vy?purpose=fullsize)
+The module describes external reconnaissance as getting the:
 
-![Image](https://images.openai.com/static-rsc-4/4vDXBm2dFwkUuz39WEDJhT9OrK5KdZLgRetA75rwNuQY15B6K6yq5UvjgUgyi_bChk74R21Tsnsmb6YBCqaBWhZY7vHBKpoqfiI0DXrt-AfKQO6h-bXjKLvf9K4D_kAML7mu57Hvafek4ORu4cXreU13wWEikQtvjYxnnSVTyDJ14oqQ2nmFCLa_4gyOV7xr?purpose=fullsize)
+> **“lay of the land”**
 
-## 1. Assessment Background
+The objective is to build as comprehensive a picture of the target as possible.
 
-The scenario places us in the role of **Penetration Testers working for `CAT-5 Security`**.
+This can include:
 
-After successfully shadowing senior members of the penetration-testing team, the senior members now want to determine whether we can begin an assessment independently.
+- Discovering username formats
+    
+- Identifying information on the company's website
+    
+- Examining social-media information
+    
+- Searching GitHub repositories
+    
+- Looking for credentials accidentally committed to code
+    
+- Examining public documents
+    
+- Finding links to intranet sites
+    
+- Finding remotely accessible sites
+    
+- Identifying information that reveals how the enterprise environment is configured
+    
 
-The target organization for this engagement is:
+### Reconnaissance mindset
 
 ```text
-Inlanefreight
+                 TARGET
+                    │
+                    ▼
+          External Reconnaissance
+                    │
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+      Scope       Public      Leaked
+    Validation    Data        Data
+        │           │           │
+        └───────────┼───────────┘
+                    ▼
+             Better Target
+             Understanding
+                    │
+                    ▼
+             Internal Testing
 ```
 
-The team lead, **Jack Smith**, sends a tasking email to the penetration-testing interns describing what needs to be accomplished.
+---
 
-### Main tasks mentioned in the tasking email
+# What Are We Looking For?
 
-The assessment involves:
+During external reconnaissance, we are looking for several important **data points**.
 
-- **Domain enumeration**
+The module specifically identifies:
+
+1. **IP Space**
     
-- **Credential discovery**
+2. **Domain Information**
     
-- **Lateral movement**
+3. **Schema Format**
     
-- **Privilege escalation**
+4. **Data Disclosures**
     
-- **Acquiring Domain Admin credentials**
+5. **Breach Data**
     
 
-The information discovered during the assessment will be used to determine the next actions.
+These may not always be publicly available, but it is worthwhile to determine what information exists.
+
+Passive reconnaissance can also become useful later if the penetration test gets stuck. For example, breach data might provide credentials that could potentially work against a VPN or another externally facing service.
 
 ---
 
-# 2. Purpose of the Module
+## 2. IP Space
 
-This module is designed to provide practical experience with an internal penetration test against an **Active Directory environment**.
+The module defines **IP Space** as information such as:
 
-The final assessment consists of:
-
-> **two internal penetration tests against the company Inlanefreight.**
-
-The two tests start from different positions.
-
-### First assessment
-
-The first assessment simulates:
-
-> **starting from an external breach position**
-
-### Second assessment
-
-The second assessment begins with:
-
-> **an attack box inside the internal network**
-
-This is important because real customers may request penetration tests from different starting positions.
-
-For example, a customer may want to understand:
-
-- What happens if an external attacker gets inside?
+- Valid ASN for the target
     
-- What could an attacker do after already obtaining internal network access?
+- Netblocks used by public-facing infrastructure
+    
+- Cloud presence
+    
+- Hosting providers
+    
+- DNS record entries
+    
+
+### Why it matters
+
+Understanding IP space helps us determine:
+
+```text
+Who owns the infrastructure?
+        ↓
+Which networks belong to the organization?
+        ↓
+Where is the infrastructure hosted?
+        ↓
+Which systems may belong to the target?
+```
+
+It also helps prevent accidentally interacting with infrastructure that isn't part of the engagement.
+
+---
+
+## 3. Domain Information
+
+Domain information can be obtained from:
+
+- IP data
+    
+- DNS
+    
+- Site registrations
+    
+
+The module suggests looking for:
+
+- Who administers the domain
+    
+- Subdomains
+    
+- Publicly accessible domain services
+    
+- Mail servers
+    
+- DNS servers
+    
+- Websites
+    
+- VPN portals
+    
+- Potential security defenses
+    
+
+Examples of defenses mentioned in the module include:
+
+- SIEM
+    
+- AV
+    
+- IPS/IDS
+    
+
+### Think of it as:
+
+```text
+Domain
+  │
+  ├── Subdomains
+  ├── Mail Servers
+  ├── DNS
+  ├── Websites
+  ├── VPN Portals
+  └── Security Infrastructure
+```
+
+---
+
+## 4. Schema Format
+
+The module uses **Schema Format** to refer to patterns that can help us understand how an organization structures things such as:
+
+- Email accounts
+    
+- AD usernames
+    
+- Password policies
+    
+
+This information can potentially be used to build a valid username list for testing externally facing services.
+
+The module explicitly mentions:
+
+- Password spraying
+    
+- Credential stuffing
+    
+- Brute forcing
+    
+
+### Example
+
+If publicly available information shows:
+
+```text
+john.smith@company.com
+jane.doe@company.com
+```
+
+we may infer:
+
+```text
+first.last
+```
+
+as a possible naming convention.
+
+That can help construct a username list for later authorized testing.
+
+---
+
+# 5. Data Disclosures
+
+Data disclosures refer to publicly accessible files that may contain information useful to a penetration tester.
+
+The module specifically mentions:
+
+- `.pdf`
+    
+- `.ppt`
+    
+- `.docx`
+    
+- `.xlsx`
+    
+
+Potential information inside those documents includes:
+
+- Intranet listings
+    
+- User metadata
+    
+- Shares
+    
+- Software information
+    
+- Hardware information
+    
+- Credentials accidentally pushed to GitHub
+    
+- Internal AD username formats contained in document metadata
+    
+
+### Important idea
+
+A seemingly harmless public document can reveal internal information.
+
+```text
+Public Document
+      ↓
+Metadata / Links / Names
+      ↓
+Internal Information
+      ↓
+Better Understanding of Environment
+```
+
+---
+
+# 6. Breach Data
+
+**Breach Data** refers to publicly released information such as:
+
+- Usernames
+    
+- Passwords
+    
+- Other critical information
+    
+
+that could potentially help an attacker gain a foothold.
+
+The module specifically emphasizes that passive recon can sometimes provide the information needed to move forward when an assessment becomes difficult.
+
+---
+
+# Where Are We Looking?
+
+The module identifies several resources that can provide the data points above.
+
+|Resource|Examples / Purpose|
+|---|---|
+|**ASN / IP registrars**|IANA, ARIN, RIPE, BGP Toolkit|
+|**Domain Registrars & DNS**|DomainTools, PTRArchive, ICANN, DNS requests|
+|**Social Media**|LinkedIn, Twitter, Facebook, news|
+|**Public-Facing Company Websites**|About Us, Contact Us, embedded documents|
+|**Cloud & Dev Storage Spaces**|GitHub, AWS S3, Azure storage, Google dorks|
+|**Breach Data Sources**|Have I Been Pwned, Dehashed|
+
+![Image](https://images.openai.com/static-rsc-4/7JGEOqDydb6S2NOMipa1nUVURvZU87Sy7nwIJjTGJrKQG2vQBrkKtYlAAJC6Cl-UKX_xFskQHX9TuF7H0ZEevyCDyOLlpSNz-jWlPgt0X3im_oCM2TSQO4XAkViBb9rSe3C2BFUIhjPutoP8qn3oO0F8bohJu9zwXgO6AScOSAr6E24kIu3TzwhYoQm4I-2v?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/ieYCGAceBqXmpVS79GEQtKC2Ml-ykFbliZTqcOHxQ6XYIJDuSJBHiP4oCaPj53FWLKnMNpJx00JAOz5-r3TcedhC6RVBm7irrokHOBGgLWmadg8cxFhzfXdeNXscdz8IH_KAhy4pIs-CDxnueEPZ9EX2PJxxK8cSLcClDbas0yyu-btD70PQY4LZTE0qvk6C?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/keju1GCrPxSgvA3JVZ_ZRDEHBOAQmtfeEE7OnJYOjmP9-WvBgKJaavj5Kh1gYXhNBN4t4JIyUvHcb4rfi_hrQI6JCqskbaj_Eu-GkxJk6q7M6qIHG-awpgzydp0czzy20cJ_a_BUZEZpSkQZ4cI6GUifAt81q3khDzby39rP8gE4NxNc9ZmJlcD3jW-qL91E?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/MrHLmJBvKlLq_hq98zhIjwqlQiNNxJC2SnNZdd0MYkvTJ2fp2ShNcSb0zuvdPZnADSvKsSir1kvYSjILxiBVgGg_SWQshEn9r3DVeXWL55Pjysq_DHX2xIy3J9JCt8Ji2hZAzZe3_UIHVLHytldeWnCAckpJNV3xgevuW5IdvpGRX7Hz8PmWjlbMA7VgUATy?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/asrasATx_9CFWJLiwaszZa-FDmvXglbjWe017aoxDmG11ZjZlYKlsQd7MHRXwiNgzfwM9T-fkT3BbJCfOYsp9lHJ9wlWuk1RwIX7khvFPTRBTMFyuxe6hAcfKqFXKaQ33w6h1bna9AMdJG48P4ESrUeZcZGIpwFcifuiUb6vGHfTrC4nNVjR6xzL5C6srOZP?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/psk2VXvuMYGyWFNBr_GdKtBNK0kJazGT0-wUAFXHd71qOfj0rw6WhIVQ58EO5hKXYq15PwMEc-XN9MNCbUdAS-4tbMx16J6wsJlNa2d7F53thnjbPCgomx0s_1a8hSDX5xfHa-R1VSWzpZVf1LWWG92ApQpcN5JuKrBY9sPoMTkJstGHn0oBDEgz5QyhHtJd?purpose=fullsize)
+
+---
+
+# Finding Address Spaces
+
+## BGP-Toolkit
+
+The module introduces the **BGP-Toolkit hosted by Hurricane Electric**.
+
+It can be used to research:
+
+- Address blocks assigned to an organization
+    
+- ASNs associated with those address blocks
+    
+
+The basic workflow is:
+
+```text
+Domain / IP
+    ↓
+BGP Toolkit
+    ↓
+ASN / Address Information
+    ↓
+Infrastructure Understanding
+```
+
+The module explains that large organizations may have their own ASN because they self-host a large amount of infrastructure.
+
+Smaller organizations may instead use infrastructure belonging to providers such as:
+
+- Cloudflare
+    
+- Google Cloud
+    
+- AWS
+    
+- Azure
     
 
 ---
 
-# 3. Skills Covered by the Module
+# ⚠️ Scope Awareness When Finding Infrastructure
 
-The module is intended to demonstrate a strong understanding of:
+This is one of the **most important concepts in the section**.
 
-### Automated Active Directory enumeration
+If a company uses infrastructure hosted by another provider, other organizations may share that infrastructure.
 
-Using tools to gather information about an AD environment automatically.
+Therefore, we must make sure we are not accidentally interacting with:
 
-### Manual Active Directory enumeration
-
-Manually investigating the environment and interpreting the information discovered.
-
-### Active Directory attack concepts
-
-Understanding common attack techniques against AD environments.
-
-### Tool usage
-
-The module exposes us to:
-
-- A wide range of security tools
+- Out-of-scope infrastructure
     
-- Automated enumeration techniques
+- Other customers
     
-- Manual enumeration techniques
+- Hosting providers' systems
     
 
-### Decision-making
+The module states that the agreement is with the customer—not with other organizations sharing the same server or provider.
 
-One of the most important skills is:
+### Remember
 
-> **Interpreting data gathered from an AD environment to make critical decisions to advance the assessment.**
+> **Finding an IP does not automatically mean you are authorized to attack it.**
 
-This means the objective isn't simply to collect information.
+Questions about:
 
-We must understand what the information means and determine what action should come next.
+- Self-hosted infrastructure
+    
+- Third-party infrastructure
+    
+- Cloud-hosted infrastructure
+    
+
+should be handled during the **scoping process**.
 
 ---
 
-# 4. Core Focus of the Module
+# Third-Party Hosting Permissions
 
-The content is intended to cover:
+In some situations, the customer may need written approval from a third-party hosting provider before testing.
 
-> **core enumeration concepts necessary for anyone to be successful in performing internal penetration tests in Active Directory environments.**
+The module gives examples:
 
-The module also covers:
+- AWS has specific penetration-testing guidelines.
+    
+- Oracle may require a **Cloud Security Testing Notification**.
+    
+- Other providers may have their own requirements.
+    
 
-- Common attack techniques
+These matters should be handled by:
+
+- Company management
     
-- Attack techniques in greater depth
+- Legal team
     
-- More advanced concepts
+- Contracts team
     
-- Foundational knowledge for later AD-focused modules
+
+If you are unsure whether an external-facing service can be attacked:
+
+> **Escalate before attacking it.**
+
+The module emphasizes that explicit permission is required to attack hosts, both internal and external.
+
+---
+
+# DNS
+
+DNS is described as an excellent way to:
+
+- Validate scope
     
+- Discover reachable hosts
+    
+- Find systems not disclosed in the original scoping document
+    
+
+The module mentions:
+
+- DomainTools
+    
+- ViewDNS.info
+    
+- Manual DNS queries
+    
+- DNS resolution
+    
+- DNSSEC information
+    
+- Geographic accessibility information
+    
+
+![Image](https://images.openai.com/static-rsc-4/RhcuxhtzYrQjOKPgkBzkvsqgspx78E417apu3Oq3vkRoHNmHHw4Y1NNfVK-g-_U9t_ZHR7x4LwRTCgfDRDusV3lgRFRJXAvmbpn7XieJsRIVlP3hvS0coMxi7HZpUMa9dwPxspQwONLYQudDTA_LdAa2wAPgATOph_DvDmJNbd8_t7UdlHzrOlI_PwP5LfbC?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/hKuV0dD0rCITZwaBKQHzr11v7A1bvpz3m3KOPSsrsK7RcjiZ_Eyo7m4QEt2Mknbk8MulH7AKjk90tyxHJN8SwuysvZvCIDKkyiSngZLaEaYpuPuWl9VnapyzjjXtPlxX4f5pc9civf-KbNtKzY8QEp_gSvsCgu5ZpmMLixqSzqfKcX6dl5oXhhlcSLEKoVFh?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/1kkC4oKsncMBRXs1reZuo-1qW3Kl1b2ePFa6myfEDLDbhcKhSDZlKnHkfGuw_lPzPDwYVVHyCCIgZWjipX9j3SOuSztFSZDTraon3VbslgdnnqkC1qFdxwgPqnUUZdVG5ggIvN9U3P3By_-AQ75oefcBa6KRGNB_1EaC2u6GhkC0xJCXDjXxuUFzmByN1pK-?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/3ZJLs-rXDf_96j-IqHxTaRajJ0aeM7phiNBBcItwCqoD4M0WZMcxQcGyXBr77X2UKM_4ddYtrCLPr-Zbz75ezhFEEtU2AOu2-6QMwJjjM31swoeNUwtT7koxgn25arT5jcIFUno2syzh-4l5CYC-LmR5RFoPTOIALWuKXzYJ4nfNBWq7B0LKP7ZCmfA2suKH?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/jAT2hL8mc5NcjgJyPKbu6riElFE7WQzt_723OF2_ZLnUmt1Q3KTDYqGQKeqgbom3-9FMQJVcjx7NOOMutg5nXpuP0BB23iHhcRzk7sYiZoH0nnnhncJWMQkcfmbByGRSE1nrWrR3YeTQzOH5Wou3lUybZUDGQzSB3BJ7FxdXdB2qm_4cwqqKE63gNjayi_5h?purpose=fullsize)
+
+---
+
+# Important DNS Scope Concept
+
+DNS enumeration may reveal additional hosts.
+
+Suppose:
+
+```text
+Customer Scope
+       ↓
+Domain
+       ↓
+DNS Enumeration
+       ↓
+Additional Host
+```
+
+That host might be:
+
+### Out of scope
+
+In which case it should not be tested.
+
+### Or
+
+It could reside on an **in-scope IP address**, meaning the module explains that it may be fair game.
+
+The module specifically says that interesting out-of-scope hosts can be brought to the client for clarification, while interesting subdomains residing on in-scope IP addresses may be considered in scope.
+
+### Key lesson
+
+**Always correlate discovered information with the actual scope.**
+
+---
+
+# ViewDNS.info
+
+The module uses **ViewDNS.info** to validate information discovered during IP/ASN research.
+
+It provides tools such as:
+
+- Reverse IP Lookup
+    
+- Reverse Whois Lookup
+    
+- IP History
+    
+- DNS Report
+    
+- Reverse MX Lookup
+    
+- Reverse NS Lookup
+    
+- IP Location Finder
+    
+- DNS Propagation Checker
+    
+- Domain/IP Whois
+    
+
+The module emphasizes validation because information discovered through external sources may not always be current.
+
+### Recon principle
+
+```text
+Source A
+   ↓
+Information
+   ↓
+Source B
+   ↓
+Validation
+   ↓
+Higher confidence
+```
+
+---
+
+# Public Data
+
+Publicly available information can reveal significant information about an organization.
+
+The module specifically highlights:
+
+- Social media
+    
+- LinkedIn
+    
+- Indeed
+    
+- Glassdoor
+    
+- Job postings
+    
+- Public company websites
+    
+- Embedded documents
+    
+- GitHub
+    
+- AWS cloud storage
+    
+- Other web-hosted platforms
+    
+
+---
+
+# Social Media & Job Postings
+
+Social media can reveal information about:
+
+- Organization structure
+    
+- Equipment
+    
+- Software
+    
+- Security implementations
+    
+- Organizational schema
+    
+
+Job postings can be particularly useful.
+
+### Example from the module
+
+A **SharePoint Administrator** job listing can reveal that an organization uses SharePoint.
+
+The example indicates that the organization may be using:
+
+```text
+SharePoint 2013
+SharePoint 2016
+```
+
+This can potentially tell a penetration tester that different versions may exist within the environment.
+
+### Why this matters
+
+A job description can reveal technology without the tester directly probing the target.
+
+```text
+Job Posting
+     ↓
+Technology Identified
+     ↓
+Potential Version Identified
+     ↓
+Better Understanding of Environment
+```
+
+---
+
+# Public-Facing Company Websites
+
+Company websites can reveal:
+
+- Contact emails
+    
+- Phone numbers
+    
+- Organizational charts
+    
+- Published documents
+    
+- Internal infrastructure references
+    
+- Intranet links
+    
+
+Embedded documents are particularly useful because they may contain information that isn't immediately visible from the main website.
+
+---
+
+# Cloud & Development Storage
+
+The module warns that information can be unintentionally leaked through:
+
+- GitHub
+    
+- AWS cloud storage
+    
+- Other web-hosted platforms
+    
+
+For example, a developer might accidentally leave:
+
+- Credentials
+    
+- Notes
+    
+- Sensitive configuration information
+    
+
+hardcoded in a code release.
+
+The module mentions:
+
+> **Trufflehog**
+
+and:
+
+> **Greyhat Warfare**
+
+as resources for finding these types of breadcrumbs.
+
+---
+
+# Overarching Enumeration Principles
+
+This is a **very important section**.
+
+The goal of enumeration is to understand the target better and identify every possible avenue that could potentially provide a route inside.
+
+### Enumeration is iterative.
+
+The module explicitly states that enumeration is:
+
+> **an iterative process we will repeat several times throughout a penetration test.**
+
+The process is not:
+
+```text
+Enumerate once → Done
+```
+
+Instead:
+
+```text
+Enumerate
+   ↓
+Analyze
+   ↓
+Discover Something
+   ↓
+Enumerate Again
+   ↓
+Analyze
+   ↓
+Discover More
+   ↓
+Repeat
+```
+
+---
+
+# Passive → Active Enumeration
+
+The module provides a specific methodology.
+
+### Step 1 — Start passive
+
+Begin with:
+
+> **`passive` resources**
+
+Start:
+
+> **wide in scope and narrowing down**
+
+### Step 2 — Exhaust initial passive enumeration
+
+Collect and analyze what you can find without actively probing the target.
+
+### Step 3 — Examine the results
+
+Determine what the information tells you.
+
+### Step 4 — Move to active enumeration
+
+Once the passive phase has been sufficiently explored, move into:
+
+> **active enumeration**
+
+### Core methodology
+
+```text
+             PASSIVE
+                │
+        Start WIDE
+                │
+                ▼
+          Gather Data
+                │
+                ▼
+            Analyze
+                │
+                ▼
+        Narrow the Scope
+                │
+                ▼
+       ACTIVE ENUMERATION
+```
+
+---
+
+# Example Enumeration Process
+
+The module now puts the concepts together using:
+
+```text
+inlanefreight.com
+```
+
+The exercise specifically avoids heavy scanning.
+
+The module says that heavy scans such as:
+
+- Nmap
+    
+- Vulnerability scans
+    
+
+are **out of scope** for this portion.
+
+The first step is:
+
+> **checking our Netblocks data**
+
+---
+
+# Check for ASN/IP & Domain Data
+
+The BGP information provides:
+
+```text
+IP Address:
+134.209.24.248
+
+Mail Server:
+mail1.inlanefreight.com
+
+Nameservers:
+NS1.inlanefreight.com
+NS2.inlanefreight.com
+```
+
+These are the specific results shown by the module.
+
+### Interpretation
+
+At this point, we have learned:
+
+```text
+inlanefreight.com
+       │
+       ├── IP
+       │    └── 134.209.24.248
+       │
+       ├── Mail Server
+       │    └── mail1.inlanefreight.com
+       │
+       └── Nameservers
+            ├── NS1.inlanefreight.com
+            └── NS2.inlanefreight.com
+```
+
+The module notes that Inlanefreight is not a large corporation, so it was not expected to have its own ASN.
+
+The next step is **validation**.
+
+---
+
+# Viewdns Results
+
+The module uses `viewdns.info` to validate the target's IP address.
+
+The results match, which increases confidence in the information discovered.
+
+The module then validates the two nameservers using `nslookup`.
+
+---
+
+# `nslookup`
+
+The exact commands shown in the module are:
+
+```bash
+nslookup ns1.inlanefreight.com
+```
+
+Result:
+
+```text
+Name:   ns1.inlanefreight.com
+Address: 178.128.39.165
+```
+
+Then:
+
+```bash
+nslookup ns2.inlanefreight.com
+```
+
+Result:
+
+```text
+Name:   ns2.inlanefreight.com
+Address: 206.189.119.186
+```
+
+### Important discovery
+
+We now have **two new IP addresses**:
+
+```text
+178.128.39.165
+206.189.119.186
+```
+
+However, the module immediately emphasizes:
+
+> **Before taking any further action with them, ensure they are in-scope for your test.**
+
+For this specific exercise, those actual IP addresses are not in scope for scanning, but websites on them could be passively browsed for interesting information.
+
+---
+
+# Publicly Available Information
+
+Because Inlanefreight is fictional for this module, it doesn't have a real social-media presence.
+
+In a real engagement, the module says we would investigate sites such as:
+
+- LinkedIn
+    
+- Twitter
+    
+- Instagram
+    
+- Facebook
+    
+
+for useful information.
+
+The module then moves to:
+
+```text
+inlanefreight.com
+```
+
+---
+
+# Hunting For Files
+
+The first website check is looking for publicly accessible documents.
+
+The exact Google dork used is:
+
+```text
+filetype:pdf inurl:inlanefreight.com
+```
+
+The purpose is to locate PDF documents associated with the domain.
+
+![Image](https://images.openai.com/static-rsc-4/sDh5WER6RK0ejCz4pyBval_fL-1AcC3iF2LdCa-2Kkg-sOwPeIBGs3sLGrTsN7GzpVLLDeeMnFhY8zG3niXQ-CiltIpylKVr6FDfoXuDAlH4bfkER0Vw2bXsshClYq-MCdb4e0F9nyzVsXgfIt3kzdSwA3diwrHw8J7I0oMsFZJX7lpOdVY1vHN-BGfMomth?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/GFkZ9HjT1mY5Sr5ughtt1eFZ1ovtOo0NFJ0MJRqIW1ldInLq-SFsMLhVKZGZbmiN0Fw9pamwRgrBHbyyu1K30WDsER5IlrIO-Kx28UENxsy2yXjq76Fn6dOkcodnmCLQyJS2JoSQ-kJ2jUqe-iKmzPcxoS9vsAWnb03LHN8b5bRXzRgOyUa9dZiJ4dd2oXtf?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/a8aUmP5VA4KQAFLga-HPgghDVnRjkZkHkiwjFjWYu37b0QtNqAnIJvpqtrhBOfltQaOI2flGqSL8qpnqW-OhHwC-Ctn8HhcaEq1mEh9f5qkHdObv-kKYWNT-7byAYytxRKUT3ryaXCzmK6megdtvgEViHncFpPxQoH4-QhYalPQNCU7-t12PJBr5GOO4_UWR?purpose=fullsize)
+
+### Documentation principle
+
+When a useful document is discovered, the module recommends:
+
+- Note the document
+    
+- Record its location
+    
+- Download a local copy
+    
+- Preserve screenshots
+    
+- Preserve scan output
+    
+- Preserve tool output
+    
+
+The reason is to maintain a comprehensive record and avoid losing important information.
+
+### Pentest documentation mindset
+
+```text
+Discover
+   ↓
+Record
+   ↓
+Save
+   ↓
+Analyze
+   ↓
+Reference Later
+```
+
+---
+
+# Hunting E-mail Addresses
+
+The module next searches for email addresses.
+
+The exact Google dork is:
+
+```text
+intext:"@inlanefreight.com" inurl:inlanefreight.com
+```
+
+The purpose is to locate instances containing text resembling an email address on the website.
+
+The search reveals a contact page containing employee contact information.
+
+This gives us information about:
+
+- Employees
+    
+- Contact information
+    
+- Potentially active users
+    
+
+---
+
+# E-mail Dork Results
+
+The contact page reveals multiple employee email addresses.
+
+The module identifies an apparent email naming convention:
+
+```text
+first.last
+```
+
+This is valuable because it can help build potential usernames for later authorized testing.
+
+The module specifically mentions potential use in:
+
+> **later password spraying attacks**
+
+and notes that social engineering/phishing would only be relevant if those activities were part of the engagement scope.
+
+---
+
+# Username Harvesting
+
+The module introduces:
+
+**linkedin2username**
+
+It can be used to scrape information from a company's LinkedIn page and generate possible username formats such as:
+
+```text
+flast
+first.last
+f.last
+```
+
+These can be added to a list of potential password-spraying targets.
+
+### Concept
+
+If we know:
+
+```text
+John Smith
+```
+
+possible username formats could include:
+
+```text
+jsmith
+john.smith
+j.smith
+```
+
+The important point is that the tool can generate candidate formats from publicly available information.
+
+---
+
+# Credential Hunting
+
+The module introduces:
+
+> **Dehashed**
+
+as a resource for searching breach data for:
+
+- Cleartext credentials
+    
+- Password hashes
+    
+
+The module explains that many passwords found may be old and may no longer work against external or internal AD-authenticated services.
+
+However, some may still be useful.
+
+Breach data can therefore also help create:
+
+> **a user list for external or internal password spraying.**
+
+---
+
+# Dehashed Example
+
+The module explicitly notes:
+
+> **For our purposes, the sample data below is fictional.**
+
+The example command is:
+
+```bash
+sudo python3 dehashed.py -q inlanefreight.local -p
+```
+
+The sample output contains fields such as:
+
+```text
+id
+email
+username
+password
+hashed_password
+name
+address
+phone
+database_name
+```
+
+For example, the fictional data includes:
+
+```text
+email : roger.grimes@inlanefreight.local
+username : rgrimes
+password : Ilovefishing!
+```
+
+and:
+
+```text
+email : jane.yu@inlanefreight.local
+username : jyu
+password : Starlight1982_!
+```
 
 ### Important
 
-This module acts as a foundation.
+These credentials are **fictional sample data from the module**.
 
-The concepts introduced here will help prepare us for more advanced Active Directory material later.
-
----
-
-# Assessment Scope
-
-Before performing any testing, the customer provides a **scoping document**.
-
-The scope defines the:
-
-- IPs
-    
-- Hosts
-    
-- Domains
-    
-
-that are authorized for the assessment.
-
-This is extremely important in a real penetration test because the tester must know exactly what they are authorized to test.
+Do not treat them as real credentials.
 
 ---
 
-# 5. In Scope For Assessment
+# Dehashed Script
 
-|**Range/Domain**|**Description**|
-|---|---|
-|`INLANEFREIGHT.LOCAL`|Customer domain to include AD and web services|
-|`LOGISTICS.INLANEFREIGHT.LOCAL`|Customer subdomain|
-|`FREIGHTLOGISTICS.LOCAL`|Subsidiary company owned by Inlanefreight. External forest trust with `INLANEFREIGHT.LOCAL`|
-|`172.16.5.0/23`|In-scope internal subnet|
+The module notes that the script used in the example is available through a GitHub repository.
 
----
+It also warns that:
 
-## 5.1 `INLANEFREIGHT.LOCAL`
+> **Due to changes in the API structure of DeHashed, modifications may be necessary.**
 
-This is the primary customer domain.
+An alternative script is also mentioned.
 
-The scope specifically states that the domain includes:
+The module emphasizes:
 
-- **Active Directory**
-    
-- **Web services**
-    
+> **Before executing the script, it is crucial to become familiar with its functionality.**
 
-Therefore, it is explicitly included in the assessment.
+This is an important professional lesson:
+
+**Don't blindly execute tools/scripts you haven't reviewed.**
 
 ---
 
-## 5.2 `LOGISTICS.INLANEFREIGHT.LOCAL`
+# Final Lessons From This Section
 
-This is a customer subdomain.
-
-It is specifically listed in the scope and therefore is included in the assessment.
-
-Important distinction:
+The module ends by encouraging further searching for information related to:
 
 ```text
-INLANEFREIGHT.LOCAL
-        │
-        └── LOGISTICS.INLANEFREIGHT.LOCAL
+inlanefreight.com
 ```
 
-The module explicitly identifies this subdomain rather than giving permission to test every possible subdomain.
+The goal is to discover:
+
+- Other useful files
+    
+- Other pages
+    
+- Information embedded in the site
+    
+- Additional information that could help the assessment
+    
+
+But the module repeatedly emphasizes the constraints:
+
+> **Stay in scope.**
+
+> **Do not test anything you are not authorized to test.**
+
+> **Stay within the time constraints of the engagement.**
 
 ---
 
-## 5.3 `FREIGHTLOGISTICS.LOCAL`
+# The Importance of External Recon
 
-This represents a subsidiary company owned by Inlanefreight.
+The module provides a practical example from previous assessments where the tester had difficulty gaining a foothold from an anonymous internal position.
 
-The important information provided by the scope is:
+External sources were used to create a wordlist from:
 
-> **External forest trust with `INLANEFREIGHT.LOCAL`**
+- Google
+    
+- LinkedIn scraping
+    
+- Dehashed
+    
+- Other outside sources
+    
 
-Conceptually:
+This was then used for targeted internal password spraying to obtain valid credentials for a standard domain user account.
+
+The module then makes an important observation:
+
+> **The vast majority of internal AD enumeration can be performed with just a set of low-privilege domain user credentials.**
+
+It also states that many attacks can be performed with such credentials.
+
+---
+
+# 🔥 Complete Enumeration Methodology From This Module
+
+This is the methodology you should memorize **from this module**:
 
 ```text
-INLANEFREIGHT.LOCAL
-        ▲
-        │
-        │ External Forest Trust
-        │
-        ▼
-FREIGHTLOGISTICS.LOCAL
+                    SCOPE
+                      │
+                      ▼
+              EXTERNAL RECON
+                      │
+                      ▼
+              PASSIVE RESOURCES
+                      │
+                      ▼
+              START WIDE
+                      │
+                      ▼
+              IP / ASN DATA
+                      │
+                      ▼
+                 DNS DATA
+                      │
+                      ▼
+             PUBLIC INFORMATION
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+       Documents    Emails     Social Media
+          │           │           │
+          └───────────┼───────────┘
+                      ▼
+               Username Formats
+                      │
+                      ▼
+                Breach Data
+                      │
+                      ▼
+                Analyze Results
+                      │
+                      ▼
+              ACTIVE ENUMERATION
 ```
 
-The existence of this trust is specifically mentioned in the assessment scope and will be relevant when understanding the environment.
+This directly follows the module's principle of starting with **passive resources**, starting **wide in scope and narrowing down**, examining the results, and then moving into active enumeration.
 
 ---
 
-## 5.4 `172.16.5.0/23`
+# 🧠 Important Things to Memorize
 
-This is the internal network range included in the assessment.
+### Core principle
 
-The exact scope provided by the customer is:
+> **Enumeration itself is an iterative process we will repeat several times throughout a penetration test.**
+
+### Start with
+
+> **`passive` resources**
+
+### Method
+
+> **starting wide in scope and narrowing down**
+
+### Then
+
+> **examine the results and move into our active enumeration phase.**
+
+### Important data points
 
 ```text
-172.16.5.0/23
+IP Space
+Domain Information
+Schema Format
+Data Disclosures
+Breach Data
 ```
 
-Therefore, this internal subnet is authorized for testing.
-
----
-
-# Out Of Scope
-
-The customer has also explicitly defined what **must not be tested**.
-
-This is just as important as knowing what is in scope.
-
----
-
-## 6. Other Subdomains of `INLANEFREIGHT.LOCAL`
-
-The scope specifically excludes:
-
-> **Any other subdomains of `INLANEFREIGHT.LOCAL`**
-
-The only subdomain explicitly included is:
+### Important resources
 
 ```text
-LOGISTICS.INLANEFREIGHT.LOCAL
+BGP Toolkit
+DomainTools
+PTRArchive
+ICANN
+ViewDNS
+LinkedIn
+Public company websites
+GitHub
+Have I Been Pwned
+Dehashed
 ```
 
-Therefore, discovering another subdomain does not automatically make it authorized for testing.
+### Important commands / searches from the module
 
-### Key principle
+```bash
+nslookup ns1.inlanefreight.com
+```
 
-> **Finding something does not automatically place it in scope.**
-
----
-
-# 7. Subdomains of `FREIGHTLOGISTICS.LOCAL`
-
-The scope explicitly excludes:
-
-> **Any subdomains of `FREIGHTLOGISTICS.LOCAL`**
-
-The parent domain itself is listed as in scope:
+```bash
+nslookup ns2.inlanefreight.com
+```
 
 ```text
-FREIGHTLOGISTICS.LOCAL
+filetype:pdf inurl:inlanefreight.com
 ```
-
-But its subdomains are not.
-
----
-
-# 8. Phishing and Social Engineering
-
-The assessment explicitly excludes:
-
-> **Any phishing or social engineering attacks**
-
-Therefore, these techniques are not part of this engagement.
-
-The assessment must rely on the authorized technical and information-gathering methods described in the scope.
-
----
-
-# 9. Other IPs / Domains / Subdomains
-
-The scope states:
-
-> **Any other IPs/domains/subdomains not explicitly mentioned**
-
-are out of scope.
-
-This is a critical professional penetration-testing rule.
-
-For example, if during enumeration we discover another domain that wasn't listed in the scope, we should **not assume permission to attack it**.
-
----
-
-# 10. Real-World `inlanefreight.com`
-
-The scope specifically restricts activity against the real-world website:
 
 ```text
-https://www.inlanefreight.com
+intext:"@inlanefreight.com" inurl:inlanefreight.com
 ```
 
-The restriction states that:
+```bash
+sudo python3 dehashed.py -q inlanefreight.local -p
+```
 
-> **Any types of attacks against the real-world inlanefreight.com website outside of passive enumeration shown in this module**
+### Critical operational lesson
 
-are out of scope.
+> **Ensure discovered hosts are in scope before taking further action.**
 
-Therefore, the module allows passive information gathering but does **not** authorize active attacks against the real-world website.
-
----
-
-# Methods Used
-
-The scope defines the methods authorized for assessing Inlanefreight.
-
-There are three important areas in this section:
-
-1. **External Information Gathering**
-    
-2. **Internal Testing**
-    
-3. **Password Testing**
-    
-
----
-
-# 11. External Information Gathering (Passive Checks)
-
-External information gathering is authorized to demonstrate the risks associated with information that can be gathered about the company from the internet.
-
-The assessment is designed to simulate a real-world attacker.
-
-Therefore, CAT-5 and its assessors will perform external information gathering from:
-
-> **an anonymous perspective on the internet**
-
-This means that no additional information is provided in advance about Inlanefreight beyond what is included in the assessment documentation.
-
----
-
-# 12. Passive Enumeration
-
-The testers will conduct:
-
-> **passive enumeration**
-
-The purpose is to uncover information that may:
-
-- Help understand the organization
-    
-- Provide information useful to the internal testing phase
-    
-- Identify publicly accessible information that could assist an attacker
-    
-
-The module specifically mentions using:
-
-> **open-source resources**
-
-for this information gathering.
-
----
-
-# 13. External Testing Restrictions
-
-The scope clearly states:
-
-> **No active enumeration, port scans, or attacks will be performed against internet-facing "real-world" IP addresses or the website located at `https://www.inlanefreight.com`.**
-
-This is an important restriction.
-
-### Allowed
+### Final progression
 
 ```text
-Passive enumeration
-        ↓
-Open-source information
-        ↓
-Publicly accessible data
+External Recon
+      ↓
+Passive Enumeration
+      ↓
+IP / ASN
+      ↓
+DNS
+      ↓
+Public Data
+      ↓
+Documents
+      ↓
+Email Addresses
+      ↓
+Username Harvesting
+      ↓
+Breach Data
+      ↓
+Analyze
+      ↓
+Active Enumeration
+      ↓
+Internal AD Enumeration
 ```
 
-### Not allowed
+The module itself concludes by transitioning into **internal enumeration of `INLANEFREIGHT.LOCAL`**, both passively and actively, according to the assessment's scope and Rules of Engagement.
 
-```text
-Active enumeration
-Port scanning
-Attacks
-```
-
-against the real-world internet-facing infrastructure.
-
----
-
-# Internal Testing
-
-The internal assessment is designed to demonstrate the risks associated with vulnerabilities on:
-
-- Internal hosts
-    
-- Internal services
-    
-- **Active Directory specifically**
-    
-
-The goal is to emulate attack vectors originating from inside Inlanefreight's environment.
-
----
-
-# 14. Purpose of Internal Testing
-
-The internal assessment allows Inlanefreight to understand:
-
-- Internal vulnerabilities
-    
-- Possible attack paths
-    
-- Potential impact of successfully exploiting a vulnerability
-    
-
-The test is therefore intended to answer a practical question:
-
-> **What could an attacker accomplish after gaining a position inside the organization?**
-
----
-
-# 15. Untrusted Insider Perspective
-
-The assessment is conducted from an:
-
-> **untrusted insider perspective**
-
-This means the tester is simulating an attacker who has obtained internal network access but does not automatically receive trusted administrative information.
-
-The testers begin with:
-
-> **no advance information outside of what's provided in this documentation and discovered from external testing.**
-
-This makes enumeration particularly important.
-
----
-
-# 16. Internal Testing Starting Position
-
-Testing starts from:
-
-> **an anonymous position on the internal network**
-
-The objective is then to discover enough information to progress through the environment.
-
-The module specifies the following goals:
-
-```text
-Anonymous Internal Position
-          ↓
-Domain User Credentials
-          ↓
-Internal Domain Enumeration
-          ↓
-Gaining a Foothold
-          ↓
-Lateral Movement
-          ↓
-Vertical Movement
-          ↓
-Compromise of In-Scope Internal Domains
-```
-
----
-
-# 17. Domain User Credentials
-
-One of the objectives is:
-
-> **obtaining domain user credentials**
-
-The tester needs to discover credentials that can potentially provide additional access within the environment.
-
-This becomes an important part of progressing through the assessment.
-
----
-
-# 18. Internal Domain Enumeration
-
-After obtaining useful information or credentials, the tester performs:
-
-> **internal domain enumeration**
-
-The purpose is to understand the internal Active Directory environment and identify information that can help advance the assessment.
-
----
-
-# 19. Gaining a Foothold
-
-The assessment aims to:
-
-> **gain a foothold**
-
-A foothold represents a useful initial position inside the target environment from which further assessment activities can be performed.
-
-The module's progression is therefore:
-
-```text
-Internal Position
-       ↓
-Credentials
-       ↓
-Enumeration
-       ↓
-Foothold
-```
-
----
-
-# 20. Lateral Movement
-
-The assessment then involves:
-
-> **moving laterally**
-
-This means progressing through the internal environment rather than remaining limited to the original system or position.
-
-The objective is to determine how far an attacker could move through the authorized environment.
-
----
-
-# 21. Vertical Movement
-
-The scope also mentions:
-
-> **moving laterally and vertically**
-
-Vertical movement refers to progressing toward higher levels of access or privilege.
-
-The overall assessment therefore examines both:
-
-```text
-Lateral = movement through the environment
-Vertical = movement toward higher privileges
-```
-
----
-
-# 22. Domain Compromise
-
-The ultimate internal-testing goal is to:
-
-> **achieve compromise of all in-scope internal domains.**
-
-The emphasis here is on the domains explicitly included within the assessment scope.
-
-The tester must not extend the assessment into domains that are outside the authorized scope.
-
----
-
-# 23. Operational Safety
-
-The scope contains an important operational requirement:
-
-> **Computer systems and network operations will not be intentionally interrupted during the test.**
-
-This means the assessment should be conducted without intentionally disrupting normal operations.
-
-The purpose of penetration testing is to demonstrate security weaknesses and their potential impact—not to unnecessarily interrupt business operations.
-
----
-
-# Password Testing
-
-The final method described in this section is:
-
-> **Password Testing**
-
----
-
-# 24. Password Files
-
-Password files may be:
-
-- Captured from Inlanefreight devices, or
-    
-- Provided by the organization
-    
-
-These files may be loaded onto:
-
-> **offline workstations for decryption**
-
-The resulting credentials may then be used to:
-
-- Gain further access
-    
-- Continue the assessment
-    
-- Accomplish the assessment goals
-    
-
----
-
-# 25. Password Confidentiality
-
-The scope contains an important security requirement:
-
-> **At no time will a captured password file or the decrypted passwords be revealed to persons not officially participating in the assessment.**
-
-This means credentials discovered during the engagement must remain confidential.
-
----
-
-# 26. Secure Storage
-
-All password-related data must be:
-
-- Stored securely
-    
-- Kept on CAT-5-owned and approved systems
-    
-- Retained for the period defined in the official contract between CAT-5 and Inlanefreight
-    
-
-This demonstrates an important professional responsibility:
-
-> **Sensitive information discovered during a penetration test must itself be protected.**
-
----
-
-# Scoping Documentation
-
-The module explains that this documentation style is something penetration testers will commonly encounter during their careers.
-
-Especially on the offensive-security side, testers may receive:
-
-- **Scoping documents**
-    
-- **Rules of Engagement (RoE) documents**
-    
-- Tasking information
-    
-
-These documents define the boundaries and requirements of an engagement.
-
----
-
-# 27. Why Scoping Documents Matter
-
-A penetration tester must understand the scope before performing testing.
-
-The scope establishes:
-
-```text
-WHAT can be tested
-        +
-WHAT cannot be tested
-        +
-WHERE testing can occur
-        +
-WHAT methods are authorized
-```
-
-This protects both:
-
-- The customer
-    
-- The penetration-testing team
-    
-
----
-
-# 28. The Stage Is Set
-
-At this point, the module has established:
-
-### Scope
-
-What systems and domains can be assessed.
-
-### Methods
-
-How the assessment can be performed.
-
-### Restrictions
-
-What activities are prohibited.
-
-### Objectives
-
-What the testers need to accomplish.
-
-The module then transitions into the technical portion.
-
-The next stage is:
-
-> **performing passive external enumeration against Inlanefreight.**
-
----
-
-# 🧠 Key Information to Memorize
-
-## In Scope
-
-```text
-INLANEFREIGHT.LOCAL
-LOGISTICS.INLANEFREIGHT.LOCAL
-FREIGHTLOGISTICS.LOCAL
-172.16.5.0/23
-```
-
-## Out Of Scope
-
-```text
-Any other INLANEFREIGHT.LOCAL subdomains
-Any subdomains of FREIGHTLOGISTICS.LOCAL
-Any phishing or social engineering attacks
-Any other IPs/domains/subdomains not explicitly mentioned
-Attacks against the real-world inlanefreight.com website
-```
-
-## Main Assessment Goals
-
-```text
-Domain Enumeration
-        ↓
-Credential Discovery
-        ↓
-Internal Domain Enumeration
-        ↓
-Foothold
-        ↓
-Lateral Movement
-        ↓
-Vertical Movement
-        ↓
-Compromise of In-Scope Internal Domains
-```
-
-## External Testing
-
-**Passive enumeration only** against the real-world environment.
-
-## Internal Testing
-
-Begins from an:
-
-> **Anonymous position on the internal network**
-
-and uses an:
-
-> **Untrusted insider perspective**
-
-## Password Testing
-
-Password files may be processed on:
-
-> **Offline workstations for decryption**
-
-but captured/decrypted credentials must remain confidential and securely stored.
-
----
-
-# 🔥 Module Takeaways
-
-1. **Always understand the scope before testing.**
-    
-2. `INLANEFREIGHT.LOCAL`, `LOGISTICS.INLANEFREIGHT.LOCAL`, `FREIGHTLOGISTICS.LOCAL`, and `172.16.5.0/23` are explicitly in scope.
-    
-3. Other domains/subdomains are **not automatically authorized**.
-    
-4. Phishing and social engineering are explicitly prohibited.
-    
-5. Real-world `inlanefreight.com` may only undergo the passive enumeration described by the module.
-    
-6. The internal assessment simulates an **untrusted insider**.
-    
-7. The internal starting position is **anonymous**.
-    
-8. The assessment focuses specifically on **Active Directory**.
-    
-9. The progression includes credential discovery, domain enumeration, foothold, lateral movement, and vertical movement.
-    
-10. Password material may be processed offline, but credentials must be securely handled.
-    
-11. **Computer systems and network operations will not be intentionally interrupted during the test.**
-    
-12. The next section begins with **passive external enumeration against Inlanefreight**.
-    
-
-This is the complete set of notes for the **Scenario** section you provided, without pulling in later-module concepts.
+**These notes cover the entire `External Recon and Enumeration Principles` material you provided.** We can now move to its exercises one at a time, with **Cybersecurity Mentor Mode**: I'll make you reason through the enumeration rather than simply handing you the answer.
