@@ -1,5 +1,3 @@
-# 🔐 T — Detailed Cybersecurity Notes
-
 This section is the **toolkit/reference section** for the Active Directory module. I’ve kept the original tool names and their important purposes intact, while organizing them by what you should actually use them for during an AD assessment. The module states that Windows-host tools are available under `C:\Tools`, while the Parrot Linux attack host has the required tools installed or available under `/opt`.
 
 ---
