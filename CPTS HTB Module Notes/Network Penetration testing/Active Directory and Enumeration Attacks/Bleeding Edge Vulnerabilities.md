@@ -1,4 +1,4 @@
-# 1. Module Overview
+## 1. Module Overview
 
 ### What are “Bleeding Edge” vulnerabilities?
 
