@@ -10,8 +10,6 @@
 
 ![Image](https://images.openai.com/static-rsc-4/OZgJNOwOfsB3syndoLRuu-Tbo4MGl8_xvRcsPcvac9YCl-0bhDi0P_2ZAj-6ob_fM1LfpsSqU61qW8nJ8N9Ezc6M3jbVtGx0CdkHu-jmfgAi-3sdCqJ78vybyiK99S1StqhLXxXT8zuVUK53BqBQ0AnUAhaFSNxUF8B3JxgKD-8BBbZ6GAtU6S-LjiIlH9H7?purpose=fullsize)
 
-# Introduction to Documentation and Reporting
-
 ## 1. Why Documentation & Reporting Matters
 
 Strong **documentation and reporting skills** are extremely important in Information Technology and Information Security.
