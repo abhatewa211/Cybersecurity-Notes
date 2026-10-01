@@ -1,5 +1,3 @@
-Absolutely. I’ll keep the **important wording, terminology, recommendations, and structure from the pasted HTB section**, while turning it into detailed study notes. I’ll also add visual references and a CPTS-focused revision section.
-
 ![Image](https://images.openai.com/static-rsc-4/iBCalZF0QgHG8HIBQECj9s9MO75WccCRlV5WBeUBtm5Wmzmen8FnB9JgPHDTP8PDIYczTFPY2FskprXpB5xQYvNkrhiQd1SDuV9R3GJusdj41CLG_GqFKCKhs2SXKKJUP30VM-PAtYz-OxpToYRjF4-E5_vzyl7pMRo8U-M0QQuun1i2kiiyal5P83aXhF7Y?purpose=fullsize)
 
 ![Image](https://images.openai.com/static-rsc-4/G_FUampzUyIJ3OZ7yqROfsYyPyNZ6EdGhPEHCyjIlEDELgPITRFo-tiGwx3TehqjBNuZ4qkaIlZl4-ia2JbbUqRdN1zz2b1lFKukXZUXMfXQQttbJ5YEjyhocK9INmiOtoRRDeFTgSY4tQNKfiCEMLEGw8SPIRA_EIibDR0t2db5IA_0CWefYnOd3njYKC-F?purpose=fullsize)
