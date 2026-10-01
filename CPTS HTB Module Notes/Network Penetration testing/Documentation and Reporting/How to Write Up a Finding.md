@@ -12,8 +12,6 @@
 
 ![Image](https://images.openai.com/static-rsc-4/MUptweQUpigwlyykeGheaQqav3gIwNYiexBMIjzGktnQX_O0pNIn029rMtUCxLJ4Sz67TzMwKd1qWZhdCZjLRn0HKgG4AvMxZe0_1ebMKhN4-Rj-UNTjT7mQfMGFgjt4AWRTfWP_wh-XE2q4nz3Qu0jgP0TK_-li6f3GlaJAzVx_qBOMhvQ5YBZZ7B7XBSFF?purpose=fullsize)
 
-# 📘 
-
 ## 1. What Is the Findings Section?
 
 The **Findings** section is the **"meat"** of a penetration-testing report.
