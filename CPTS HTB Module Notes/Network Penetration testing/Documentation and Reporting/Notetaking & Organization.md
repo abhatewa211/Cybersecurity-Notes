@@ -12,8 +12,6 @@ Absolutely. I’ve based these notes on the attached **HTB Documentation & Repor
 
 ![Image](https://images.openai.com/static-rsc-4/dgXsh1vOub0ekby0s2StdM-EICq3FDAa37LsKNF_OKNxl4a737ZNg6NTYvikklFy8L2MT8PglkP8p1yQkix2s3xEtaZMknJGJYpbuiT4nhWZv0ERoMqqLrW3sQEPYCsXYUc0WA7xpRDxE-8_NScsHB0pqGLsWhDpmEc_AWfuGWYJ8trIeJ6fhpCva62jLQ0f?purpose=fullsize)
 
-# Detailed Notes — 
-
 # 📚 Notetaking & Organization
 
 ## 1. Why Detailed Notetaking Is Critical
