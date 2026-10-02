@@ -1047,3 +1047,5 @@ Potential Domain Compromise
 **Scope → Authorization → Recon → Enumeration → Exploitation → Internal Access → AD → Documentation**
 
 The most important thing to understand from this section is that a professional penetration test isn't simply **"run Nmap and hack the target."** The tester must operate within a clearly documented **scope and authorization**, understand exactly what is permitted, protect availability, communicate with the client, document continuously, and then methodically determine how far an external attacker can progress.
+
+![[Pasted image 20261002124440.png]]
